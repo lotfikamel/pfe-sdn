@@ -11,7 +11,7 @@ class Mythread (threading.Thread):
 
     def __init__(self, attack_time, attack_type, data_size, ip_number):
 
-        print('hichem github')
+        print('hichem github lotfi')
 
         super(Mythread, self).__init__()
         self.param = {}
