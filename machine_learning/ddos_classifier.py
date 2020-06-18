@@ -8,86 +8,111 @@ from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 from sklearn.model_selection import train_test_split
 from datetime import datetime, date
 import joblib
+from os import path
 
-dataset_path = '/root/Downloads/ML-Training/Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv'
+class Classifier () :
 
-ddos_dataset = pd.read_csv(dataset_path)
+	def __init__ (self, params) :
 
-# print(ddos_dataset.info())
+		self.modelName = params['model_name']
 
-attack_label = LabelEncoder()
+		self.dataset_path = params['dataset_path']
 
-ddos_dataset[' Label'] = attack_label.fit_transform(ddos_dataset[' Label'])
+		self.data_frame = pd.DataFrame()
 
-# print(ddos_dataset[' Label'].value_counts())
+		self.classifier = None
 
-# sns.countplot(ddos_dataset[' Label'])
+		self.scaler = MinMaxScaler()
 
-# plt.show()
+		self.labelEncoder = LabelEncoder()
 
-start = datetime.now().replace(microsecond=0)
 
-#####
-## Clean the dataset from the big values
-## @param {DataFrame} data_frame
-## @return {DataFrame}
-####
-def clean_dataset (data_frame):
+	####
+	# check if the given model exists 
+	# @return {Boolean}
+	####
+	def is_exists (self) : 
 
-	assert isinstance(data_frame, pd.DataFrame)
+		return path.exists(f'{self.modelName}.joblib')
 
-	data_frame.dropna(inplace=True)
+	####
+	# Clean the data frame
+	# @return {Void}
+	###
+	def clean_dataset (self) :
 
-	indices_to_keep = ~data_frame.isin([np.nan, np.inf, -np.inf]).any(1)
+		assert isinstance(self.data_frame, pd.DataFrame)
 
-	return data_frame[indices_to_keep].astype(np.float64)
+		self.data_frame.dropna(inplace=True)
 
-####
-## Persiste the given classfier
-## @param {Object} classifier
-## @return {Void}
-###
-def persiste_classifier (classifier) :
+		indices_to_keep = ~self.data_frame.isin([np.nan, np.inf, -np.inf]).any(1)
 
-	joblib.dump(classifier, f'{classifier.__class__.__name__}.joblib')
+		self.data_frame = self.data_frame[indices_to_keep].astype(np.float64)
 
-####
-## Persiste the given scaler
-## @param {Object} scaler
-## @return {Void}
-###
-def persiste_scaler (scaler) :
+	####
+	## Persiste the given classfier
+	## @return {Void}
+	###
+	def persiste_classifier (self) :
 
-	joblib.dump(scaler, f'{scaler.__class__.__name__}.joblib')
+		joblib.dump(self.classifier, f'{self.classifier.__class__.__name__}.joblib')
 
-ddos_dataset = clean_dataset(ddos_dataset)
+	####
+	## Persiste the given scaler
+	## @return {Void}
+	###
+	def persiste_scaler (self) :
 
-X = ddos_dataset.drop(' Label', axis=1)
+		joblib.dump(self.scaler, f'{self.scaler.__class__.__name__}.joblib')
 
-scaler = MinMaxScaler()
+	####
+	## Build and train the model
+	## 
+	###
+	def build (self) :
 
-X = scaler.fit_transform(X)
+		self.data_frame = pd.read_csv(self.dataset_path)
 
-y = ddos_dataset[' Label']
+		self.data_frame.rename(columns={' Label' : 'label'}, inplace=True)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=  0.2)
+		self.data_frame['label'] = self.labelEncoder.fit_transform(self.data_frame['label'])
 
-classifier = RandomForestClassifier()
+		self.clean_dataset()
 
-classifier.fit(X_train, y_train)
+		X = self.data_frame.drop('label', axis=1)
 
-persiste_classifier(classifier)
+		X = self.scaler.fit_transform(X)
 
-persiste_scaler(scaler)
-   
-prediction = classifier.predict(X_test)
+		y = self.data_frame['label']
 
-end = datetime.now().replace(microsecond=0)
+		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-duration = end - start
+		self.classifier = globals[self.modelName]()
 
-print('timing : {} '.format(duration))
+		start = datetime.now().replace(microsecond=0)
 
-print(classification_report(y_test, prediction))
+		classifier.fit(X_train, y_train)
+
+		end = datetime.now().replace(microsecond=0)
+
+		duration = end - start
+
+		persiste_classifier()
+
+		persiste_scaler()
+		   
+		prediction = classifier.predict(X_test)
+
+		print('timing : {} '.format(duration))
+
+		print(classification_report(y_test, prediction))
+
+classifier = Classifier({
+
+	'model_name' : 'RandomForestClassifier',
+	'dataset_path' : ''
+})
+
+classifier.build()
 
 
