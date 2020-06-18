@@ -14,7 +14,7 @@ class Classifier () :
 
 	def __init__ (self, params) :
 
-		self.modelName = params['model_name']
+		self.modelClass = params['model_class']
 
 		self.dataset_path = params['dataset_path']
 
@@ -33,7 +33,7 @@ class Classifier () :
 	####
 	def is_exists (self) : 
 
-		return path.exists(f'{self.modelName}.joblib')
+		return path.exists(f'{self.classifier.__class__.__name__}.joblib')
 
 	####
 	# Clean the data frame
@@ -87,11 +87,11 @@ class Classifier () :
 
 		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-		self.classifier = globals[self.modelName]()
+		self.classifier = self.modelClass()
 
 		start = datetime.now().replace(microsecond=0)
 
-		classifier.fit(X_train, y_train)
+		self.classifier.fit(X_train, y_train)
 
 		end = datetime.now().replace(microsecond=0)
 
@@ -109,7 +109,7 @@ class Classifier () :
 
 classifier = Classifier({
 
-	'model_name' : 'RandomForestClassifier',
+	'model_class' : RandomForestClassifier,
 	'dataset_path' : ''
 })
 
