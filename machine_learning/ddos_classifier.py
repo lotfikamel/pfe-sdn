@@ -91,7 +91,7 @@ class Classifier () :
 
 		start = datetime.now().replace(microsecond=0)
 
-		classifier.fit(X_train, y_train)
+		self.classifier.fit(X_train, y_train)
 
 		end = datetime.now().replace(microsecond=0)
 
