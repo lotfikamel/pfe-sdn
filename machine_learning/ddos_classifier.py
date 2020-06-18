@@ -33,7 +33,7 @@ class Classifier () :
 	####
 	def is_exists (self) : 
 
-		return path.exists(f'{self.classifier.__class__.__name__}.joblib')
+		return path.exists(f'{self.modelClass.__name__}.joblib')
 
 	####
 	# Clean the data frame
@@ -64,6 +64,20 @@ class Classifier () :
 	def persiste_scaler (self) :
 
 		joblib.dump(self.scaler, f'{self.scaler.__class__.__name__}.joblib')
+
+	####
+	# load classifier if persisted else build new one
+	# @return {Object}
+	###
+	def load (self) : 
+
+		if self.is_exists() :
+
+			return joblib.load(f'{self.modelClass.__name__}.joblib')
+
+		self.build()
+
+		return self.classifier
 
 	####
 	## Build and train the model
@@ -97,11 +111,11 @@ class Classifier () :
 
 		duration = end - start
 
-		persiste_classifier()
+		self.persiste_classifier()
 
-		persiste_scaler()
+		self.persiste_scaler()
 		   
-		prediction = classifier.predict(X_test)
+		prediction = self.classifier.predict(X_test)
 
 		print('timing : {} '.format(duration))
 
@@ -113,6 +127,6 @@ classifier = Classifier({
 	'dataset_path' : ''
 })
 
-classifier.build()
+classifier.load()
 
 
