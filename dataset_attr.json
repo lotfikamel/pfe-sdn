@@ -1,0 +1,15 @@
+{
+
+	"Flow duration" : "the duration of the communication in microseconds last packet date - first packet date",
+	"Total Fwd Packets" : "the Total number of Packets tranfered from the source to destination",
+	"Total Length of Fwd Packets" : "the total size of all packets payload in byts",
+	"Flow Bytes/s" : "avg of the received byts per seconds (Total Length of Fwd Packets + Total Length of Bwd Packets / flow duration in seconds)",
+	"Flow Packets/s" : "avg of the received byts per seconds (Total of Fwd Packets + Total of Bwd Packets / flow duration in seconds)",
+	"Forward Bytes/s" : "avg of the received byts per seconds (Total Length of Fwd Packets / flow duration in seconds)",
+	"Forward Packets/s" : "avg of the received byts per seconds (Total of Fwd Packets / flow duration in seconds)",
+	"backword Bytes/s" : "avg of the received byts per seconds (Total Length of Bwd Packets / flow duration in seconds)",
+	"backword Packets/s" : "avg of the received byts per seconds (Total of Bwd Packets / flow duration in seconds)",
+	"Flow Mean IAT" : "avg of time between two in a row in microseconds",
+	"Flow Fwd Header Length" : "the total Header Length in forwarded direction",
+	"Flow Bwd Header Length" : "the total Header Length in backword direction"
+}
