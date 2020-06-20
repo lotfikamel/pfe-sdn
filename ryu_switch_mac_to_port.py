@@ -143,46 +143,45 @@ class SwitchMacToPort(app_manager.RyuApp):
             'in_port' : in_port,
         }
 
-        ethernet_packet = packet.get_protocols(ethernet.ethernet)[0]
+        for protocol in packet.protocols:
 
-        if ethernet_packet.ethertype == ether_types.ETH_TYPE_IP:
+            print(protocol.protocol_name)
 
-            flow_match['eth_src']  = ethernet_packet.src
-            flow_match['eth_dst']  = ethernet_packet.dst
-            flow_match['eth_type'] = ethernet_packet.ethertype
+            if protocol.protocol_name == 'ethernet' :
 
-            ipv4_layer = packet.get_protocol(ipv4.ipv4)
+                flow_match['eth_src'] = protocol.src
+                flow_match['eth_dst'] = protocol.dst
+                flow_match['eth_type'] = protocol.ethertype
 
-            flow_match['ipv4_src'] = ipv4_layer.src
-            flow_match['ipv4_dst'] = ipv4_layer.dst
+            if protocol.protocol_name == 'ipv4' :
 
-            protocol = ipv4_layer.proto
+                print('packet ip version 4')
 
-            if protocol == in_proto.IPPROTO_ICMP:
+                flow_match['ipv4_src'] = protocol.src
+                flow_match['ipv4_dst'] = protocol.dst
+                flow_match['ip_proto'] = protocol.proto
 
-                icmp_packet = packet.get_protocol(icmp.icmp)
+            elif protocol.protocol_name == 'ipv6' :
 
-                # print(payload)
+                print('packet ip version 6')
 
-                flow_match['ip_proto'] = protocol
-                flow_match['icmpv4_code'] = icmp_packet.code
-                flow_match['icmpv4_type'] = icmp_packet.type
+                flow_match['ipv6_src'] = protocol.src
+                flow_match['ipv6_dst'] = protocol.dst
 
-            elif protocol == in_proto.IPPROTO_TCP:
+            if protocol.protocol_name == 'tcp' :
 
-                tcp_packet = packet.get_protocol(tcp.tcp)
+                print('tcp packet received')
 
-                flow_match['ip_proto'] = protocol
-                flow_match['tcp_src'] = tcp_packet.src_port
-                flow_match['tcp_dst'] = tcp_packet.dst_port
+                flow_match['tcp_src'] = protocol.src_port
+                flow_match['tcp_dst'] = protocol.dst_port
 
-            elif protocol == in_proto.IPPROTO_UDP:
+            if protocol.protocol_name == 'udp' :
 
-                udp_packet = packet.get_protocol(udp.udp)
+                print('udp packet received')
 
-                flow_match['ip_proto'] = protocol
-                flow_match['udp_src'] = udp_packet.src_port
-                flow_match['udp_dst'] = udp_packet.dst_port
+                flow_match['udp_src'] = protocol.src_port
+                flow_match['udp_dst'] = protocol.dst_port
+
 
             # json_printer.o(flow_match)
 
