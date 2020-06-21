@@ -1,15 +1,20 @@
 {
 
-	"Flow duration" : "the duration of the communication in microseconds last packet date - first packet date",
-	"Total Fwd Packets" : "the Total number of Packets tranfered from the source to destination",
-	"Total Length of Fwd Packets" : "the total size of all packets payload in byts",
+	"Flow duration" : "the duration of the communication in microseconds (last packet date - first packet date) [by calculation]",
+	"Total Fwd Packets" : "the Total number of Packets tranfered from the source to destination [ monitoring ]",
+	"Total Bwd Packets" : "the Total number of Packets tranfered from the destination to source [ monitoring ]",
+	"Total Length of Fwd Packets" : "the total size of all Forward packets payload in byts [ monitoring ]",
+	"Total Length of Bwd Packets" : "the total size of all Bwd packets payload in byts [ monitoring ]",
+	"Fwd Packet Length Mean" : "avg packet size in the forward direction ( Total Length Fwd Packets  / Total Fwd Packets)",
+	"Bwd Packet Length Mean" : "avg packet size in the backword direction ( Total Length Bwd Packets  / Total Bwd Packets)",
 	"Flow Bytes/s" : "avg of the received byts per seconds (Total Length of Fwd Packets + Total Length of Bwd Packets / flow duration in seconds)",
 	"Flow Packets/s" : "avg of the received byts per seconds (Total of Fwd Packets + Total of Bwd Packets / flow duration in seconds)",
 	"Forward Bytes/s" : "avg of the received byts per seconds (Total Length of Fwd Packets / flow duration in seconds)",
 	"Forward Packets/s" : "avg of the received byts per seconds (Total of Fwd Packets / flow duration in seconds)",
 	"backword Bytes/s" : "avg of the received byts per seconds (Total Length of Bwd Packets / flow duration in seconds)",
 	"backword Packets/s" : "avg of the received byts per seconds (Total of Bwd Packets / flow duration in seconds)",
-	"Flow Mean IAT" : "avg of time between two in a row in microseconds",
+	"Flow Mean IAT" : "avg of time between two in a row in microseconds [ calculation ]",
+	"Flow Mean IAT MAX" : "MAX avg of time between two in a row in microseconds [ calculation ]",
 	"Flow Fwd Header Length" : "the total Header Length in forwarded direction",
 	"Flow Bwd Header Length" : "the total Header Length in backword direction"
 }
