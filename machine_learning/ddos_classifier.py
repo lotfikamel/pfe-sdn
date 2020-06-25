@@ -8,7 +8,7 @@ ddos_classifier = Classifier({
 
 	'model_class' : RandomForestClassifier,
 	'scaler_class' : MinMaxScaler,
-	'dataset_path' : '/home/lotfi/pfe/ddos_dataset.csv'
+	'dataset_path' : '/home/lotfi/pfe/DDOS_datasets/UDPLag.csv'
 })
 
 ddos_classifier.load()
