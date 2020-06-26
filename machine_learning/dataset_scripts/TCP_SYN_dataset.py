@@ -116,8 +116,6 @@ encoder = LabelEncoder()
 
 data_frame[' Label'] = encoder.fit_transform(data_frame[' Label'])
 
-data_frame = factorize_all_data_frame(data_frame)
-
 data_frame = clean_dataset(data_frame)
 
 unseen_mixed_data = pd.concat(objs=[tcp_benign_line, tcp_syn_line], join='inner')
@@ -125,13 +123,17 @@ unseen_mixed_data = pd.concat(objs=[tcp_benign_line, tcp_syn_line], join='inner'
 ##shuffle
 unseen_mixed_data = unseen_mixed_data.reindex(np.random.permutation(unseen_mixed_data.index))
 
-unseen_mixed_data_labels = encoder.transform(unseen_mixed_data[' Label'])
+unseen_mixed_data[' Label'] = encoder.transform(unseen_mixed_data[' Label'])
 
-unseen_mixed_data = factorize_all_data_frame(unseen_mixed_data)
+unseen_mixed_data = clean_dataset(unseen_mixed_data)
+
+unseen_mixed_data_labels = unseen_mixed_data[' Label']
 
 unseen_mixed_data.drop(columns=[' Label'], inplace=True)
 
-unseen_mixed_data = clean_dataset(unseen_mixed_data)
+print(unseen_mixed_data.info())
+
+print(data_frame.info())
 
 X = np.array(data_frame.drop(columns=[' Label']))
 
