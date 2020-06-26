@@ -116,8 +116,6 @@ encoder = LabelEncoder()
 
 data_frame[' Label'] = encoder.fit_transform(data_frame[' Label'])
 
-data_frame = factorize_all_data_frame(data_frame)
-
 data_frame = clean_dataset(data_frame)
 
 unseen_mixed_data = pd.concat(objs=[udp_benign_line, udp_lag_line], join='inner')
@@ -126,8 +124,6 @@ unseen_mixed_data = pd.concat(objs=[udp_benign_line, udp_lag_line], join='inner'
 unseen_mixed_data = unseen_mixed_data.reindex(np.random.permutation(unseen_mixed_data.index))
 
 unseen_mixed_data_labels = encoder.transform(unseen_mixed_data[' Label'])
-
-unseen_mixed_data = factorize_all_data_frame(unseen_mixed_data)
 
 unseen_mixed_data.drop(columns=[' Label'], inplace=True)
 
