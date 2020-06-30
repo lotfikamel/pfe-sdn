@@ -112,7 +112,7 @@ class SimpleMonitor13(SwitchMacToPort):
         @param {OFPMatch} match
         @return {Dict}
     """
-    def flow_match_parse(self, match):
+    def flow_match_parse (self, match):
 
       packet_match = {}
 

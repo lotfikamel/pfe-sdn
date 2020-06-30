@@ -28,6 +28,10 @@ import struct
 import textwrap
 import time
 
+import os
+
+from TraficCalculator import TraficCalculator
+
 TAB1 = '\t'
 TAB2 = '\t\t'
 TAB3 = '\t\t\t'
@@ -44,19 +48,9 @@ class SwitchMacToPort(app_manager.RyuApp):
         # format : { datapath_swicth_id : {mac : port} }
         self.mac_to_port = {}
 
-        ###
-        # Track flow calculated attr
-        # { "flow_id" : {  } }
-        ##
-        self.flow_infos = {}
+        self.traficCalculator = TraficCalculator()
 
-        self.packet_in_csv_file = './packet_in.csv'
-
-        self.dataset_csv_file = './my_dataset.csv'
-
-        packet_in_file = open(self.packet_in_csv_file, 'w')
-        packet_in_file.write('flow_id,src_ip,src_port,dst_ip,dst_port,ip_proto \n')
-        packet_in_file.close()
+        os.system('sudo python3 ./packet_sniffer.py')
 
     def __str__ (self) :
 
@@ -102,35 +96,6 @@ class SwitchMacToPort(app_manager.RyuApp):
         self.mac_to_port[datapath_swicth_id][mac] = port
 
     """
-        build flow flow id based on ip src and ip dst
-        @param {String} ipv4_src
-        @param {String} ipv4_dst
-        @return {String}
-    """
-    def get_flow_id (self, ipv4_src, ipv4_dst) :
-        
-        return f'{ipv4_src}-{ipv4_dst}'
-
-    """
-        update flow infos on packet in
-        @param {Dict} flow_match
-    """
-    def update_flow_infos (self, flow_match) :
-        
-        flow_id = self.get_flow_id(flow_match['ipv4_src'], flow_match['ipv4_dst'])
-
-        if flow_id not in self.flow_infos :
-
-            print(f'first packet in for the flow {flow_id}')
-
-            self.flow_infos[flow_id] = 1
-
-        else :
-
-            self.flow_infos[flow_id] += 1
-
-            #print(f'flow {flow_id} has {self.flow_infos[flow_id]}')
-    """
         build the full match flow based on
         protocol stack in received packet
         @param {List<Object>}
@@ -145,8 +110,6 @@ class SwitchMacToPort(app_manager.RyuApp):
 
         for protocol in packet.protocols:
 
-            print(protocol.protocol_name)
-
             if protocol.protocol_name == 'ethernet' :
 
                 flow_match['eth_src'] = protocol.src
@@ -154,8 +117,6 @@ class SwitchMacToPort(app_manager.RyuApp):
                 flow_match['eth_type'] = protocol.ethertype
 
             if protocol.protocol_name == 'ipv4' :
-
-                print('packet ip version 4')
 
                 flow_match['ipv4_src'] = protocol.src
                 flow_match['ipv4_dst'] = protocol.dst
@@ -170,28 +131,17 @@ class SwitchMacToPort(app_manager.RyuApp):
 
             if protocol.protocol_name == 'tcp' :
 
-                print('tcp packet received')
-
                 flow_match['tcp_src'] = protocol.src_port
                 flow_match['tcp_dst'] = protocol.dst_port
 
             if protocol.protocol_name == 'udp' :
 
-                print('udp packet received')
-
                 flow_match['udp_src'] = protocol.src_port
                 flow_match['udp_dst'] = protocol.dst_port
 
-
-            # json_printer.o(flow_match)
-
         if 'ip_proto' in flow_match :
 
-            self.update_flow_infos(flow_match)
-
-            flow_id = self.get_flow_id(flow_match['ipv4_src'], flow_match['ipv4_dst'])
-
-            self.parse_flow_match(flow_match, flow_id)
+            self.traficCalculator.calculate(packet, flow_match)
 
         return flow_match
 
@@ -221,31 +171,6 @@ class SwitchMacToPort(app_manager.RyuApp):
 
         self.logger.info('ending switch_features_handler')
 
-    def parse_flow_match(self, flow_match, flow_id) :
-
-        if flow_match['ip_proto'] == in_proto.IPPROTO_TCP:
-
-            packet_in_file = open(self.packet_in_csv_file, 'a+')
-
-            packet_in_file.write("{},{},{},{},{},{}\n".format(
-               flow_id, flow_match['ipv4_src'], flow_match['tcp_src'],
-               flow_match['ipv4_dst'], flow_match['tcp_dst'],
-               flow_match['ip_proto']))
-
-
-            packet_in_file.close()
-
-        elif flow_match['ip_proto'] == in_proto.IPPROTO_UDP:
-
-            packet_in_file = open(self.packet_in_csv_file, 'a+')
-
-            packet_in_file.write("{},{},{},{},{},{}\n".format(
-               flow_id, flow_match['ipv4_src'], flow_match['udp_src'],
-               flow_match['ipv4_dst'], flow_match['udp_dst'],
-               flow_match['ip_proto']))
-
-
-            packet_in_file.close()
     """
         packet in event handler
     """

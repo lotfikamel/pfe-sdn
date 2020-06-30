@@ -89,7 +89,7 @@ UDP_LAG_BENIGNE= UDP_LAG_BENIGNE.loc[data_frame[' Protocol'] == 17]
 
 udp_benign_line = UDP_LAG_BENIGNE.iloc[1521:1561,:]
 
-UDP_LAG_BENIGNE = UDP_LAG_BENIGNE.iloc[:1500]
+UDP_LAG_BENIGNE = UDP_LAG_BENIGNE.iloc[:200]
 
 UDP_LAG_BENIGNE.to_csv('/home/lotfi/pfe/DDOS_datasets/UDPLag/UDPLag_BENIGNE.csv', index=False)
 
@@ -99,7 +99,7 @@ UDP_LAG= UDP_LAG.loc[data_frame[' Protocol'] == 17]
 
 udp_lag_line = UDP_LAG.iloc[3000:3040,:]
 
-UDP_LAG = UDP_LAG.iloc[:1500]
+UDP_LAG = UDP_LAG.iloc[:200]
 
 BALANCED_UDP = pd.concat(objs=[UDP_LAG_BENIGNE, UDP_LAG], join='inner')
 
@@ -160,13 +160,13 @@ end = time() - start
 
 print(f'training time is : {end}')
 
-predictions = classifier.predict(X_test)
+predictions = classifier.predict(unseen_mixed_data)
 
 labels = list(map(int, predictions))
 
-confusion_matrix = metrics.confusion_matrix(y_test, predictions)
+confusion_matrix = metrics.confusion_matrix(unseen_mixed_data_labels, predictions)
 
-classification_report = metrics.classification_report(y_test, predictions, labels=np.unique(y))
+classification_report = metrics.classification_report(unseen_mixed_data_labels, predictions, labels=np.unique(y))
 
 print('confusion matrix :')
 
