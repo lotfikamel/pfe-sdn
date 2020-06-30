@@ -6,7 +6,7 @@ udp_counts = 0
 
 def filter (packet) :
 
-	return TCP in packet
+	return (TCP in packet) or (UDP in packet)
 
 def packet_sniffer (packet) :
 

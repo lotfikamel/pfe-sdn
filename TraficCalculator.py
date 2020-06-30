@@ -2,6 +2,10 @@
 	class for calculating each flow attr
 """
 
+from scapy.all import *
+
+from datetime import datetime, timedelta
+
 class TraficCalculator () :
 
 	"""
@@ -26,11 +30,47 @@ class TraficCalculator () :
 		}
 
 	"""
+		begin sniffing
+	"""
+	def init_sniff (self) :
+
+		sniff(lfilter=self.filter_packet, prn=self.on_packet)
+
+	"""
+		filter packet to sniff
+	"""
+	def filter_packet (self, packet) :
+
+		return (TCP in packet) or (UDP in packet)
+
+	"""
+		packet sniff callback
+	"""
+	def on_packet (self, packet) :
+
+		print(packet[IP].proto)
+
+		flow_id = self.generate_flow_id(packet)
+
+		if flow_id in self.flow_infos :
+
+			self.calculate(flow_id, packet)
+
+		# fist packet in the flow
+		else :
+
+			self.init_flow(flow_id, packet)
+
+		print(self.flow_infos)
+
+		return
+
+	"""
 		generate flow id
 		@param {Packet} packet
 		@return {String}
 	"""
-	def generate_flow_id (self, flow_match) :
+	def generate_flow_id (self, packet) :
 
 		min_ip = None
 		max_ip = None
@@ -41,25 +81,25 @@ class TraficCalculator () :
 		port_src = None
 		port_dst = None
 
-		if flow_match['ipv4_src'] < flow_match['ipv4_dst'] :
+		if packet[IP].src < packet[IP].dst :
 
-			min_ip = flow_match['ipv4_src']
-			max_ip = flow_match['ipv4_dst']
+			min_ip = packet[IP].src
+			max_ip = packet[IP].dst
 
 		else :
 
-			min_ip = flow_match['ipv4_dst']
-			max_ip = flow_match['ipv4_src']
+			min_ip = packet[IP].dst
+			max_ip = packet[IP].src
 
-		if flow_match['ip_proto'] == self.ip_protocol_codes['TCP'] :
+		if packet[IP].proto == self.ip_protocol_codes['TCP'] :
 
-			port_src = flow_match['tcp_src']
-			port_dst = flow_match['tcp_dst']
+			port_src = packet[TCP].sport
+			port_dst = packet[TCP].dport
 
-		elif flow_match['ip_proto'] == self.ip_protocol_codes['UDP'] :
+		elif packet[IP].proto == self.ip_protocol_codes['UDP'] :
 
-			port_src = flow_match['udp_src']
-			port_dst = flow_match['udp_dst']
+			port_src = packet[UDP].sport
+			port_dst = packet[UDP].dport
 
 		if port_src < port_dst :
 
@@ -71,35 +111,58 @@ class TraficCalculator () :
 			min_port = port_dst
 			max_port = port_src
 
-		return f'{min_ip}-{max_ip}-{min_port}-{max_port}-{flow_match["ip_proto"]}'
+		return f'{min_ip}-{max_ip}-{min_port}-{max_port}-{packet[IP].proto}'
 
 
 	"""
 		install flow infos for the first time
 		@param {String} flow_id
+		@param {Packet} packet
 		@return {Void}
 	"""
-	def init_flow_infos (self, flow_id) :
+	def init_flow (self, flow_id, packet) :
 
-		if flow_id not in self.flow_infos :
+		self.flow_infos[flow_id] = {
 
-			self.flow_infos[flow_id] = 1
+			'protocol' : packet[IP].proto,
 
-		else :
+			'ip_forwarded' : packet[IP].src,
 
-			self.flow_infos[flow_id] += 1 
+			'first_packet_time' : datetime.now(),
+
+			'duration' : 0,
+
+			'forward' : {
+
+				'total' : 0
+			},
+
+			'backward' : {
+
+				'total' : 0
+			}
+		}
 
 	"""
 		fire trafic calculation
 		@param {Packet} packet
 		@return {String}
 	"""
-	def calculate (self, packet, flow_match) :
+	def calculate (self, flow_id, packet) :
 
-		if flow_match['ip_proto'] == self.ip_protocol_codes['TCP'] or flow_match['ip_proto'] == self.ip_protocol_codes['UDP'] :
+		self.calculate_flow_duration(flow_id, packet)
 
-			flow_id = self.generate_flow_id(flow_match)
+	"""
+		calculate flow duration
+	"""
+	def calculate_flow_duration (self, flow_id, packet) :
 
-			self.init_flow_infos(flow_id)
+		diff = datetime.now() - self.flow_infos[flow_id]['first_packet_time']
 
-			print('flow_infos', self.flow_infos)
+		duration_microseconds = diff / timedelta(microseconds=1)
+
+		self.flow_infos[flow_id]['duration'] = duration_microseconds
+
+traficCalculator = TraficCalculator()
+
+traficCalculator.init_sniff()

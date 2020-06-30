@@ -30,8 +30,6 @@ import time
 
 import os
 
-from TraficCalculator import TraficCalculator
-
 TAB1 = '\t'
 TAB2 = '\t\t'
 TAB3 = '\t\t\t'
@@ -47,10 +45,6 @@ class SwitchMacToPort(app_manager.RyuApp):
         # mac to port table
         # format : { datapath_swicth_id : {mac : port} }
         self.mac_to_port = {}
-
-        self.traficCalculator = TraficCalculator()
-
-        os.system('sudo python3 ./packet_sniffer.py')
 
     def __str__ (self) :
 
@@ -138,10 +132,6 @@ class SwitchMacToPort(app_manager.RyuApp):
 
                 flow_match['udp_src'] = protocol.src_port
                 flow_match['udp_dst'] = protocol.dst_port
-
-        if 'ip_proto' in flow_match :
-
-            self.traficCalculator.calculate(packet, flow_match)
 
         return flow_match
 
