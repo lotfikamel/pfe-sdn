@@ -9,13 +9,11 @@
 	"Flow Bwd Header Length" : "the total Header Length in backword direction",
 	"Flow Bytes/s" : "avg of the received byts per seconds (Total Length of Fwd Packets + Total Length of Bwd Packets / flow duration in seconds)",
 	"Flow Packets/s" : "avg of the received byts per seconds (Total of Fwd Packets + Total of Bwd Packets / flow duration in seconds)",
-
-	"Fwd Packet Length Mean" : "avg packet size in the forward direction ( Total Length Fwd Packets  / Total Fwd Packets)",
-	"Bwd Packet Length Mean" : "avg packet size in the backword direction ( Total Length Bwd Packets  / Total Bwd Packets)",
-	"Forward Bytes/s" : "avg of the received byts per seconds (Total Length of Fwd Packets / flow duration in seconds)",
 	"Forward Packets/s" : "avg of the received byts per seconds (Total of Fwd Packets / flow duration in seconds)",
-	"backword Bytes/s" : "avg of the received byts per seconds (Total Length of Bwd Packets / flow duration in seconds)",
 	"backword Packets/s" : "avg of the received byts per seconds (Total of Bwd Packets / flow duration in seconds)",
 	"Flow Mean IAT" : "avg of time between two in a row in microseconds [ calculation ]",
-	"Flow Mean IAT MAX" : "MAX avg of time between two in a row in microseconds [ calculation ]",
+	"Fwd Packet Length Mean" : "avg packet size in the forward direction ( Total Length Fwd Packets  / Total Fwd Packets)",
+	"Bwd Packet Length Mean" : "avg packet size in the backword direction ( Total Length Bwd Packets  / Total Bwd Packets)",
+
+	"Fwd Packet Length Max" : "the largest packet length in forward direction"
 }

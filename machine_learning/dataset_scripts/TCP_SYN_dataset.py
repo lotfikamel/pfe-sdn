@@ -77,6 +77,7 @@ attrs=[
 	'Fwd Packets/s',
 	' Bwd Packets/s',
 	' Flow IAT Mean',
+	' Fwd Packet Length Max',
 	' Label'
 ]
 

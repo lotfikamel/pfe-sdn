@@ -4,6 +4,8 @@
 
 from scapy.all import *
 
+import numpy as np
+
 from datetime import datetime, timedelta
 
 from pprint import pprint
@@ -16,7 +18,7 @@ class TraficCalculator () :
 	def __init__ (self) :
 
 		"""
-			flow infos data structure
+			flow infos
 			@var {Dict}
 		"""
 		self.flow_infos = {}
@@ -25,7 +27,7 @@ class TraficCalculator () :
 			ip protocol with their code
 			@var {Dict}
 		"""
-		self.ip_protocol_codes = {
+		self.IP_PROTOCOL_CODES = {
 
 			'TCP' : 6,
 			'UDP' : 17
@@ -33,6 +35,7 @@ class TraficCalculator () :
 
 		"""
 			fixed ip header length
+			@var {Dict}
 		"""
 		self.HEADERS_LEN = {
 
@@ -65,8 +68,6 @@ class TraficCalculator () :
 	"""
 	def on_packet (self, packet) :
 
-		print(self.get_packet_net_payload_len(packet))
-
 		flow_id = self.generate_flow_id(packet)
 
 		if flow_id in self.flow_infos :
@@ -77,10 +78,6 @@ class TraficCalculator () :
 		else :
 
 			self.init_flow(flow_id, packet)
-
-		pprint(self.flow_infos)
-
-		return
 
 	"""
 		generate flow id
@@ -108,12 +105,12 @@ class TraficCalculator () :
 			min_ip = packet[IP].dst
 			max_ip = packet[IP].src
 
-		if packet[IP].proto == self.ip_protocol_codes['TCP'] :
+		if packet[IP].proto == self.IP_PROTOCOL_CODES['TCP'] :
 
 			port_src = packet[TCP].sport
 			port_dst = packet[TCP].dport
 
-		elif packet[IP].proto == self.ip_protocol_codes['UDP'] :
+		elif packet[IP].proto == self.IP_PROTOCOL_CODES['UDP'] :
 
 			port_src = packet[UDP].sport
 			port_dst = packet[UDP].dport
@@ -147,7 +144,11 @@ class TraficCalculator () :
 
 			'first_packet_time' : datetime.now(),
 
+			'last_packet_time' : datetime.now(),
+
 			'duration' : 0,
+
+			'mean_iat' : 0,
 
 			'packet_per_second' : 0,
 
@@ -156,15 +157,19 @@ class TraficCalculator () :
 			'forward' : {
 
 				'total' : 1,
-				'total_length' : self.get_packet_net_payload_len(packet),
-				'total_header_length' : self.get_protocol_header_length(packet)
+				'total_length' : self.get_packet_net_payload_length(packet),
+				'total_header_length' : self.get_protocol_header_length(packet),
+				'packet_per_second' : 0,
+				'length_mean' : 0,
 			},
 
 			'backward' : {
 
 				'total' : 0,
 				'total_length' : 0,
-				'total_header_length' : 0
+				'total_header_length' : 0,
+				'packet_per_second' : 0,
+				'length_mean' : 0,
 			}
 		}
 
@@ -200,7 +205,7 @@ class TraficCalculator () :
 		@param {Packet} packet
 		@return {Integer}
 	"""
-	def get_packet_net_payload_len (self, packet) :
+	def get_packet_net_payload_length (self, packet) :
 
 		if TCP in packet :
 
@@ -230,6 +235,10 @@ class TraficCalculator () :
 
 			self.calculate_total_forwarded_header_length(flow_id, packet)
 
+			self.calculate_forwarded_packets_per_second(flow_id)
+
+			self.calculate_forwarded_packets_length_mean(flow_id)
+
 		#call all backward functions
 		else :
 
@@ -239,9 +248,17 @@ class TraficCalculator () :
 
 			self.calculate_total_backward_header_length(flow_id, packet)
 
+			self.calculate_backward_packets_per_second(flow_id)
+
+			self.calculate_backward_packets_length_mean(flow_id)
+
 		self.calculate_flow_packets_per_second(flow_id)
 
 		self.calculate_flow_bytes_per_second(flow_id)
+
+		self.calculate_flow_mean_iat(flow_id)
+
+		pprint(self.flow_infos)
 
 	"""
 		calculate flow duration
@@ -285,7 +302,7 @@ class TraficCalculator () :
 	"""
 	def calculate_total_forwarded_packets_length (self, flow_id, packet) :
 
-		self.flow_infos[flow_id]['forward']['total_length'] += self.get_packet_net_payload_len(packet)
+		self.flow_infos[flow_id]['forward']['total_length'] += self.get_packet_net_payload_length(packet)
 
 	"""
 		calculate total backward packets length
@@ -295,7 +312,7 @@ class TraficCalculator () :
 	"""
 	def calculate_total_backward_packets_length (self, flow_id, packet) :
 
-		self.flow_infos[flow_id]['backward']['total_length'] += self.get_packet_net_payload_len(packet)
+		self.flow_infos[flow_id]['backward']['total_length'] += self.get_packet_net_payload_length(packet)
 
 	"""
 		calculate forward total header length
@@ -362,6 +379,83 @@ class TraficCalculator () :
 		flow_duration = self.flow_infos[flow_id]['duration'] / 10**6
 
 		self.flow_infos[flow_id]['bytes_per_second'] = ( total_forwarded_length + total_backward_length ) / flow_duration
+
+	"""
+		calculate forward packets per second
+		@param {Packet} packet
+		@parm {Void}
+	"""
+	def calculate_forwarded_packets_per_second (self, flow_id) :
+
+		total_forwarded_packets = self.flow_infos[flow_id]['forward']['total']
+
+		flow_duration = self.flow_infos[flow_id]['duration'] / 10**6
+
+		self.flow_infos[flow_id]['forward']['packet_per_second'] = total_forwarded_packets/ flow_duration
+
+	"""
+		calculate forward packets length mean
+		@param {String} flow_id
+		@parm {Void}
+	"""
+	def calculate_forwarded_packets_length_mean (self, flow_id) :
+
+		total_forwarded_length = self.flow_infos[flow_id]['forward']['total_length']
+
+		total_forwarded_packets = self.flow_infos[flow_id]['forward']['total']
+
+		self.flow_infos[flow_id]['forward']['length_mean'] = total_forwarded_length / total_forwarded_packets
+
+	"""
+		calculate backward packets length mean
+		@param {String} flow_id
+		@parm {Void}
+	"""
+	def calculate_backward_packets_length_mean (self, flow_id) :
+
+		total_backward_length = self.flow_infos[flow_id]['backward']['total_length']
+
+		total_backward_packets = self.flow_infos[flow_id]['backward']['total']
+
+		self.flow_infos[flow_id]['backward']['length_mean'] = total_backward_length / total_backward_packets
+
+	"""
+		calculate backward packets per second
+		@param {Packet} packet
+		@parm {Void}
+	"""
+	def calculate_backward_packets_per_second (self, flow_id) :
+
+		total_backward_packets = self.flow_infos[flow_id]['backward']['total']
+
+		flow_duration = self.flow_infos[flow_id]['duration'] / 10**6
+
+		self.flow_infos[flow_id]['backward']['packet_per_second'] = total_backward_packets / flow_duration
+
+	"""
+		calculate flow mean iat
+		@param {String} fow_id
+		@parm {Void}
+	"""
+	def calculate_flow_mean_iat (self, flow_id) :
+
+		now = datetime.now()
+
+		diff = now - self.flow_infos[flow_id]['last_packet_time']
+
+		mean_iat_microseconds = diff / timedelta(microseconds=1)
+
+		self.flow_infos[flow_id]['mean_iat'] = mean_iat_microseconds
+
+		self.flow_infos[flow_id]['last_packet_time'] = now
+
+	"""
+		build flow array
+		@return {nparray}
+	"""
+	def get_flows_infos (self) :
+
+		pass
 
 traficCalculator = TraficCalculator()
 
