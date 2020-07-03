@@ -161,6 +161,8 @@ class TraficCalculator () :
 				'total_header_length' : self.get_protocol_header_length(packet),
 				'packet_per_second' : 0,
 				'length_mean' : 0,
+				'last_packet_time' : datetime.now(),
+				'mean_iat' : 0,
 			},
 
 			'backward' : {
@@ -170,6 +172,8 @@ class TraficCalculator () :
 				'total_header_length' : 0,
 				'packet_per_second' : 0,
 				'length_mean' : 0,
+				'last_packet_time' : None,
+				'mean_iat' : 0,
 			}
 		}
 
@@ -239,6 +243,8 @@ class TraficCalculator () :
 
 			self.calculate_forwarded_packets_length_mean(flow_id)
 
+			self.calculate_forward_mean_iat(flow_id)
+
 		#call all backward functions
 		else :
 
@@ -251,6 +257,8 @@ class TraficCalculator () :
 			self.calculate_backward_packets_per_second(flow_id)
 
 			self.calculate_backward_packets_length_mean(flow_id)
+
+			self.calculate_backward_mean_iat(flow_id)
 
 		self.calculate_flow_packets_per_second(flow_id)
 
@@ -448,6 +456,43 @@ class TraficCalculator () :
 		self.flow_infos[flow_id]['mean_iat'] = mean_iat_microseconds
 
 		self.flow_infos[flow_id]['last_packet_time'] = now
+
+
+	"""
+		calculate forward mean iat
+		@param {String} fow_id
+		@parm {Void}
+	"""
+	def calculate_forward_mean_iat (self, flow_id) :
+
+		now = datetime.now()
+
+		diff = now - self.flow_infos[flow_id]['forward']['last_packet_time']
+
+		mean_iat_microseconds = diff / timedelta(microseconds=1)
+
+		self.flow_infos[flow_id]['forward']['mean_iat'] = mean_iat_microseconds
+
+		self.flow_infos[flow_id]['forward']['last_packet_time'] = now
+
+	"""
+		calculate backward mean iat
+		@param {String} fow_id
+		@parm {Void}
+	"""
+	def calculate_backward_mean_iat (self, flow_id) :
+
+		now = datetime.now()
+
+		if self.flow_infos[flow_id]['backward']['last_packet_time'] != None :
+
+			diff = now - self.flow_infos[flow_id]['backward']['last_packet_time']
+
+			mean_iat_microseconds = diff / timedelta(microseconds=1)
+
+			self.flow_infos[flow_id]['backward']['mean_iat'] = mean_iat_microseconds
+
+		self.flow_infos[flow_id]['backward']['last_packet_time'] = now
 
 	"""
 		build flow array
