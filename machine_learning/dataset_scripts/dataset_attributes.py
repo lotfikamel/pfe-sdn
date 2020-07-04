@@ -17,6 +17,6 @@ attributes_rename_mapping = {
 	' Bwd IAT Mean' : 'backward_iat_mean',
 	' Flow IAT Mean' : 'flow_iat_mean',
 	' Flow Packets/s' : 'flow_packets_per_seconds',
-	'Flow Bytes/s' : 'flow_packets_per_seconds',
+	'Flow Bytes/s' : 'flow_bytes_per_seconds',
 	' Label' : 'label'
 }

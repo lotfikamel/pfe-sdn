@@ -40,19 +40,9 @@ class Classifier () :
 
 		return path.exists(f'{self.modelClass.__name__}.joblib') and path.exists(f'{self.scalerClass.__name__}.joblib')
 
-	####
-	# Clean the data frame
-	# @return {Void}
-	###
 	def clean_dataset (self) :
 
-		assert isinstance(self.data_frame, pd.DataFrame)
-
-		self.data_frame.dropna(inplace=True)
-
-		indices_to_keep = ~self.data_frame.isin([np.nan, np.inf, -np.inf]).any(1)
-
-		self.data_frame = self.data_frame[indices_to_keep].astype(np.float64)
+		self.data_frame.replace([np.inf, -np.inf], np.nan).dropna(inplace=True)
 
 	####
 	## Persiste the given classfier

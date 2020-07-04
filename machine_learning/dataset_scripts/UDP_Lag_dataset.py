@@ -41,101 +41,59 @@ def factorize_all_data_frame (data_frame) :
 
 	return data_frame
 
-def clean_dataset (data_frame) :
-
-		assert isinstance(data_frame, pd.DataFrame)
-
-		data_frame.dropna(inplace=True)
-
-		indices_to_keep = ~data_frame.isin([np.nan, np.inf, -np.inf]).any(1)
-
-		data_frame = data_frame[indices_to_keep].astype(np.float64)
-
-		return data_frame
-
-dataset_path = '/home/lotfi/pfe/DDOS_datasets/UDPLag.csv'
+dataset_path = '/home/lotfi/pfe/DDOS_datasets/final_datasets/UDPLag.csv'
 
 #create dataframe
 data_frame = pd.read_csv(dataset_path)
 
-print(data_frame.info())
+udp_benign = data_frame.loc[data_frame['label'] == 'BENIGN']
 
-attrs=[
-		
-	' Protocol',
-	' Flow Duration',
-	' Total Fwd Packets',
-	' Total Backward Packets',
-	'Total Length of Fwd Packets',
-	' Total Length of Bwd Packets',
-	' Fwd Packet Length Mean',
-	' Bwd Packet Length Mean',
-	'Flow Bytes/s',
-	' Flow Packets/s',
-	' Fwd Header Length',
-	' Bwd Header Length',
-	'Fwd Packets/s',
-	' Bwd Packets/s',
-	' Flow IAT Mean',
-	' Label'
-]
+unseen_udp_benign = udp_benign.iloc[201:227,:]
 
-# select custom attr
-data_frame = data_frame[attrs]
+udp_benign = udp_benign.iloc[:200]
 
-UDP_LAG_BENIGNE = data_frame.loc[data_frame[' Label'] == 'BENIGN']
+udp_lag = data_frame.loc[data_frame['label'] == 'UDP-lag']
 
-UDP_LAG_BENIGNE= UDP_LAG_BENIGNE.loc[data_frame[' Protocol'] == 17]
+unseen_udp_lag = udp_lag.iloc[201:227,:]
 
-udp_benign_line = UDP_LAG_BENIGNE.iloc[1521:1561,:]
+udp_lag = udp_lag.iloc[:200]
 
-UDP_LAG_BENIGNE = UDP_LAG_BENIGNE.iloc[:200]
+data_frame = pd.concat(objs=[udp_benign, udp_lag], join='inner')
 
-UDP_LAG_BENIGNE.to_csv('/home/lotfi/pfe/DDOS_datasets/UDPLag/UDPLag_BENIGNE.csv', index=False)
-
-UDP_LAG = data_frame.loc[data_frame[' Label'] == 'UDP-lag']
-
-UDP_LAG= UDP_LAG.loc[data_frame[' Protocol'] == 17]
-
-udp_lag_line = UDP_LAG.iloc[3000:3040,:]
-
-UDP_LAG = UDP_LAG.iloc[:200]
-
-BALANCED_UDP = pd.concat(objs=[UDP_LAG_BENIGNE, UDP_LAG], join='inner')
-
-UDP_LAG.to_csv('/home/lotfi/pfe/DDOS_datasets/UDPLag/UDPLag.csv', index=False)
-
-BALANCED_UDP.to_csv('/home/lotfi/pfe/DDOS_datasets/UDPLag/BALANCED_UDP.csv', index=False)
-
-data_frame = pd.read_csv('/home/lotfi/pfe/DDOS_datasets/UDPLag/BALANCED_UDP.csv')
-
-##shuffle
 data_frame = data_frame.reindex(np.random.permutation(data_frame.index))
+
+print(data_frame.head())
 
 encoder = LabelEncoder()
 
-data_frame[' Label'] = encoder.fit_transform(data_frame[' Label'])
+data_frame['label'] = encoder.fit_transform(data_frame['label'])
 
-data_frame = clean_dataset(data_frame)
+print(data_frame.head())
 
-unseen_mixed_data = pd.concat(objs=[udp_benign_line, udp_lag_line], join='inner')
+unseen_data = pd.concat(objs=[unseen_udp_benign, unseen_udp_lag], join='inner')
 
-##shuffle
-unseen_mixed_data = unseen_mixed_data.reindex(np.random.permutation(unseen_mixed_data.index))
+unseen_data = unseen_data.reindex(np.random.permutation(unseen_data.index))
 
-unseen_mixed_data_labels = encoder.transform(unseen_mixed_data[' Label'])
+print(unseen_data.head())
 
-unseen_mixed_data.drop(columns=[' Label'], inplace=True)
+unseen_data['label'] = encoder.transform(unseen_data['label'])
 
-unseen_mixed_data = clean_dataset(unseen_mixed_data)
+print(unseen_data.head())
 
-X = np.array(data_frame.drop(columns=[' Label']))
+print(unseen_data.head())
+
+X = data_frame.drop(columns=['label'])
 
 #create y
-y = np.array(data_frame[' Label'])
+y = data_frame['label']
+
+X_unseen = unseen_data.drop(columns=['label'])
+
+#create y
+y_unseen = unseen_data['label']
 
 #split dataset into train and test
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5)
 
 #create classifier or model
 
@@ -148,9 +106,9 @@ classifier = RandomForestClassifier(criterion="entropy")
 #mesure the trauning time
 start = time()
 
-classifier.fit(X_train, y_train)
+classifier.fit(X, y)
 
-feat_importances = pd.Series(classifier.feature_importances_, index=unseen_mixed_data.columns).sort_values(ascending=False)
+feat_importances = pd.Series(classifier.feature_importances_, index=X.columns).sort_values(ascending=False)
 
 feat_importances.plot(kind="barh")
 
@@ -160,13 +118,13 @@ end = time() - start
 
 print(f'training time is : {end}')
 
-predictions = classifier.predict(unseen_mixed_data)
+predictions = classifier.predict(X_unseen)
 
 labels = list(map(int, predictions))
 
-confusion_matrix = metrics.confusion_matrix(unseen_mixed_data_labels, predictions)
+confusion_matrix = metrics.confusion_matrix(y_unseen, predictions)
 
-classification_report = metrics.classification_report(unseen_mixed_data_labels, predictions, labels=np.unique(y))
+classification_report = metrics.classification_report(y_unseen, predictions, labels=np.unique(y))
 
 print('confusion matrix :')
 

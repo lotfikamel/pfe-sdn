@@ -412,7 +412,9 @@ class TraficCalculator () :
 
 		total_forwarded_packets = self.flow_infos[flow_id]['forward']['total']
 
-		self.flow_infos[flow_id]['forward']['length_mean'] = total_forwarded_length / total_forwarded_packets
+		if total_forwarded_packets > 0 :
+
+			self.flow_infos[flow_id]['forward']['length_mean'] = total_forwarded_length / total_forwarded_packets
 
 	"""
 		calculate backward packets length mean
@@ -425,7 +427,9 @@ class TraficCalculator () :
 
 		total_backward_packets = self.flow_infos[flow_id]['backward']['total']
 
-		self.flow_infos[flow_id]['backward']['length_mean'] = total_backward_length / total_backward_packets
+		if total_backward_packets > 0
+
+			self.flow_infos[flow_id]['backward']['length_mean'] = total_backward_length / total_backward_packets
 
 	"""
 		calculate backward packets per second
