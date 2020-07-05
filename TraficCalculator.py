@@ -10,6 +10,10 @@ from datetime import datetime, timedelta
 
 from pprint import pprint
 
+import threading, time
+
+from machine_learning.ddos_classifier import ddos_classifier
+
 class TraficCalculator () :
 
 	"""
@@ -44,6 +48,8 @@ class TraficCalculator () :
 			'TCP' : 20
 		}
 
+		self.classify()
+
 	"""
 		begin sniffing
 		@return {Void}
@@ -59,7 +65,7 @@ class TraficCalculator () :
 	"""
 	def filter_packet (self, packet) :
 
-		return (IP in packet) and ( (TCP in packet) or (UDP in packet) )
+		return (IP in packet) and (UDP in packet) #( (TCP in packet) or (UDP in packet) )
 
 	"""
 		on packet sniffed
@@ -266,8 +272,6 @@ class TraficCalculator () :
 
 		self.calculate_flow_mean_iat(flow_id)
 
-		pprint(self.flow_infos)
-
 	"""
 		calculate flow duration
 		@param {String} fow_id
@@ -427,7 +431,7 @@ class TraficCalculator () :
 
 		total_backward_packets = self.flow_infos[flow_id]['backward']['total']
 
-		if total_backward_packets > 0
+		if total_backward_packets > 0 :
 
 			self.flow_infos[flow_id]['backward']['length_mean'] = total_backward_length / total_backward_packets
 
@@ -499,12 +503,54 @@ class TraficCalculator () :
 		self.flow_infos[flow_id]['backward']['last_packet_time'] = now
 
 	"""
-		build flow array
-		@return {nparray}
+		build flow List
+		@return {List<List>}
 	"""
-	def get_flows_infos (self) :
+	def build_flows (self) :
 
-		pass
+		flows = []
+
+		for flow_id in self.flow_infos :
+
+			flows.append([
+
+				self.flow_infos[flow_id]['protocol'],
+				self.flow_infos[flow_id]['duration'],
+
+				self.flow_infos[flow_id]['forward']['total'],
+				self.flow_infos[flow_id]['backward']['total'],
+
+				self.flow_infos[flow_id]['forward']['total_length'],
+				self.flow_infos[flow_id]['backward']['total_length'],
+
+				self.flow_infos[flow_id]['forward']['length_mean'],
+				self.flow_infos[flow_id]['backward']['length_mean'],
+
+				self.flow_infos[flow_id]['forward']['total_header_length'],
+				self.flow_infos[flow_id]['backward']['total_header_length'],
+
+				self.flow_infos[flow_id]['forward']['packet_per_second'],
+				self.flow_infos[flow_id]['backward']['packet_per_second'],
+
+				self.flow_infos[flow_id]['forward']['mean_iat'],
+				self.flow_infos[flow_id]['backward']['mean_iat'],
+
+				self.flow_infos[flow_id]['mean_iat'],
+				self.flow_infos[flow_id]['packet_per_second'],
+				self.flow_infos[flow_id]['bytes_per_second'],
+			])
+
+		return flows
+
+	def classify (self) :
+
+		threading.Timer(10, self.classify).start()
+
+		flows = self.build_flows()
+
+		if len(flows) > 0 :
+
+			ddos_classifier.predict_flows(flows)
 
 traficCalculator = TraficCalculator()
 

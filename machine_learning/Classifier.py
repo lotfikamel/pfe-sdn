@@ -4,6 +4,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 from sklearn.model_selection import train_test_split
+#import matplotlib
+import matplotlib.pyplot as plt
 from datetime import datetime, date
 import joblib
 from os import path
@@ -24,12 +26,13 @@ class Classifier () :
 
 		self.scaler = None
 
+		self.use_scaler = params['use_scaler']
+
 		self.labelEncoder = LabelEncoder()
 
-		self.rename_columns = {
+		self.X = None
 
-			' Label' : 'label'
-		}
+		self.y = None
 
 
 	####
@@ -40,6 +43,9 @@ class Classifier () :
 
 		return path.exists(f'{self.modelClass.__name__}.joblib') and path.exists(f'{self.scalerClass.__name__}.joblib')
 
+	"""
+		clean the dataset from nan and inf
+	"""
 	def clean_dataset (self) :
 
 		self.data_frame.replace([np.inf, -np.inf], np.nan).dropna(inplace=True)
@@ -64,7 +70,21 @@ class Classifier () :
 	# load classifier if persisted else build new one
 	# @return {Object}
 	###
-	def load (self) : 
+	def load (self) :
+
+		self.data_frame = pd.read_csv(self.dataset_path)
+
+		self.data_frame['label'] = self.labelEncoder.fit_transform(self.data_frame['label'])
+
+		self.X = self.data_frame.drop(columns=['label'])
+
+		if self.use_scaler == True :
+
+			self.scaler = self.scalerClass()
+
+			self.X = self.scaler.fit_transform(self.X)
+
+		self.y = self.data_frame['label']
 
 		if self.is_exists() :
 
@@ -74,9 +94,11 @@ class Classifier () :
 
 			self.data_frame = pd.read_csv(self.dataset_path)
 
-			self.data_frame.rename(columns=self.rename_columns, inplace=True)
+		else :
 
-		self.build()
+			print('classifier not exists', self.classifier, self.scaler)
+
+			self.build()
 
 	####
 	## Build and train the model
@@ -84,44 +106,38 @@ class Classifier () :
 	###
 	def build (self) :
 
-		if self.classifier == None and self.scaler == None : 
+		if self.classifier == None :
 
-			self.data_frame = pd.read_csv(self.dataset_path)
+			print('build')
 
-			self.data_frame.rename(columns=self.rename_columns, inplace=True)
-
-			self.data_frame['label'] = self.labelEncoder.fit_transform(self.data_frame['label'])
-
-			self.clean_dataset()
-
-			X = np.array(self.data_frame.drop('label', axis=1))
-
-			self.scaler = self.scalerClass()
-
-			X = self.scaler.fit_transform(X)
-
-			y = np.array(self.data_frame['label'])
-
-			X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+			#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 			self.classifier = self.modelClass()
 
-			start = datetime.now().replace(microsecond=0)
+			self.classifier.fit(self.X, self.y)
 
-			self.classifier.fit(X_train, y_train)
-
-			end = datetime.now().replace(microsecond=0)
-
-			duration = end - start
+			print('classifier training finished')
 
 			self.persiste_classifier()
 
 			self.persiste_scaler()
-			   
-			prediction = self.classifier.predict(X_test)
 
-			print('timing : {} '.format(duration))
+	def predict_flows (self, flows) :
 
-			print(classification_report(y_test, prediction))
+		# feat_importances = pd.Series(self.classifier.feature_importances_, index=self.X.columns).sort_values(ascending=False)
+
+		# feat_importances.plot(kind="barh")
+
+		# plt.show()
+
+		print(flows)
+
+		predictions = self.classifier.predict(flows)
+
+		labels = list(map(int, predictions))
+
+		labels = self.labelEncoder.inverse_transform(labels)
+
+		print('prediction', labels)
 
 
