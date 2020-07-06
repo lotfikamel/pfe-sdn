@@ -41,7 +41,7 @@ class Classifier () :
 	####
 	def is_exists (self) : 
 
-		return path.exists(f'{self.modelClass.__name__}.joblib') and path.exists(f'{self.scalerClass.__name__}.joblib')
+		return path.exists(f'{self.modelClass.__name__}.joblib')
 
 	"""
 		clean the dataset from nan and inf
@@ -56,7 +56,7 @@ class Classifier () :
 	###
 	def persiste_classifier (self) :
 
-		joblib.dump(self.classifier, f'{self.classifier.__class__.__name__}.joblib')
+		joblib.dump(self.classifier, f'./{self.classifier.__class__.__name__}.joblib')
 
 	####
 	## Persiste the given scaler
@@ -64,7 +64,7 @@ class Classifier () :
 	###
 	def persiste_scaler (self) :
 
-		joblib.dump(self.scaler, f'{self.scaler.__class__.__name__}.joblib')
+		joblib.dump(self.scaler, f'./{self.scaler.__class__.__name__}.joblib')
 
 	####
 	# load classifier if persisted else build new one
@@ -88,9 +88,11 @@ class Classifier () :
 
 		if self.is_exists() :
 
-			self.classifier = joblib.load(f'{self.modelClass.__name__}.joblib')
+			self.classifier = joblib.load(f'./{self.modelClass.__name__}.joblib')
 
-			self.scaler = joblib.load(f'{self.scalerClass.__name__}.joblib')
+			if self.use_scaler == True :
+
+				self.scaler = joblib.load(f'./{self.scalerClass.__name__}.joblib')
 
 			self.data_frame = pd.read_csv(self.dataset_path)
 
