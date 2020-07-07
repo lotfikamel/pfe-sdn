@@ -7,7 +7,7 @@ from machine_learning.Classifier import Classifier
 
 ddos_classifier = Classifier({
 
-	'model_class' : DecisionTreeClassifier,
+	'model_class' : RandomForestClassifier,
 	'model_args' : {},
 	'scaler_class' : MinMaxScaler,
 	'use_scaler' : False,
