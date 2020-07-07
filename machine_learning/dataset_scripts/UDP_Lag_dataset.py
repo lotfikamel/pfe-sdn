@@ -14,7 +14,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 
 #import Random Forest Classifier
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 
 #import split test size
 from sklearn.model_selection import train_test_split
@@ -48,13 +48,13 @@ data_frame = pd.read_csv(dataset_path)
 
 udp_benign = data_frame.loc[data_frame['label'] == 'BENIGN']
 
-unseen_udp_benign = udp_benign.iloc[201:227,:]
+unseen_udp_benign = udp_benign.iloc[201:700,:]
 
 udp_benign = udp_benign.iloc[:200]
 
 udp_lag = data_frame.loc[data_frame['label'] == 'UDP-lag']
 
-unseen_udp_lag = udp_lag.iloc[201:227,:]
+unseen_udp_lag = udp_lag.iloc[201:700,:]
 
 udp_lag = udp_lag.iloc[:200]
 
@@ -108,11 +108,11 @@ start = time()
 
 classifier.fit(X, y)
 
-feat_importances = pd.Series(classifier.feature_importances_, index=X.columns).sort_values(ascending=False)
+# feat_importances = pd.Series(classifier.feature_importances_, index=X.columns).sort_values(ascending=False)
 
-feat_importances.plot(kind="barh")
+# feat_importances.plot(kind="barh")
 
-plt.show()
+# plt.show()
 
 end = time() - start
 

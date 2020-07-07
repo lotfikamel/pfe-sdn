@@ -16,6 +16,8 @@ class Classifier () :
 
 		self.modelClass = params['model_class']
 
+		self.modelArgs = params['model_args']
+
 		self.dataset_path = params['dataset_path']
 
 		self.data_frame = pd.DataFrame()
@@ -114,7 +116,7 @@ class Classifier () :
 
 			#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-			self.classifier = self.modelClass()
+			self.classifier = self.modelClass(**self.modelArgs)
 
 			self.classifier.fit(self.X, self.y)
 
@@ -127,6 +129,8 @@ class Classifier () :
 	def predict_flows (self, flows) :
 
 		# feat_importances = pd.Series(self.classifier.feature_importances_, index=self.X.columns).sort_values(ascending=False)
+
+		# print(feat_importances)
 
 		# feat_importances.plot(kind="barh")
 

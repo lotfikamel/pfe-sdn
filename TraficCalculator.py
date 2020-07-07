@@ -403,7 +403,7 @@ class TraficCalculator () :
 
 		flow_duration = self.flow_infos[flow_id]['duration'] / 10**6
 
-		self.flow_infos[flow_id]['forward']['packet_per_second'] = total_forwarded_packets/ flow_duration
+		self.flow_infos[flow_id]['forward']['packet_per_second'] = total_forwarded_packets / flow_duration
 
 	"""
 		calculate forward packets length mean
@@ -544,7 +544,7 @@ class TraficCalculator () :
 
 	def classify (self) :
 
-		threading.Timer(10, self.classify).start()
+		threading.Timer(5, self.classify).start()
 
 		flows = self.build_flows()
 

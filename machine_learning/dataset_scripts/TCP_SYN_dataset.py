@@ -53,53 +53,24 @@ def clean_dataset (data_frame) :
 
 		return data_frame
 
-dataset_path = '/home/lotfi/pfe/DDOS_datasets/Syn.csv'
+dataset_path = '/home/lotfi/pfe/DDOS_datasets/final_datasets/TCPSyn.csv'
 
 #create dataframe
 data_frame = pd.read_csv(dataset_path)
 
-print(data_frame[' Label'].value_counts())
+TCP_BENIGN = data_frame.loc[data_frame['label'] == 'BENIGN']
 
-attrs=[
-		
-	' Protocol',
-	' Flow Duration',
-	' Total Fwd Packets',
-	' Total Backward Packets',
-	'Total Length of Fwd Packets',
-	' Total Length of Bwd Packets',
-	' Fwd Packet Length Mean',
-	' Bwd Packet Length Mean',
-	'Flow Bytes/s',
-	' Flow Packets/s',
-	' Fwd Header Length',
-	' Bwd Header Length',
-	'Fwd Packets/s',
-	' Bwd Packets/s',
-	' Flow IAT Mean',
-	' Label'
-]
+tcp_benign_line = TCP_BENIGN.iloc[150:187,:]
 
-# select custom attr
-data_frame = data_frame[attrs]
-
-TCP_BENIGN = data_frame.loc[data_frame[' Label'] == 'BENIGN']
-
-TCP_BENIGN= TCP_BENIGN.loc[data_frame[' Protocol'] == 6]
-
-tcp_benign_line = TCP_BENIGN.iloc[201:227,:]
-
-TCP_BENIGN = TCP_BENIGN.iloc[:200]
+TCP_BENIGN = TCP_BENIGN.iloc[:149]
 
 TCP_BENIGN.to_csv('/home/lotfi/pfe/DDOS_datasets/TCPSyn/TCPSyn_BENIGNE.csv', index=False)
 
-TCP_SYN = data_frame.loc[data_frame[' Label'] == 'Syn']
+TCP_SYN = data_frame.loc[data_frame['label'] == 'Syn']
 
-TCP_SYN= TCP_SYN.loc[data_frame[' Protocol'] == 6]
+tcp_syn_line = TCP_SYN.iloc[150:187,:]
 
-tcp_syn_line = TCP_SYN.iloc[201:227,:]
-
-TCP_SYN = TCP_SYN.iloc[:200]
+TCP_SYN = TCP_SYN.iloc[:149]
 
 TCP_SYN.to_csv('/home/lotfi/pfe/DDOS_datasets/TCPSyn/TCPSyn.csv', index=False)
 
@@ -114,31 +85,25 @@ data_frame = data_frame.reindex(np.random.permutation(data_frame.index))
 
 encoder = LabelEncoder()
 
-data_frame[' Label'] = encoder.fit_transform(data_frame[' Label'])
-
-data_frame = clean_dataset(data_frame)
+data_frame['label'] = encoder.fit_transform(data_frame['label'])
 
 unseen_mixed_data = pd.concat(objs=[tcp_benign_line, tcp_syn_line], join='inner')
 
 ##shuffle
 unseen_mixed_data = unseen_mixed_data.reindex(np.random.permutation(unseen_mixed_data.index))
 
-unseen_mixed_data[' Label'] = encoder.transform(unseen_mixed_data[' Label'])
+print('unseen_mixed_data', unseen_mixed_data['label'].value_counts())
 
-unseen_mixed_data = clean_dataset(unseen_mixed_data)
+unseen_mixed_data['label'] = encoder.transform(unseen_mixed_data['label'])
 
-unseen_mixed_data_labels = unseen_mixed_data[' Label']
+unseen_mixed_data_labels = unseen_mixed_data['label']
 
-unseen_mixed_data.drop(columns=[' Label'], inplace=True)
+unseen_mixed_data.drop(columns=['label'], inplace=True)
 
-print(unseen_mixed_data.info())
-
-print(data_frame.info())
-
-X = np.array(data_frame.drop(columns=[' Label']))
+X = data_frame.drop(columns=['label'])
 
 #create y
-y = np.array(data_frame[' Label'])
+y = data_frame['label']
 
 #split dataset into train and test
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -154,13 +119,15 @@ classifier = RandomForestClassifier(criterion="entropy")
 #mesure the trauning time
 start = time()
 
-classifier.fit(X_train, y_train)
+classifier.fit(X, y)
 
 feat_importances = pd.Series(classifier.feature_importances_, index=unseen_mixed_data.columns).sort_values(ascending=False)
 
-feat_importances.plot(kind="barh")
+print(feat_importances)
 
-plt.show()
+# feat_importances.plot(kind="barh")
+
+# plt.show()
 
 end = time() - start
 
