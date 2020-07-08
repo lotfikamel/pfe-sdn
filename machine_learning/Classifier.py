@@ -66,7 +66,9 @@ class Classifier () :
 	###
 	def persiste_scaler (self) :
 
-		joblib.dump(self.scaler, f'./{self.scaler.__class__.__name__}.joblib')
+		if self.use_scaler == True :
+
+			joblib.dump(self.scaler, f'./{self.scaler.__class__.__name__}.joblib')
 
 	####
 	# load classifier if persisted else build new one
@@ -74,11 +76,15 @@ class Classifier () :
 	###
 	def load (self) :
 
+		print('load')
+
 		self.data_frame = pd.read_csv(self.dataset_path)
 
 		self.data_frame['label'] = self.labelEncoder.fit_transform(self.data_frame['label'])
 
 		self.X = self.data_frame.drop(columns=['label'])
+
+		self.y = self.data_frame['label']
 
 		if self.use_scaler == True :
 
@@ -86,9 +92,9 @@ class Classifier () :
 
 			self.X = self.scaler.fit_transform(self.X)
 
-		self.y = self.data_frame['label']
-
 		if self.is_exists() :
+
+			print('classifier exists', self.classifier)
 
 			self.classifier = joblib.load(f'./{self.modelClass.__name__}.joblib')
 
@@ -96,11 +102,9 @@ class Classifier () :
 
 				self.scaler = joblib.load(f'./{self.scalerClass.__name__}.joblib')
 
-			self.data_frame = pd.read_csv(self.dataset_path)
-
 		else :
 
-			print('classifier not exists', self.classifier, self.scaler)
+			print('classifier not exists')
 
 			self.build()
 
@@ -128,9 +132,9 @@ class Classifier () :
 
 	def predict_flows (self, flows) :
 
-		# feat_importances = pd.Series(self.classifier.feature_importances_, index=self.X.columns).sort_values(ascending=False)
+		feat_importances = pd.Series(self.classifier.feature_importances_, index=self.X.columns).sort_values(ascending=False)
 
-		# print(feat_importances)
+		print(feat_importances)
 
 		# feat_importances.plot(kind="barh")
 

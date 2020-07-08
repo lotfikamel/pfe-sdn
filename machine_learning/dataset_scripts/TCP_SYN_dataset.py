@@ -7,6 +7,8 @@ import numpy as np
 #import matplotlib
 import matplotlib.pyplot as plt
 
+from sklearn.svm import SVC
+
 #import Decision Tree Algorithms
 from sklearn.tree import DecisionTreeClassifier
 
@@ -62,15 +64,19 @@ TCP_BENIGN = data_frame.loc[data_frame['label'] == 'BENIGN']
 
 tcp_benign_line = TCP_BENIGN.iloc[150:187,:]
 
-TCP_BENIGN = TCP_BENIGN.iloc[:149]
+TCP_BENIGN = TCP_BENIGN.iloc[:150]
+
+print(TCP_BENIGN['flow_bytes_per_seconds'].value_counts())
 
 TCP_BENIGN.to_csv('/home/lotfi/pfe/DDOS_datasets/TCPSyn/TCPSyn_BENIGNE.csv', index=False)
 
 TCP_SYN = data_frame.loc[data_frame['label'] == 'Syn']
 
-tcp_syn_line = TCP_SYN.iloc[150:187,:]
+tcp_syn_line = TCP_SYN.iloc[15000:15200,:]
 
-TCP_SYN = TCP_SYN.iloc[:149]
+TCP_SYN = TCP_SYN.iloc[:15000]
+
+print(TCP_SYN['flow_bytes_per_seconds'].value_counts())
 
 TCP_SYN.to_csv('/home/lotfi/pfe/DDOS_datasets/TCPSyn/TCPSyn.csv', index=False)
 
@@ -82,6 +88,8 @@ data_frame = pd.read_csv('/home/lotfi/pfe/DDOS_datasets/TCPSyn/BALANCED_TCP.csv'
 
 ##shuffle
 data_frame = data_frame.reindex(np.random.permutation(data_frame.index))
+
+print(data_frame['flow_bytes_per_seconds'].value_counts())
 
 encoder = LabelEncoder()
 
@@ -114,20 +122,20 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 #classifier = KNeighborsClassifier()
 
-classifier = RandomForestClassifier(criterion="entropy")
+classifier = RandomForestClassifier(criterion="entropy", max_features=None)
 
 #mesure the trauning time
 start = time()
 
 classifier.fit(X, y)
 
-feat_importances = pd.Series(classifier.feature_importances_, index=unseen_mixed_data.columns).sort_values(ascending=False)
+# feat_importances = pd.Series(classifier.feature_importances_, index=unseen_mixed_data.columns).sort_values(ascending=False)
 
-print(feat_importances)
+# print(feat_importances)
 
 # feat_importances.plot(kind="barh")
 
-# plt.show()
+plt.show()
 
 end = time() - start
 

@@ -65,7 +65,11 @@ class TraficCalculator () :
 	"""
 	def filter_packet (self, packet) :
 
-		return (IP in packet) and (UDP in packet) #( (TCP in packet) or (UDP in packet) )
+		if DNS in packet :
+
+			print('DNS packet')
+
+		return (IP in packet) and (DNS in packet and UDP in packet) # ( (TCP in packet) or (UDP in packet) )
 
 	"""
 		on packet sniffed
@@ -156,17 +160,17 @@ class TraficCalculator () :
 
 			'mean_iat' : 0,
 
-			'packet_per_second' : 0,
+			'packet_per_second' : 1,
 
-			'bytes_per_second' : 0,
+			'bytes_per_second' : self.get_packet_net_payload_length(packet),
 
 			'forward' : {
 
 				'total' : 1,
 				'total_length' : self.get_packet_net_payload_length(packet),
 				'total_header_length' : self.get_protocol_header_length(packet),
-				'packet_per_second' : 0,
-				'length_mean' : 0,
+				'packet_per_second' : 1,
+				'length_mean' : self.get_packet_net_payload_length(packet),
 				'last_packet_time' : datetime.now(),
 				'mean_iat' : 0,
 			},
@@ -526,8 +530,8 @@ class TraficCalculator () :
 				self.flow_infos[flow_id]['forward']['length_mean'],
 				self.flow_infos[flow_id]['backward']['length_mean'],
 
-				self.flow_infos[flow_id]['forward']['total_header_length'],
-				self.flow_infos[flow_id]['backward']['total_header_length'],
+				# self.flow_infos[flow_id]['forward']['total_header_length'],
+				# self.flow_infos[flow_id]['backward']['total_header_length'],
 
 				self.flow_infos[flow_id]['forward']['packet_per_second'],
 				self.flow_infos[flow_id]['backward']['packet_per_second'],
@@ -549,6 +553,8 @@ class TraficCalculator () :
 		flows = self.build_flows()
 
 		if len(flows) > 0 :
+
+			pprint(self.flow_infos)
 
 			ddos_classifier.predict_flows(flows)
 
