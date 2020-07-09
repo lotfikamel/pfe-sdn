@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append('/home/lotfi/pfe/pfe-sdn')
+sys.path.append('/home/lotfi/pfe/PFE')
 
 from ryu.base import app_manager
 from ryu.controller import ofp_event

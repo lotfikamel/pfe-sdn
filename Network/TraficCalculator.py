@@ -2,6 +2,10 @@
 	class for calculating each flow attr
 """
 
+import sys
+
+sys.path.append('/home/lotfi/pfe/PFE')
+
 from scapy.all import *
 
 import numpy as np
@@ -552,7 +556,7 @@ class TraficCalculator () :
 
 			pprint(self.flow_infos)
 
-			ddos_classifier.predict_flows(flows)
+			DrDoSDNSClassifier.predict_flows(flows)
 
 traficCalculator = TraficCalculator()
 

@@ -1,9 +1,13 @@
+# import sys
+
+# sys.path.append('/home/lotfi/pfe/PFE')
+
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
 
-from BaseClassifer import Classifier
+from .BaseClassifier import Classifier
 
 DrDoSDNSClassifier = Classifier({
 
