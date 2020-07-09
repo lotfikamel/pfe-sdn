@@ -4,9 +4,11 @@ import socket
 
 from dnslib import DNSRecord
 
-DNS_SERVER_IP = '127.0.0.1'
+DNS_SERVER_IP = '10.0.0.2'
 
 DNS_SERVER_PORT = 53
+
+local_ip = '127.0.0.1'
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_UDP)
 
@@ -16,17 +18,15 @@ while True:
 
 	data, address = sock.recvfrom(512)
 
-	data = hexdump(data)
+	data = raw(data)
 
-	packet = DNSRecord(data)
+	packet = IP(_pkt=data) / UDP(_pkt=data) / DNS(_pkt=data)
 
-	print(packet.id)
+	if packet.haslayer(DNSQR) :
 
-	# packet = IP(data) / UDP(data) / DNS(data) / DNSQR(data)
+		print(packet[UDP].dport)
 
-	# print('udp', packet[UDP].sport, packet[UDP].dport, packet[IP].src)
-
-	# packet.show()
+		packet[DNSQR].show()
 
 exit(0)
 
@@ -60,26 +60,22 @@ def get_response(pkt):
 
 	print(pkt.show())
 
-	# spf_resp = IP(dst=pkt[IP].src) / UDP(dport=pkt[UDP].sport, sport=53) / DNS(id=pkt[DNS].id,ancount=1,an=DNSRR(rrname=pkt[DNSQR].qname, rdata=local_ip)/DNSRR(rrname="trailers.apple.com",rdata=local_ip))
+	if (
+		DNS in pkt and
+		pkt[DNS].opcode == 0 and
+		pkt[DNS].ancount == 0
+	) :
+		if "trailers.apple.com" in str(pkt["DNS Question Record"].qname) :
 
-	# send(spf_resp, verbose=0)
+			spf_resp = IP(dst=pkt[IP].src) / UDP(dport=pkt[UDP].sport, sport=53) / DNS(id=pkt[DNS].id,ancount=1,an=DNSRR(rrname=pkt[DNSQR].qname, rdata=local_ip)/DNSRR(rrname="trailers.apple.com",rdata=local_ip))
 
-	# if (
-	# 	DNS in pkt and
-	# 	pkt[DNS].opcode == 0 and
-	# 	pkt[DNS].ancount == 0
-	# ) :
-	# 	if "trailers.apple.com" in str(pkt["DNS Question Record"].qname) :
+			send(spf_resp, verbose=0, iface=IFACE)
 
-	# 		spf_resp = IP(dst=pkt[IP].src) / UDP(dport=pkt[UDP].sport, sport=53) / DNS(id=pkt[DNS].id,ancount=1,an=DNSRR(rrname=pkt[DNSQR].qname, rdata=local_ip)/DNSRR(rrname="trailers.apple.com",rdata=local_ip))
+			return f"Spoofed DNS Response Sent: {pkt[IP].src}"
 
-	# 		send(spf_resp, verbose=0, iface=IFACE)
-
-	# 		return f"Spoofed DNS Response Sent: {pkt[IP].src}"
-
-	# 	else:
-	# 		# make DNS query, capturing the answer and send the answer
-	# 		return forward_dns(pkt)
+		else:
+			# make DNS query, capturing the answer and send the answer
+			return forward_dns(pkt)
 
 sniff(lfilter=filter, prn=get_response, iface="lo")
 
