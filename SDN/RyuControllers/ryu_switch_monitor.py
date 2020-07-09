@@ -195,7 +195,7 @@ class SimpleMonitor13(SwitchMacToPort):
 
             flow_packet.update(self.flow_match_parse(flow.match))
 
-            json_printer.o(flow_packet)
+            json_printer.dict(flow_packet)
 
             self.dataset_parsing(flow_packet)
 

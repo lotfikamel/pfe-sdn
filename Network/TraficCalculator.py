@@ -12,7 +12,7 @@ from pprint import pprint
 
 import threading, time
 
-from machine_learning.ddos_classifier import ddos_classifier
+from MachineLearning.Classifiers.DrDoSDNSClassifier import DrDoSDNSClassifier
 
 class TraficCalculator () :
 
@@ -64,10 +64,6 @@ class TraficCalculator () :
 		@retrun {Boolean}
 	"""
 	def filter_packet (self, packet) :
-
-		if DNS in packet :
-
-			print('DNS packet')
 
 		return (IP in packet) and (DNS in packet and UDP in packet) # ( (TCP in packet) or (UDP in packet) )
 

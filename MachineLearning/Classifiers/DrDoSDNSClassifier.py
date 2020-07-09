@@ -3,9 +3,9 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
 
-from machine_learning.Classifier import Classifier
+from BaseClassifer import Classifier
 
-ddos_classifier = Classifier({
+DrDoSDNSClassifier = Classifier({
 
 	'model_class' : RandomForestClassifier,
 	'model_args' : {
@@ -17,4 +17,4 @@ ddos_classifier = Classifier({
 	'dataset_path' : '/home/lotfi/pfe/DDOS_datasets/final_datasets/DrDoS_DNS.csv'
 })
 
-ddos_classifier.load()
+DrDoSDNSClassifier.load()

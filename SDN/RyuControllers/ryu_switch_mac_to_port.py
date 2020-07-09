@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append('/home/lotfi/pfe/pfe-sdn')
+
 from ryu.base import app_manager
 from ryu.controller import ofp_event
 from ryu.controller.handler import CONFIG_DISPATCHER, MAIN_DISPATCHER, HANDSHAKE_DISPATCHER
@@ -6,33 +10,9 @@ from ryu.ofproto import ofproto_v1_3
 from ryu.lib.packet import packet
 from ryu.lib.packet import ethernet, tcp, udp, icmp, ipv4, arp, openflow, ipv6, in_proto
 from ryu.lib.packet import ether_types
-from helpers import json_printer
-from operator import attrgetter
-
-# from ryu.app import simple_switch_13
-import ryu_switch_mac_to_port
-from ryu.controller import ofp_event
-from ryu.controller.handler import MAIN_DISPATCHER, DEAD_DISPATCHER
-from ryu.controller.handler import set_ev_cls
 from ryu.lib import hub
-from helpers import json_printer
-import json
-import ipaddress
-from helpers import json_printer
-from datetime import datetime
-from pprint import pprint 
 
-import array
-import socket
-import struct
-import textwrap
-import time
-
-import os
-
-TAB1 = '\t'
-TAB2 = '\t\t'
-TAB3 = '\t\t\t'
+from Helpers import json_printer
 
 class SwitchMacToPort(app_manager.RyuApp):
 
