@@ -1,0 +1,2037 @@
+{
+   "google.com": {
+      "A": [
+         {
+            "rrname": "google.com.",
+            "type": 1,
+            "ttl": 162,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "172.217.18.46"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "google.com.",
+            "type": 16,
+            "ttl": 3599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "facebook-domain-verification=22rm551cu4k0ab0bxsw536tlds4h95"
+            ]
+         },
+         {
+            "rrname": "google.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "docusign=05958488-4752-4ef2-95eb-aa7ba8a3bd0e"
+            ]
+         },
+         {
+            "rrname": "google.com.",
+            "type": 16,
+            "ttl": 3599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:_spf.google.com ~all"
+            ]
+         },
+         {
+            "rrname": "google.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "docusign=1b0a6754-49b1-4db5-8540-d2c12664b289"
+            ]
+         },
+         {
+            "rrname": "google.com.",
+            "type": 16,
+            "ttl": 3599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "globalsign-smime-dv=CDYX+XFHUw2wml6/Gb8+59BsH31KzUr6c1l2BPvqKX8="
+            ]
+         }
+      ]
+   },
+   "facebook.com": {
+      "A": [
+         {
+            "rrname": "facebook.com.",
+            "type": 1,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "157.240.195.35"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "facebook.com.",
+            "type": 16,
+            "ttl": 21599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 redirect=_spf.facebook.com"
+            ]
+         },
+         {
+            "rrname": "facebook.com.",
+            "type": 16,
+            "ttl": 7199,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=A2WZWCNQHrGV_TWwKh6KHY90tY0SHZo_RnyMJoDaG0s"
+            ]
+         },
+         {
+            "rrname": "facebook.com.",
+            "type": 16,
+            "ttl": 7199,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=wdH5DTJTc9AYNwVunSVFeK0hYDGUIEOGb-RReU6pJlY"
+            ]
+         }
+      ]
+   },
+   "youtube.com": {
+      "A": [
+         {
+            "rrname": "youtube.com.",
+            "type": 1,
+            "ttl": 25,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "172.217.18.238"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "youtube.com.",
+            "type": 16,
+            "ttl": 3456,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=QtQWEwHWM8tHiJ4s-jJWzEQrD_fF3luPnpzNDH-Nw-w"
+            ]
+         },
+         {
+            "rrname": "youtube.com.",
+            "type": 16,
+            "ttl": 3456,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "facebook-domain-verification=64jdes7le4h7e7lfpi22rijygx58j1"
+            ]
+         },
+         {
+            "rrname": "youtube.com.",
+            "type": 16,
+            "ttl": 3456,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:google.com mx -all"
+            ]
+         }
+      ]
+   },
+   "twitter.com": {
+      "A": [
+         {
+            "rrname": "twitter.com.",
+            "type": 1,
+            "ttl": 1725,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "104.244.42.129"
+         },
+         {
+            "rrname": "twitter.com.",
+            "type": 1,
+            "ttl": 1725,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "104.244.42.1"
+         }
+      ],
+      "TXT": []
+   },
+   "tmall.com": {
+      "A": [
+         {
+            "rrname": "tmall.com.",
+            "type": 1,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "140.205.94.193"
+         },
+         {
+            "rrname": "tmall.com.",
+            "type": 1,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "140.205.130.99"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "tmall.com.",
+            "type": 16,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:spf1.staff.mail.aliyun.com -all"
+            ]
+         }
+      ]
+   },
+   "baidu.com": {
+      "A": [
+         {
+            "rrname": "baidu.com.",
+            "type": 1,
+            "ttl": 102,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "220.181.38.148"
+         },
+         {
+            "rrname": "baidu.com.",
+            "type": 1,
+            "ttl": 102,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "39.156.69.79"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "baidu.com.",
+            "type": 16,
+            "ttl": 7199,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=GHb98-6msqyx_qqjGl5eRatD3QTHyVB6-xQ3gJB5UwM"
+            ]
+         },
+         {
+            "rrname": "baidu.com.",
+            "type": 16,
+            "ttl": 7199,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:spf1.baidu.com include:spf2.baidu.com include:spf3.baidu.com a mx ptr -all"
+            ]
+         }
+      ]
+   },
+   "qq.com": {
+      "A": [
+         {
+            "rrname": "qq.com.",
+            "type": 1,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "125.39.52.26"
+         },
+         {
+            "rrname": "qq.com.",
+            "type": 1,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "58.250.137.36"
+         },
+         {
+            "rrname": "qq.com.",
+            "type": 1,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "58.247.214.47"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "qq.com.",
+            "type": 16,
+            "ttl": 7056,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:spf.mail.qq.com -all"
+            ]
+         }
+      ]
+   },
+   "yahoo.com": {
+      "A": [
+         {
+            "rrname": "yahoo.com.",
+            "type": 1,
+            "ttl": 1733,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "72.30.35.9"
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 1,
+            "ttl": 1733,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "98.137.246.7"
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 1,
+            "ttl": 1733,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "98.138.219.231"
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 1,
+            "ttl": 1733,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "72.30.35.10"
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 1,
+            "ttl": 1733,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "98.138.219.232"
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 1,
+            "ttl": 1733,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "98.137.246.8"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "yahoo.com.",
+            "type": 16,
+            "ttl": 1657,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 redirect=_spf.mail.yahoo.com"
+            ]
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 16,
+            "ttl": 1657,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "edb3bff2c0d64622a9b2250438277a59"
+            ]
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 16,
+            "ttl": 1657,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "facebook-domain-verification=gysqrcd69g0ej34f4jfn0huivkym1p"
+            ]
+         }
+      ]
+   },
+   "amazon.com": {
+      "A": [
+         {
+            "rrname": "amazon.com.",
+            "type": 1,
+            "ttl": 2,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "176.32.103.205"
+         },
+         {
+            "rrname": "amazon.com.",
+            "type": 1,
+            "ttl": 2,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "205.251.242.103"
+         },
+         {
+            "rrname": "amazon.com.",
+            "type": 1,
+            "ttl": 2,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "176.32.98.166"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "amazon.com.",
+            "type": 16,
+            "ttl": 894,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "MS=4B600B22799EB2CAC0D8FF0A3A3CAECA5EE2BF3A"
+            ]
+         },
+         {
+            "rrname": "amazon.com.",
+            "type": 16,
+            "ttl": 894,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=9vpzZueNucS8hPqoGpZ5r10Nr2_sLMRG3AnDtNlucc4"
+            ]
+         },
+         {
+            "rrname": "amazon.com.",
+            "type": 16,
+            "ttl": 894,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "spf2.0/pra include:spf1.amazon.com include:spf2.amazon.com include:amazonses.com -all"
+            ]
+         },
+         {
+            "rrname": "amazon.com.",
+            "type": 16,
+            "ttl": 894,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:spf1.amazon.com include:spf2.amazon.com include:amazonses.com -all"
+            ]
+         },
+         {
+            "rrname": "amazon.com.",
+            "type": 16,
+            "ttl": 894,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "facebook-domain-verification=d9u57u52gylohx845ogo1axzpywpmq"
+            ]
+         },
+         {
+            "rrname": "amazon.com.",
+            "type": 16,
+            "ttl": 894,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=14WGW2MdNMxchG8PlinF7LgqqE0OwwHqOq0HKhb7rDQ"
+            ]
+         }
+      ]
+   },
+   "weibo.com": {
+      "A": [
+         {
+            "rrname": "weibo.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "36.51.254.229"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "weibo.com.",
+            "type": 16,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:spf.weibo.com -all"
+            ]
+         }
+      ]
+   },
+   "live.com": {
+      "A": [
+         {
+            "rrname": "live.com.",
+            "type": 1,
+            "ttl": 3547,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "204.79.197.212"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "live.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=N9kowue62gCm511Op0_N2LO1JZTcjA2GYzOE22SBaiI"
+            ]
+         },
+         {
+            "rrname": "live.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:spf-a.hotmail.com include:spf-b.hotmail.com include:spf-c.hotmail.com include:spf-d.hotmail.com include:spf.protection.outlook.com ~all"
+            ]
+         },
+         {
+            "rrname": "live.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "facebook-domain-verification=atvthxwtzc3u4ubnsozavn76cusuaj"
+            ]
+         },
+         {
+            "rrname": "live.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=0mLTLcpaFxdFNO4m1TfqB2WQ4rGtz7xpPmFwDJ9O_9Q"
+            ]
+         },
+         {
+            "rrname": "live.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=DVGpQUbbQCBRPGlmWiTVUMyQGfLPlEVw6Z4pm39AAj4"
+            ]
+         }
+      ]
+   },
+   "reddit.com": {
+      "A": [
+         {
+            "rrname": "reddit.com.",
+            "type": 1,
+            "ttl": 234,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.193.140"
+         },
+         {
+            "rrname": "reddit.com.",
+            "type": 1,
+            "ttl": 234,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.1.140"
+         },
+         {
+            "rrname": "reddit.com.",
+            "type": 1,
+            "ttl": 234,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.129.140"
+         },
+         {
+            "rrname": "reddit.com.",
+            "type": 1,
+            "ttl": 234,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.65.140"
+         }
+      ],
+      "TXT": []
+   },
+   "netflix.com": {
+      "A": [
+         {
+            "rrname": "netflix.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "52.214.178.75"
+         },
+         {
+            "rrname": "netflix.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "52.213.155.117"
+         },
+         {
+            "rrname": "netflix.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "52.211.208.146"
+         },
+         {
+            "rrname": "netflix.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "34.248.165.48"
+         },
+         {
+            "rrname": "netflix.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "34.246.46.249"
+         },
+         {
+            "rrname": "netflix.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "54.76.159.18"
+         },
+         {
+            "rrname": "netflix.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "54.194.5.178"
+         },
+         {
+            "rrname": "netflix.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "54.194.87.208"
+         }
+      ],
+      "TXT": []
+   },
+   "zoom.us": {
+      "A": [
+         {
+            "rrname": "zoom.us.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "52.202.62.236"
+         }
+      ],
+      "TXT": []
+   },
+   "microsoft.com": {
+      "A": [
+         {
+            "rrname": "microsoft.com.",
+            "type": 1,
+            "ttl": 3517,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "104.215.148.63"
+         },
+         {
+            "rrname": "microsoft.com.",
+            "type": 1,
+            "ttl": 3517,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "40.76.4.15"
+         },
+         {
+            "rrname": "microsoft.com.",
+            "type": 1,
+            "ttl": 3517,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "40.112.72.205"
+         },
+         {
+            "rrname": "microsoft.com.",
+            "type": 1,
+            "ttl": 3517,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "40.113.200.201"
+         },
+         {
+            "rrname": "microsoft.com.",
+            "type": 1,
+            "ttl": 3517,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "13.77.161.179"
+         }
+      ],
+      "TXT": []
+   },
+   "vk.com": {
+      "A": [
+         {
+            "rrname": "vk.com.",
+            "type": 1,
+            "ttl": 253,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "93.186.225.208"
+         },
+         {
+            "rrname": "vk.com.",
+            "type": 1,
+            "ttl": 253,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "87.240.139.194"
+         },
+         {
+            "rrname": "vk.com.",
+            "type": 1,
+            "ttl": 253,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "87.240.137.158"
+         },
+         {
+            "rrname": "vk.com.",
+            "type": 1,
+            "ttl": 253,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "87.240.190.67"
+         },
+         {
+            "rrname": "vk.com.",
+            "type": 1,
+            "ttl": 253,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "87.240.190.72"
+         },
+         {
+            "rrname": "vk.com.",
+            "type": 1,
+            "ttl": 253,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "87.240.190.78"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "vk.com.",
+            "type": 16,
+            "ttl": 756,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "yandex-verification: 5272a4ebac9953a9"
+            ]
+         },
+         {
+            "rrname": "vk.com.",
+            "type": 16,
+            "ttl": 756,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=bQE4SQUYC7KTvk4XCaMdwF0e_tj-O-6ZXMfXW2a8mHY"
+            ]
+         },
+         {
+            "rrname": "vk.com.",
+            "type": 16,
+            "ttl": 756,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 ip4:93.186.224.0/20 ip4:87.240.128.0/18 ip4:95.142.192.0/21 mx include:_spf.google.com -all"
+            ]
+         }
+      ]
+   },
+   "instagram.com": {
+      "A": [
+         {
+            "rrname": "instagram.com.",
+            "type": 1,
+            "ttl": 8,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "34.206.62.254"
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 1,
+            "ttl": 8,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "3.229.8.185"
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 1,
+            "ttl": 8,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "3.224.3.80"
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 1,
+            "ttl": 8,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "34.202.31.155"
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 1,
+            "ttl": 8,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "34.199.142.235"
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 1,
+            "ttl": 8,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "54.175.36.206"
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 1,
+            "ttl": 8,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "54.80.100.38"
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 1,
+            "ttl": 8,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "35.153.214.22"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "instagram.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "adobe-idp-site-verification=367fda82-a8bb-46cf-9cff-0062d452d229"
+            ]
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=GGtId51KFyq0hqX2xNvt1u0P9Xp0C7k6pp9do49fCNw"
+            ]
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "hyWdekepiNsp/V9b1JCR+wZDdzbESurl4GqY+FLMfiN+7aeFaway0Art+kNDHeL5OnGZipNeV/iIC+lOONSQVQ=="
+            ]
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "ms=ms86975275"
+            ]
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "nEXgIFIbDifAKlSMQvAhly5SA-vpsAkm5wiOdwdkrzY"
+            ]
+         },
+         {
+            "rrname": "instagram.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:facebookmail.com include:spf.thefacebook.com include:spf-00082601.pphosted.com -all"
+            ]
+         }
+      ]
+   },
+   "bing.com": {
+      "A": [
+         {
+            "rrname": "bing.com.",
+            "type": 1,
+            "ttl": 3343,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "13.107.21.200"
+         },
+         {
+            "rrname": "bing.com.",
+            "type": 1,
+            "ttl": 3343,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "204.79.197.200"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "bing.com.",
+            "type": 16,
+            "ttl": 3599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "facebook-domain-verification=09yg8uzcfnqnlqekzsbwjxyy8rdck7"
+            ]
+         },
+         {
+            "rrname": "bing.com.",
+            "type": 16,
+            "ttl": 3599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=msv1 t=6097A7EA-53F7-4028-BA76-6869CB284C54"
+            ]
+         },
+         {
+            "rrname": "bing.com.",
+            "type": 16,
+            "ttl": 3599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:spf.protection.outlook.com -all"
+            ]
+         }
+      ]
+   },
+   "stackoverflow.com": {
+      "A": [
+         {
+            "rrname": "stackoverflow.com.",
+            "type": 1,
+            "ttl": 3108,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.65.69"
+         },
+         {
+            "rrname": "stackoverflow.com.",
+            "type": 1,
+            "ttl": 3108,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.1.69"
+         },
+         {
+            "rrname": "stackoverflow.com.",
+            "type": 1,
+            "ttl": 3108,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.193.69"
+         },
+         {
+            "rrname": "stackoverflow.com.",
+            "type": 1,
+            "ttl": 3108,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.129.69"
+         }
+      ],
+      "TXT": []
+   },
+   "aliexpress.com": {
+      "A": [
+         {
+            "rrname": "aliexpress.com.",
+            "type": 1,
+            "ttl": 456,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "198.11.132.250"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "aliexpress.com.",
+            "type": 16,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:spf1.service.alibaba.com include:spf2.service.alibaba.com include:spf2.ocm.aliyun.com -all"
+            ]
+         },
+         {
+            "rrname": "aliexpress.com.",
+            "type": 16,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "f6t8k5j81d8psl001ddncwt7zd1v0rr4"
+            ]
+         },
+         {
+            "rrname": "aliexpress.com.",
+            "type": 16,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "mailru-verification: c9feb214b705f911"
+            ]
+         },
+         {
+            "rrname": "aliexpress.com.",
+            "type": 16,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=-ap3gLODUF_ESQRpsT4UoHjz3rVy7LLa4HouklA_SAc"
+            ]
+         }
+      ]
+   },
+   "ebay.com": {
+      "A": [
+         {
+            "rrname": "ebay.com.",
+            "type": 1,
+            "ttl": 3285,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "66.135.195.175"
+         },
+         {
+            "rrname": "ebay.com.",
+            "type": 1,
+            "ttl": 3285,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "66.135.196.249"
+         }
+      ],
+      "TXT": []
+   },
+   "taobao.com": {
+      "A": [
+         {
+            "rrname": "taobao.com.",
+            "type": 1,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "140.205.220.96"
+         },
+         {
+            "rrname": "taobao.com.",
+            "type": 1,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "140.205.94.189"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "taobao.com.",
+            "type": 16,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "5hrp21wwcjlvc2s1nhy8mmptb5tcdv7q"
+            ]
+         },
+         {
+            "rrname": "taobao.com.",
+            "type": 16,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:spf1.staff.mail.aliyun.com -all"
+            ]
+         }
+      ]
+   },
+   "apple.com": {
+      "A": [
+         {
+            "rrname": "apple.com.",
+            "type": 1,
+            "ttl": 3592,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "17.172.224.47"
+         },
+         {
+            "rrname": "apple.com.",
+            "type": 1,
+            "ttl": 3592,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "17.178.96.59"
+         },
+         {
+            "rrname": "apple.com.",
+            "type": 1,
+            "ttl": 3592,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "17.142.160.59"
+         }
+      ],
+      "TXT": []
+   },
+   "espn.com": {
+      "A": [
+         {
+            "rrname": "espn.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "13.225.25.52"
+         },
+         {
+            "rrname": "espn.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "13.225.25.122"
+         },
+         {
+            "rrname": "espn.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "13.225.25.92"
+         },
+         {
+            "rrname": "espn.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "13.225.25.55"
+         }
+      ],
+      "TXT": []
+   },
+   "nytimes.com": {
+      "A": [
+         {
+            "rrname": "nytimes.com.",
+            "type": 1,
+            "ttl": 466,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.129.164"
+         },
+         {
+            "rrname": "nytimes.com.",
+            "type": 1,
+            "ttl": 466,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.1.164"
+         },
+         {
+            "rrname": "nytimes.com.",
+            "type": 1,
+            "ttl": 466,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.65.164"
+         },
+         {
+            "rrname": "nytimes.com.",
+            "type": 1,
+            "ttl": 466,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.193.164"
+         }
+      ],
+      "TXT": []
+   },
+   "cnn.com": {
+      "A": [
+         {
+            "rrname": "cnn.com.",
+            "type": 1,
+            "ttl": 29,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.193.67"
+         },
+         {
+            "rrname": "cnn.com.",
+            "type": 1,
+            "ttl": 29,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.1.67"
+         },
+         {
+            "rrname": "cnn.com.",
+            "type": 1,
+            "ttl": 29,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.129.67"
+         },
+         {
+            "rrname": "cnn.com.",
+            "type": 1,
+            "ttl": 29,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.65.67"
+         }
+      ],
+      "TXT": []
+   },
+   "quora.com": {
+      "A": [
+         {
+            "rrname": "quora.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "34.192.36.169"
+         },
+         {
+            "rrname": "quora.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "34.192.252.133"
+         },
+         {
+            "rrname": "quora.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "34.232.236.5"
+         },
+         {
+            "rrname": "quora.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "3.222.111.119"
+         },
+         {
+            "rrname": "quora.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "34.193.164.38"
+         },
+         {
+            "rrname": "quora.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "3.216.43.27"
+         },
+         {
+            "rrname": "quora.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "54.175.190.187"
+         },
+         {
+            "rrname": "quora.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "54.88.111.196"
+         }
+      ],
+      "TXT": []
+   },
+   "weather.com": {
+      "A": [
+         {
+            "rrname": "weather.com.",
+            "type": 1,
+            "ttl": 19,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "23.51.230.100"
+         }
+      ],
+      "TXT": []
+   },
+   "businessinsider.com": {
+      "A": [
+         {
+            "rrname": "businessinsider.com.",
+            "type": 1,
+            "ttl": 14294,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.193.171"
+         },
+         {
+            "rrname": "businessinsider.com.",
+            "type": 1,
+            "ttl": 14294,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.65.171"
+         },
+         {
+            "rrname": "businessinsider.com.",
+            "type": 1,
+            "ttl": 14294,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.1.171"
+         },
+         {
+            "rrname": "businessinsider.com.",
+            "type": 1,
+            "ttl": 14294,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.129.171"
+         }
+      ],
+      "TXT": []
+   },
+   "usatoday.com": {
+      "A": [
+         {
+            "rrname": "usatoday.com.",
+            "type": 1,
+            "ttl": 1122,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "159.54.242.176"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "usatoday.com.",
+            "type": 16,
+            "ttl": 1199,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "MS=ms79769498"
+            ]
+         },
+         {
+            "rrname": "usatoday.com.",
+            "type": 16,
+            "ttl": 1199,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "ZOOM_verify_9oEL9RzeRVSVi5iXieBVDg"
+            ]
+         },
+         {
+            "rrname": "usatoday.com.",
+            "type": 16,
+            "ttl": 1199,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "docusign=5db99093-c58f-4563-aaa0-c2963ce8bfe6"
+            ]
+         },
+         {
+            "rrname": "usatoday.com.",
+            "type": 16,
+            "ttl": 1199,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "facebook-domain-verification=3gzevmp40zrp194rg1v0qfish6fnyp"
+            ]
+         },
+         {
+            "rrname": "usatoday.com.",
+            "type": 16,
+            "ttl": 1199,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=u686fHLjNurDq9rB45vhmGprUxg40XGCAhZB_iqh0aA"
+            ]
+         },
+         {
+            "rrname": "usatoday.com.",
+            "type": 16,
+            "ttl": 1199,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 ip4:159.54.128.0/24 include:spf.gannett.com include:sendgrid.net include:spf.mandrillapp.com include:_spf.qualtrics.com include:mktomail.com ~all"
+            ]
+         }
+      ]
+   },
+   "medicalnewstoday.com": {
+      "A": [
+         {
+            "rrname": "medicalnewstoday.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "13.225.25.34"
+         },
+         {
+            "rrname": "medicalnewstoday.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "13.225.25.121"
+         },
+         {
+            "rrname": "medicalnewstoday.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "13.225.25.66"
+         },
+         {
+            "rrname": "medicalnewstoday.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "13.225.25.44"
+         }
+      ],
+      "TXT": []
+   },
+   "usnews.com": {
+      "A": [
+         {
+            "rrname": "usnews.com.",
+            "type": 1,
+            "ttl": 19,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "23.51.236.21"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "usnews.com.",
+            "type": 16,
+            "ttl": 457,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "ZOOM_verify_X6FjtCkvSl6J_A5UT_QfLw"
+            ]
+         },
+         {
+            "rrname": "usnews.com.",
+            "type": 16,
+            "ttl": 457,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "adobe-idp-site-verification=5c15a9ed09bebe1d6398278573886d10fe5cafb99d913d8470eea3cf1b4ace4b"
+            ]
+         },
+         {
+            "rrname": "usnews.com.",
+            "type": 16,
+            "ttl": 457,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "facebook-domain-verification=4onziq2r3y9y8wx1tf5ympb4sz11x8"
+            ]
+         },
+         {
+            "rrname": "usnews.com.",
+            "type": 16,
+            "ttl": 457,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:spf.usnews.com -all"
+            ]
+         }
+      ]
+   },
+   "foxnews.com": {
+      "A": [
+         {
+            "rrname": "foxnews.com.",
+            "type": 1,
+            "ttl": 17,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "104.78.177.82"
+         }
+      ],
+      "TXT": []
+   },
+   "genius.com": {
+      "A": [
+         {
+            "rrname": "genius.com.",
+            "type": 1,
+            "ttl": 243,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "104.18.18.96"
+         },
+         {
+            "rrname": "genius.com.",
+            "type": 1,
+            "ttl": 243,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "104.18.19.96"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "genius.com.",
+            "type": 16,
+            "ttl": 156,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 mx include:mailgun.org include:_spf.google.com ~all"
+            ]
+         },
+         {
+            "rrname": "genius.com.",
+            "type": 16,
+            "ttl": 156,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=7fJqu3FnyOHBhQJWkwJ3YSOwcnzNVfWFlTk8pAjT8Fs"
+            ]
+         },
+         {
+            "rrname": "genius.com.",
+            "type": 16,
+            "ttl": 156,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "blitz=mu-f9723803-7585777f-82d589ff-533e169d"
+            ]
+         },
+         {
+            "rrname": "genius.com.",
+            "type": 16,
+            "ttl": 156,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=NOlZXdOysTTU8drrYjd1nulZlNL9mZ-LAybhtMmNLGA"
+            ]
+         },
+         {
+            "rrname": "genius.com.",
+            "type": 16,
+            "ttl": 156,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "ZOOM_verify_1Tveykm8Qv-x9RHxrNz3Cw"
+            ]
+         }
+      ]
+   },
+   "spotify.com": {
+      "A": [
+         {
+            "rrname": "spotify.com.",
+            "type": 1,
+            "ttl": 183,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "35.186.224.25"
+         }
+      ],
+      "TXT": []
+   },
+   "forbes.com": {
+      "A": [
+         {
+            "rrname": "forbes.com.",
+            "type": 1,
+            "ttl": 215,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.2.49"
+         },
+         {
+            "rrname": "forbes.com.",
+            "type": 1,
+            "ttl": 215,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.66.49"
+         },
+         {
+            "rrname": "forbes.com.",
+            "type": 1,
+            "ttl": 215,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.130.49"
+         },
+         {
+            "rrname": "forbes.com.",
+            "type": 1,
+            "ttl": 215,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.194.49"
+         }
+      ],
+      "TXT": []
+   },
+   "cnet.com": {
+      "A": [
+         {
+            "rrname": "cnet.com.",
+            "type": 1,
+            "ttl": 21599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "35.190.79.82"
+         }
+      ],
+      "TXT": []
+   },
+   "washingtonpost.com": {
+      "A": [
+         {
+            "rrname": "washingtonpost.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "143.204.222.83"
+         },
+         {
+            "rrname": "washingtonpost.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "143.204.222.92"
+         },
+         {
+            "rrname": "washingtonpost.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "143.204.222.102"
+         },
+         {
+            "rrname": "washingtonpost.com.",
+            "type": 1,
+            "ttl": 59,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "143.204.222.108"
+         }
+      ],
+      "TXT": []
+   },
+   "paypal.com": {
+      "A": [
+         {
+            "rrname": "paypal.com.",
+            "type": 1,
+            "ttl": 271,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "64.4.250.37"
+         },
+         {
+            "rrname": "paypal.com.",
+            "type": 1,
+            "ttl": 271,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "64.4.250.36"
+         }
+      ],
+      "TXT": []
+   },
+   "foodnetwork.com": {
+      "A": [
+         {
+            "rrname": "foodnetwork.com.",
+            "type": 1,
+            "ttl": 4,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "204.78.50.45"
+         }
+      ],
+      "TXT": []
+   },
+   "hulu.com": {
+      "A": [
+         {
+            "rrname": "hulu.com.",
+            "type": 1,
+            "ttl": 19,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "23.38.28.250"
+         }
+      ],
+      "TXT": []
+   },
+   "go.com": {
+      "A": [
+         {
+            "rrname": "go.com.",
+            "type": 1,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "23.236.60.174"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "go.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "htr9iscf127tqthdpuapd75e0s"
+            ]
+         },
+         {
+            "rrname": "go.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "34qqnv54o1kpgkan1oefc4chaq"
+            ]
+         },
+         {
+            "rrname": "go.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "6obgql8sf1ebl1h54e4jvd2qqa"
+            ]
+         },
+         {
+            "rrname": "go.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "vn3obnp8on58rh1gbm220mr0o5"
+            ]
+         },
+         {
+            "rrname": "go.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "zf4583k7l87r1mb4bn98zl974g3ddrby"
+            ]
+         }
+      ]
+   },
+   "wowhead.com": {
+      "A": [
+         {
+            "rrname": "wowhead.com.",
+            "type": 1,
+            "ttl": 288,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "104.18.30.49"
+         },
+         {
+            "rrname": "wowhead.com.",
+            "type": 1,
+            "ttl": 288,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "104.18.31.49"
+         }
+      ],
+      "TXT": []
+   },
+   "ign.com": {
+      "A": [
+         {
+            "rrname": "ign.com.",
+            "type": 1,
+            "ttl": 44,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "3.225.128.25"
+         }
+      ],
+      "TXT": [
+         {
+            "rrname": "ign.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "_globalsign-domain-verification=VPemhDee0EKRXi0IPzeSUrn849jHevrjIaTeDYOTZ4"
+            ]
+         },
+         {
+            "rrname": "ign.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "_globalsign-domain-verification=mGZXdzAu0fntEqfD9786zQszYXn9loQ6fpDuWN2sjU"
+            ]
+         },
+         {
+            "rrname": "ign.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "_globalsign-domain-verification=n-kJTGwLshlTiyXFHlUrmuZBUmd02TKkgRt0H3jHw1"
+            ]
+         },
+         {
+            "rrname": "ign.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "knowbe4-site-verification=f8a0eecde40ecb172ead956570d9179c"
+            ]
+         },
+         {
+            "rrname": "ign.com.",
+            "type": 16,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:_spf.google.com include:amazonses.com -all"
+            ]
+         }
+      ]
+   },
+   "wikihow.com": {
+      "A": [
+         {
+            "rrname": "wikihow.com.",
+            "type": 1,
+            "ttl": 21456,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.194.110"
+         },
+         {
+            "rrname": "wikihow.com.",
+            "type": 1,
+            "ttl": 21456,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.66.110"
+         },
+         {
+            "rrname": "wikihow.com.",
+            "type": 1,
+            "ttl": 21456,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.130.110"
+         },
+         {
+            "rrname": "wikihow.com.",
+            "type": 1,
+            "ttl": 21456,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.2.110"
+         }
+      ],
+      "TXT": []
+   },
+   "expedia.com": {
+      "A": [
+         {
+            "rrname": "expedia.com.",
+            "type": 1,
+            "ttl": 24,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "52.40.56.178"
+         },
+         {
+            "rrname": "expedia.com.",
+            "type": 1,
+            "ttl": 24,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "52.26.234.148"
+         }
+      ],
+      "TXT": []
+   },
+   "bbb.org": {
+      "A": [
+         {
+            "rrname": "bbb.org.",
+            "type": 1,
+            "ttl": 4,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "216.52.119.101"
+         }
+      ],
+      "TXT": []
+   },
+   "books.google.com": {
+      "A": [
+         {
+            "rrname": "books.google.com.",
+            "type": 1,
+            "ttl": 299,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "172.217.21.14"
+         }
+      ],
+      "TXT": []
+   },
+   "huffpost.comimdb.compinterest.com": {
+      "A": [
+         {
+            "rrname": "huffpost.comimdb.compinterest.com.",
+            "type": 1,
+            "ttl": 3599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "103.224.182.241"
+         }
+      ],
+      "TXT": []
+   }
+}
