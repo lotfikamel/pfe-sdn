@@ -1,5 +1,7 @@
 from scapy.all import *
 
+import sys
+
 import socket
 
 import json
@@ -111,7 +113,7 @@ class DNSServer :
 						rdata=self.data[qname][qtype][i]['rdata']
 					)
 
-		dns = DNS(id=packet[DNS].id,ancount=ancount,an=an, qd=qd, qr=1, rd=1, ra=1)
+		dns = DNS(id=packet[DNS].id,ancount=ancount,an=an, qd=qd)
 
 		return ip / udp / dns
 
@@ -121,12 +123,14 @@ class DNSServer :
 	"""
 	def start (self) :
 
+		print(f'DNS Server start and waiting for queries on {self.DNS_SERVER_IP}:{self.DNS_SERVER_PORT}...')
+
 		#bind the socket
 		self.sock.bind((self.DNS_SERVER_IP, self.DNS_SERVER_PORT))
 
 		while True:
 
-			data, address = self.sock.recvfrom(512)
+			data, address = self.sock.recvfrom(1024)
 
 			data = raw(data)
 
@@ -144,9 +148,13 @@ class DNSServer :
 
 					response.show()
 
+					print(address)
+
 					self.sock.sendto(raw(response), address)
 			
 
-dnsServer = DNSServer('127.0.0.1')
+server_ip = sys.argv[1]
+
+dnsServer = DNSServer(server_ip)
 
 dnsServer.start()

@@ -11,12 +11,16 @@ from ryu.lib.packet import packet
 from ryu.lib.packet import ethernet, tcp, udp, icmp, ipv4, arp, openflow, ipv6, in_proto
 from ryu.lib.packet import ether_types
 from ryu.lib import hub
+from ryu.lib import snortlib
 
 from Helpers import json_printer
+import array
 
 class SwitchMacToPort(app_manager.RyuApp):
 
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
+
+    _CONTEXTS = {'snortlib': snortlib.SnortLib}
 
     def __init__(self, *args, **kwargs):
 
@@ -26,9 +30,37 @@ class SwitchMacToPort(app_manager.RyuApp):
         # format : { datapath_swicth_id : {mac : port} }
         self.mac_to_port = {}
 
+        self.snort = kwargs['snortlib']
+
+        self.snort_port = 3
+
+        socket_config = {'unixsock': True}
+
+        self.snort.set_config(socket_config)
+
+        self.snort.start_socket_server()
+
     def __str__ (self) :
 
         return str(self.__dict__)
+
+    """
+        snort packet alert
+    """
+    @set_ev_cls(snortlib.EventAlert, MAIN_DISPATCHER)
+    def _dump_alert(self, ev):
+
+        msg = ev.msg
+
+        pkt = packet.Packet(array.array('B', msg.pkt))
+
+        _udp = pkt.get_protocol(ipv4.ipv4)
+
+        _icmp = pkt.get_protocol(icmp.icmp)
+
+        print(_udp)
+
+        print(_icmp)
 
     """
         add new entry to the flow table

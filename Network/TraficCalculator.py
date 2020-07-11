@@ -69,6 +69,8 @@ class TraficCalculator () :
 	"""
 	def filter_packet (self, packet) :
 
+		print(packet[IP].src == '10.0.0.2')
+
 		return (IP in packet) and (DNS in packet and UDP in packet) # ( (TCP in packet) or (UDP in packet) )
 
 	"""

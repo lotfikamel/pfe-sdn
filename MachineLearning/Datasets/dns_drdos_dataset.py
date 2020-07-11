@@ -24,6 +24,8 @@ from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 #import metrics module
 from sklearn import metrics
 
+from imblearn.over_sampling import SMOTE
+
 #import time to mesure training time
 from time import time
 
@@ -79,6 +81,10 @@ X = data_frame.drop(columns=['label'])
 #create y
 y = data_frame['label']
 
+smote = SMOTE()
+
+X_smote, y_smote = smote.fit_sample(X, y)
+
 X_unseen = unseen_data.drop(columns=['label'])
 
 #create y
@@ -98,7 +104,9 @@ classifier = RandomForestClassifier(criterion="entropy")
 #mesure the trauning time
 start = time()
 
-classifier.fit(X, y)
+classifier.fit(X_smote, y_smote)
+
+print(X.shape, X_smote.shape)
 
 feat_importances = pd.Series(classifier.feature_importances_, index=X.columns).sort_values(ascending=False)
 
