@@ -1,16 +1,26 @@
 {
    "google.com": {
-      "A": [
+      "1": [
          {
             "rrname": "google.com.",
             "type": 1,
-            "ttl": 162,
+            "ttl": 258,
             "rclass": 1,
             "rdlen": null,
             "rdata": "172.217.18.46"
          }
       ],
-      "TXT": [
+      "16": [
+         {
+            "rrname": "google.com.",
+            "type": 16,
+            "ttl": 3599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 include:_spf.google.com ~all"
+            ]
+         },
          {
             "rrname": "google.com.",
             "type": 16,
@@ -38,7 +48,7 @@
             "rclass": 1,
             "rdlen": null,
             "rdata": [
-               "v=spf1 include:_spf.google.com ~all"
+               "globalsign-smime-dv=CDYX+XFHUw2wml6/Gb8+59BsH31KzUr6c1l2BPvqKX8="
             ]
          },
          {
@@ -50,21 +60,11 @@
             "rdata": [
                "docusign=1b0a6754-49b1-4db5-8540-d2c12664b289"
             ]
-         },
-         {
-            "rrname": "google.com.",
-            "type": 16,
-            "ttl": 3599,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": [
-               "globalsign-smime-dv=CDYX+XFHUw2wml6/Gb8+59BsH31KzUr6c1l2BPvqKX8="
-            ]
          }
       ]
    },
    "facebook.com": {
-      "A": [
+      "1": [
          {
             "rrname": "facebook.com.",
             "type": 1,
@@ -74,7 +74,7 @@
             "rdata": "157.240.195.35"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "facebook.com.",
             "type": 16,
@@ -108,21 +108,21 @@
       ]
    },
    "youtube.com": {
-      "A": [
+      "1": [
          {
             "rrname": "youtube.com.",
             "type": 1,
-            "ttl": 25,
+            "ttl": 280,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "172.217.18.238"
+            "rdata": "216.58.212.110"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "youtube.com.",
             "type": 16,
-            "ttl": 3456,
+            "ttl": 3599,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -132,48 +132,48 @@
          {
             "rrname": "youtube.com.",
             "type": 16,
-            "ttl": 3456,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": [
-               "facebook-domain-verification=64jdes7le4h7e7lfpi22rijygx58j1"
-            ]
-         },
-         {
-            "rrname": "youtube.com.",
-            "type": 16,
-            "ttl": 3456,
+            "ttl": 3599,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
                "v=spf1 include:google.com mx -all"
             ]
+         },
+         {
+            "rrname": "youtube.com.",
+            "type": 16,
+            "ttl": 3599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "facebook-domain-verification=64jdes7le4h7e7lfpi22rijygx58j1"
+            ]
          }
       ]
    },
    "twitter.com": {
-      "A": [
+      "1": [
          {
             "rrname": "twitter.com.",
             "type": 1,
-            "ttl": 1725,
+            "ttl": 1631,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "104.244.42.129"
+            "rdata": "104.244.42.1"
          },
          {
             "rrname": "twitter.com.",
             "type": 1,
-            "ttl": 1725,
+            "ttl": 1631,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "104.244.42.1"
+            "rdata": "104.244.42.129"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "tmall.com": {
-      "A": [
+      "1": [
          {
             "rrname": "tmall.com.",
             "type": 1,
@@ -191,7 +191,7 @@
             "rdata": "140.205.130.99"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "tmall.com.",
             "type": 16,
@@ -205,49 +205,57 @@
       ]
    },
    "baidu.com": {
-      "A": [
+      "1": [
          {
             "rrname": "baidu.com.",
             "type": 1,
-            "ttl": 102,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "220.181.38.148"
-         },
-         {
-            "rrname": "baidu.com.",
-            "type": 1,
-            "ttl": 102,
+            "ttl": 351,
             "rclass": 1,
             "rdlen": null,
             "rdata": "39.156.69.79"
-         }
-      ],
-      "TXT": [
-         {
-            "rrname": "baidu.com.",
-            "type": 16,
-            "ttl": 7199,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": [
-               "google-site-verification=GHb98-6msqyx_qqjGl5eRatD3QTHyVB6-xQ3gJB5UwM"
-            ]
          },
          {
             "rrname": "baidu.com.",
+            "type": 1,
+            "ttl": 351,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "220.181.38.148"
+         }
+      ],
+      "16": [
+         {
+            "rrname": "baidu.com.",
             "type": 16,
-            "ttl": 7199,
+            "ttl": 7085,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
                "v=spf1 include:spf1.baidu.com include:spf2.baidu.com include:spf3.baidu.com a mx ptr -all"
             ]
+         },
+         {
+            "rrname": "baidu.com.",
+            "type": 16,
+            "ttl": 7085,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=GHb98-6msqyx_qqjGl5eRatD3QTHyVB6-xQ3gJB5UwM"
+            ]
          }
       ]
    },
    "qq.com": {
-      "A": [
+      "1": [
+         {
+            "rrname": "qq.com.",
+            "type": 1,
+            "ttl": 599,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "58.247.214.47"
+         },
          {
             "rrname": "qq.com.",
             "type": 1,
@@ -263,21 +271,13 @@
             "rclass": 1,
             "rdlen": null,
             "rdata": "58.250.137.36"
-         },
-         {
-            "rrname": "qq.com.",
-            "type": 1,
-            "ttl": 599,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "58.247.214.47"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "qq.com.",
             "type": 16,
-            "ttl": 7056,
+            "ttl": 7086,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -287,35 +287,11 @@
       ]
    },
    "yahoo.com": {
-      "A": [
+      "1": [
          {
             "rrname": "yahoo.com.",
             "type": 1,
-            "ttl": 1733,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "72.30.35.9"
-         },
-         {
-            "rrname": "yahoo.com.",
-            "type": 1,
-            "ttl": 1733,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "98.137.246.7"
-         },
-         {
-            "rrname": "yahoo.com.",
-            "type": 1,
-            "ttl": 1733,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "98.138.219.231"
-         },
-         {
-            "rrname": "yahoo.com.",
-            "type": 1,
-            "ttl": 1733,
+            "ttl": 1515,
             "rclass": 1,
             "rdlen": null,
             "rdata": "72.30.35.10"
@@ -323,7 +299,31 @@
          {
             "rrname": "yahoo.com.",
             "type": 1,
-            "ttl": 1733,
+            "ttl": 1515,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "98.138.219.231"
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 1,
+            "ttl": 1515,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "98.137.246.8"
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 1,
+            "ttl": 1515,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "98.137.246.7"
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 1,
+            "ttl": 1515,
             "rclass": 1,
             "rdlen": null,
             "rdata": "98.138.219.232"
@@ -331,27 +331,17 @@
          {
             "rrname": "yahoo.com.",
             "type": 1,
-            "ttl": 1733,
+            "ttl": 1515,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "98.137.246.8"
+            "rdata": "72.30.35.9"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "yahoo.com.",
             "type": 16,
-            "ttl": 1657,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": [
-               "v=spf1 redirect=_spf.mail.yahoo.com"
-            ]
-         },
-         {
-            "rrname": "yahoo.com.",
-            "type": 16,
-            "ttl": 1657,
+            "ttl": 1682,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -361,7 +351,17 @@
          {
             "rrname": "yahoo.com.",
             "type": 16,
-            "ttl": 1657,
+            "ttl": 1682,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "v=spf1 redirect=_spf.mail.yahoo.com"
+            ]
+         },
+         {
+            "rrname": "yahoo.com.",
+            "type": 16,
+            "ttl": 1682,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -371,19 +371,11 @@
       ]
    },
    "amazon.com": {
-      "A": [
+      "1": [
          {
             "rrname": "amazon.com.",
             "type": 1,
-            "ttl": 2,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "176.32.103.205"
-         },
-         {
-            "rrname": "amazon.com.",
-            "type": 1,
-            "ttl": 2,
+            "ttl": 19,
             "rclass": 1,
             "rdlen": null,
             "rdata": "205.251.242.103"
@@ -391,17 +383,35 @@
          {
             "rrname": "amazon.com.",
             "type": 1,
-            "ttl": 2,
+            "ttl": 19,
             "rclass": 1,
             "rdlen": null,
             "rdata": "176.32.98.166"
+         },
+         {
+            "rrname": "amazon.com.",
+            "type": 1,
+            "ttl": 19,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "176.32.103.205"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "amazon.com.",
             "type": 16,
-            "ttl": 894,
+            "ttl": 770,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "google-site-verification=14WGW2MdNMxchG8PlinF7LgqqE0OwwHqOq0HKhb7rDQ"
+            ]
+         },
+         {
+            "rrname": "amazon.com.",
+            "type": 16,
+            "ttl": 770,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -411,7 +421,7 @@
          {
             "rrname": "amazon.com.",
             "type": 16,
-            "ttl": 894,
+            "ttl": 770,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -421,17 +431,7 @@
          {
             "rrname": "amazon.com.",
             "type": 16,
-            "ttl": 894,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": [
-               "spf2.0/pra include:spf1.amazon.com include:spf2.amazon.com include:amazonses.com -all"
-            ]
-         },
-         {
-            "rrname": "amazon.com.",
-            "type": 16,
-            "ttl": 894,
+            "ttl": 770,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -441,7 +441,7 @@
          {
             "rrname": "amazon.com.",
             "type": 16,
-            "ttl": 894,
+            "ttl": 770,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -451,17 +451,17 @@
          {
             "rrname": "amazon.com.",
             "type": 16,
-            "ttl": 894,
+            "ttl": 770,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
-               "google-site-verification=14WGW2MdNMxchG8PlinF7LgqqE0OwwHqOq0HKhb7rDQ"
+               "spf2.0/pra include:spf1.amazon.com include:spf2.amazon.com include:amazonses.com -all"
             ]
          }
       ]
    },
    "weibo.com": {
-      "A": [
+      "1": [
          {
             "rrname": "weibo.com.",
             "type": 1,
@@ -471,7 +471,7 @@
             "rdata": "36.51.254.229"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "weibo.com.",
             "type": 16,
@@ -485,17 +485,17 @@
       ]
    },
    "live.com": {
-      "A": [
+      "1": [
          {
             "rrname": "live.com.",
             "type": 1,
-            "ttl": 3547,
+            "ttl": 3256,
             "rclass": 1,
             "rdlen": null,
             "rdata": "204.79.197.212"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "live.com.",
             "type": 16,
@@ -549,19 +549,11 @@
       ]
    },
    "reddit.com": {
-      "A": [
+      "1": [
          {
             "rrname": "reddit.com.",
             "type": 1,
-            "ttl": 234,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "151.101.193.140"
-         },
-         {
-            "rrname": "reddit.com.",
-            "type": 1,
-            "ttl": 234,
+            "ttl": 164,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.1.140"
@@ -569,7 +561,15 @@
          {
             "rrname": "reddit.com.",
             "type": 1,
-            "ttl": 234,
+            "ttl": 164,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.193.140"
+         },
+         {
+            "rrname": "reddit.com.",
+            "type": 1,
+            "ttl": 164,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.129.140"
@@ -577,23 +577,23 @@
          {
             "rrname": "reddit.com.",
             "type": 1,
-            "ttl": 234,
+            "ttl": 164,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.65.140"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "netflix.com": {
-      "A": [
+      "1": [
          {
             "rrname": "netflix.com.",
             "type": 1,
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "52.214.178.75"
+            "rdata": "52.19.113.209"
          },
          {
             "rrname": "netflix.com.",
@@ -601,7 +601,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "52.213.155.117"
+            "rdata": "52.17.229.109"
          },
          {
             "rrname": "netflix.com.",
@@ -609,7 +609,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "52.211.208.146"
+            "rdata": "34.246.137.168"
          },
          {
             "rrname": "netflix.com.",
@@ -617,7 +617,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "34.248.165.48"
+            "rdata": "34.251.239.113"
          },
          {
             "rrname": "netflix.com.",
@@ -633,7 +633,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "54.76.159.18"
+            "rdata": "52.210.221.246"
          },
          {
             "rrname": "netflix.com.",
@@ -641,7 +641,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "54.194.5.178"
+            "rdata": "52.210.202.149"
          },
          {
             "rrname": "netflix.com.",
@@ -649,30 +649,30 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "54.194.87.208"
+            "rdata": "52.214.178.75"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "zoom.us": {
-      "A": [
+      "1": [
          {
             "rrname": "zoom.us.",
             "type": 1,
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "52.202.62.236"
+            "rdata": "3.235.71.135"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "microsoft.com": {
-      "A": [
+      "1": [
          {
             "rrname": "microsoft.com.",
             "type": 1,
-            "ttl": 3517,
+            "ttl": 3275,
             "rclass": 1,
             "rdlen": null,
             "rdata": "104.215.148.63"
@@ -680,7 +680,7 @@
          {
             "rrname": "microsoft.com.",
             "type": 1,
-            "ttl": 3517,
+            "ttl": 3275,
             "rclass": 1,
             "rdlen": null,
             "rdata": "40.76.4.15"
@@ -688,7 +688,7 @@
          {
             "rrname": "microsoft.com.",
             "type": 1,
-            "ttl": 3517,
+            "ttl": 3275,
             "rclass": 1,
             "rdlen": null,
             "rdata": "40.112.72.205"
@@ -696,7 +696,7 @@
          {
             "rrname": "microsoft.com.",
             "type": 1,
-            "ttl": 3517,
+            "ttl": 3275,
             "rclass": 1,
             "rdlen": null,
             "rdata": "40.113.200.201"
@@ -704,28 +704,20 @@
          {
             "rrname": "microsoft.com.",
             "type": 1,
-            "ttl": 3517,
+            "ttl": 3275,
             "rclass": 1,
             "rdlen": null,
             "rdata": "13.77.161.179"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "vk.com": {
-      "A": [
+      "1": [
          {
             "rrname": "vk.com.",
             "type": 1,
-            "ttl": 253,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "93.186.225.208"
-         },
-         {
-            "rrname": "vk.com.",
-            "type": 1,
-            "ttl": 253,
+            "ttl": 330,
             "rclass": 1,
             "rdlen": null,
             "rdata": "87.240.139.194"
@@ -733,7 +725,7 @@
          {
             "rrname": "vk.com.",
             "type": 1,
-            "ttl": 253,
+            "ttl": 330,
             "rclass": 1,
             "rdlen": null,
             "rdata": "87.240.137.158"
@@ -741,7 +733,7 @@
          {
             "rrname": "vk.com.",
             "type": 1,
-            "ttl": 253,
+            "ttl": 330,
             "rclass": 1,
             "rdlen": null,
             "rdata": "87.240.190.67"
@@ -749,7 +741,7 @@
          {
             "rrname": "vk.com.",
             "type": 1,
-            "ttl": 253,
+            "ttl": 330,
             "rclass": 1,
             "rdlen": null,
             "rdata": "87.240.190.72"
@@ -757,17 +749,25 @@
          {
             "rrname": "vk.com.",
             "type": 1,
-            "ttl": 253,
+            "ttl": 330,
             "rclass": 1,
             "rdlen": null,
             "rdata": "87.240.190.78"
+         },
+         {
+            "rrname": "vk.com.",
+            "type": 1,
+            "ttl": 330,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "93.186.225.208"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "vk.com.",
             "type": 16,
-            "ttl": 756,
+            "ttl": 899,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -777,7 +777,7 @@
          {
             "rrname": "vk.com.",
             "type": 16,
-            "ttl": 756,
+            "ttl": 899,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -787,7 +787,7 @@
          {
             "rrname": "vk.com.",
             "type": 16,
-            "ttl": 756,
+            "ttl": 899,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -797,73 +797,73 @@
       ]
    },
    "instagram.com": {
-      "A": [
+      "1": [
          {
             "rrname": "instagram.com.",
             "type": 1,
-            "ttl": 8,
+            "ttl": 29,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "34.206.62.254"
+            "rdata": "52.7.184.177"
          },
          {
             "rrname": "instagram.com.",
             "type": 1,
-            "ttl": 8,
+            "ttl": 29,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "3.229.8.185"
+            "rdata": "3.92.39.245"
          },
          {
             "rrname": "instagram.com.",
             "type": 1,
-            "ttl": 8,
+            "ttl": 29,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "3.224.3.80"
+            "rdata": "3.210.57.193"
          },
          {
             "rrname": "instagram.com.",
             "type": 1,
-            "ttl": 8,
+            "ttl": 29,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "34.202.31.155"
+            "rdata": "34.235.21.52"
          },
          {
             "rrname": "instagram.com.",
             "type": 1,
-            "ttl": 8,
+            "ttl": 29,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "34.199.142.235"
+            "rdata": "3.224.36.18"
          },
          {
             "rrname": "instagram.com.",
             "type": 1,
-            "ttl": 8,
+            "ttl": 29,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "54.175.36.206"
+            "rdata": "52.54.232.92"
          },
          {
             "rrname": "instagram.com.",
             "type": 1,
-            "ttl": 8,
+            "ttl": 29,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "54.80.100.38"
+            "rdata": "3.208.232.245"
          },
          {
             "rrname": "instagram.com.",
             "type": 1,
-            "ttl": 8,
+            "ttl": 29,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "35.153.214.22"
+            "rdata": "34.227.187.18"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "instagram.com.",
             "type": 16,
@@ -927,11 +927,11 @@
       ]
    },
    "bing.com": {
-      "A": [
+      "1": [
          {
             "rrname": "bing.com.",
             "type": 1,
-            "ttl": 3343,
+            "ttl": 3499,
             "rclass": 1,
             "rdlen": null,
             "rdata": "13.107.21.200"
@@ -939,13 +939,13 @@
          {
             "rrname": "bing.com.",
             "type": 1,
-            "ttl": 3343,
+            "ttl": 3499,
             "rclass": 1,
             "rdlen": null,
             "rdata": "204.79.197.200"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "bing.com.",
             "type": 16,
@@ -979,11 +979,11 @@
       ]
    },
    "stackoverflow.com": {
-      "A": [
+      "1": [
          {
             "rrname": "stackoverflow.com.",
             "type": 1,
-            "ttl": 3108,
+            "ttl": 3307,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.65.69"
@@ -991,15 +991,7 @@
          {
             "rrname": "stackoverflow.com.",
             "type": 1,
-            "ttl": 3108,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "151.101.1.69"
-         },
-         {
-            "rrname": "stackoverflow.com.",
-            "type": 1,
-            "ttl": 3108,
+            "ttl": 3307,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.193.69"
@@ -1007,26 +999,34 @@
          {
             "rrname": "stackoverflow.com.",
             "type": 1,
-            "ttl": 3108,
+            "ttl": 3307,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.129.69"
+         },
+         {
+            "rrname": "stackoverflow.com.",
+            "type": 1,
+            "ttl": 3307,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.1.69"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "aliexpress.com": {
-      "A": [
+      "1": [
          {
             "rrname": "aliexpress.com.",
             "type": 1,
-            "ttl": 456,
+            "ttl": 599,
             "rclass": 1,
             "rdlen": null,
             "rdata": "198.11.132.250"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "aliexpress.com.",
             "type": 16,
@@ -1070,11 +1070,11 @@
       ]
    },
    "ebay.com": {
-      "A": [
+      "1": [
          {
             "rrname": "ebay.com.",
             "type": 1,
-            "ttl": 3285,
+            "ttl": 3387,
             "rclass": 1,
             "rdlen": null,
             "rdata": "66.135.195.175"
@@ -1082,16 +1082,16 @@
          {
             "rrname": "ebay.com.",
             "type": 1,
-            "ttl": 3285,
+            "ttl": 3387,
             "rclass": 1,
             "rdlen": null,
             "rdata": "66.135.196.249"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "taobao.com": {
-      "A": [
+      "1": [
          {
             "rrname": "taobao.com.",
             "type": 1,
@@ -1109,7 +1109,7 @@
             "rdata": "140.205.94.189"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "taobao.com.",
             "type": 16,
@@ -1133,11 +1133,19 @@
       ]
    },
    "apple.com": {
-      "A": [
+      "1": [
          {
             "rrname": "apple.com.",
             "type": 1,
-            "ttl": 3592,
+            "ttl": 3539,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "17.142.160.59"
+         },
+         {
+            "rrname": "apple.com.",
+            "type": 1,
+            "ttl": 3539,
             "rclass": 1,
             "rdlen": null,
             "rdata": "17.172.224.47"
@@ -1145,31 +1153,23 @@
          {
             "rrname": "apple.com.",
             "type": 1,
-            "ttl": 3592,
+            "ttl": 3539,
             "rclass": 1,
             "rdlen": null,
             "rdata": "17.178.96.59"
-         },
-         {
-            "rrname": "apple.com.",
-            "type": 1,
-            "ttl": 3592,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "17.142.160.59"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "espn.com": {
-      "A": [
+      "1": [
          {
             "rrname": "espn.com.",
             "type": 1,
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "13.225.25.52"
+            "rdata": "99.86.91.91"
          },
          {
             "rrname": "espn.com.",
@@ -1177,7 +1177,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "13.225.25.122"
+            "rdata": "99.86.91.121"
          },
          {
             "rrname": "espn.com.",
@@ -1185,7 +1185,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "13.225.25.92"
+            "rdata": "99.86.91.35"
          },
          {
             "rrname": "espn.com.",
@@ -1193,25 +1193,17 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "13.225.25.55"
+            "rdata": "99.86.91.100"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "nytimes.com": {
-      "A": [
+      "1": [
          {
             "rrname": "nytimes.com.",
             "type": 1,
-            "ttl": 466,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "151.101.129.164"
-         },
-         {
-            "rrname": "nytimes.com.",
-            "type": 1,
-            "ttl": 466,
+            "ttl": 430,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.1.164"
@@ -1219,7 +1211,7 @@
          {
             "rrname": "nytimes.com.",
             "type": 1,
-            "ttl": 466,
+            "ttl": 430,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.65.164"
@@ -1227,36 +1219,28 @@
          {
             "rrname": "nytimes.com.",
             "type": 1,
-            "ttl": 466,
+            "ttl": 430,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.129.164"
+         },
+         {
+            "rrname": "nytimes.com.",
+            "type": 1,
+            "ttl": 430,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.193.164"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "cnn.com": {
-      "A": [
+      "1": [
          {
             "rrname": "cnn.com.",
             "type": 1,
-            "ttl": 29,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "151.101.193.67"
-         },
-         {
-            "rrname": "cnn.com.",
-            "type": 1,
-            "ttl": 29,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "151.101.1.67"
-         },
-         {
-            "rrname": "cnn.com.",
-            "type": 1,
-            "ttl": 29,
+            "ttl": 44,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.129.67"
@@ -1264,20 +1248,36 @@
          {
             "rrname": "cnn.com.",
             "type": 1,
-            "ttl": 29,
+            "ttl": 44,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.1.67"
+         },
+         {
+            "rrname": "cnn.com.",
+            "type": 1,
+            "ttl": 44,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.193.67"
+         },
+         {
+            "rrname": "cnn.com.",
+            "type": 1,
+            "ttl": 44,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.65.67"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "quora.com": {
-      "A": [
+      "1": [
          {
             "rrname": "quora.com.",
             "type": 1,
-            "ttl": 59,
+            "ttl": 54,
             "rclass": 1,
             "rdlen": null,
             "rdata": "34.192.36.169"
@@ -1285,39 +1285,23 @@
          {
             "rrname": "quora.com.",
             "type": 1,
-            "ttl": 59,
+            "ttl": 54,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "34.192.252.133"
+            "rdata": "54.88.111.196"
          },
          {
             "rrname": "quora.com.",
             "type": 1,
-            "ttl": 59,
+            "ttl": 54,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "34.232.236.5"
+            "rdata": "34.194.85.163"
          },
          {
             "rrname": "quora.com.",
             "type": 1,
-            "ttl": 59,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "3.222.111.119"
-         },
-         {
-            "rrname": "quora.com.",
-            "type": 1,
-            "ttl": 59,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "34.193.164.38"
-         },
-         {
-            "rrname": "quora.com.",
-            "type": 1,
-            "ttl": 59,
+            "ttl": 54,
             "rclass": 1,
             "rdlen": null,
             "rdata": "3.216.43.27"
@@ -1325,7 +1309,15 @@
          {
             "rrname": "quora.com.",
             "type": 1,
-            "ttl": 59,
+            "ttl": 54,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "3.215.229.190"
+         },
+         {
+            "rrname": "quora.com.",
+            "type": 1,
+            "ttl": 54,
             "rclass": 1,
             "rdlen": null,
             "rdata": "54.175.190.187"
@@ -1333,33 +1325,41 @@
          {
             "rrname": "quora.com.",
             "type": 1,
-            "ttl": 59,
+            "ttl": 54,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "54.88.111.196"
+            "rdata": "34.193.130.150"
+         },
+         {
+            "rrname": "quora.com.",
+            "type": 1,
+            "ttl": 54,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "52.204.43.105"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "weather.com": {
-      "A": [
+      "1": [
          {
             "rrname": "weather.com.",
             "type": 1,
             "ttl": 19,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "23.51.230.100"
+            "rdata": "88.221.30.202"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "businessinsider.com": {
-      "A": [
+      "1": [
          {
             "rrname": "businessinsider.com.",
             "type": 1,
-            "ttl": 14294,
+            "ttl": 14296,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.193.171"
@@ -1367,15 +1367,7 @@
          {
             "rrname": "businessinsider.com.",
             "type": 1,
-            "ttl": 14294,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "151.101.65.171"
-         },
-         {
-            "rrname": "businessinsider.com.",
-            "type": 1,
-            "ttl": 14294,
+            "ttl": 14296,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.1.171"
@@ -1383,26 +1375,34 @@
          {
             "rrname": "businessinsider.com.",
             "type": 1,
-            "ttl": 14294,
+            "ttl": 14296,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.65.171"
+         },
+         {
+            "rrname": "businessinsider.com.",
+            "type": 1,
+            "ttl": 14296,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.129.171"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "usatoday.com": {
-      "A": [
+      "1": [
          {
             "rrname": "usatoday.com.",
             "type": 1,
-            "ttl": 1122,
+            "ttl": 1085,
             "rclass": 1,
             "rdlen": null,
             "rdata": "159.54.242.176"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "usatoday.com.",
             "type": 16,
@@ -1466,14 +1466,14 @@
       ]
    },
    "medicalnewstoday.com": {
-      "A": [
+      "1": [
          {
             "rrname": "medicalnewstoday.com.",
             "type": 1,
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "13.225.25.34"
+            "rdata": "99.86.91.55"
          },
          {
             "rrname": "medicalnewstoday.com.",
@@ -1481,7 +1481,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "13.225.25.121"
+            "rdata": "99.86.91.45"
          },
          {
             "rrname": "medicalnewstoday.com.",
@@ -1489,7 +1489,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "13.225.25.66"
+            "rdata": "99.86.91.27"
          },
          {
             "rrname": "medicalnewstoday.com.",
@@ -1497,37 +1497,37 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "13.225.25.44"
+            "rdata": "99.86.91.3"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "usnews.com": {
-      "A": [
+      "1": [
          {
             "rrname": "usnews.com.",
             "type": 1,
             "ttl": 19,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "23.51.236.21"
+            "rdata": "92.122.69.2"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "usnews.com.",
             "type": 16,
-            "ttl": 457,
+            "ttl": 599,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
-               "ZOOM_verify_X6FjtCkvSl6J_A5UT_QfLw"
+               "v=spf1 include:spf.usnews.com -all"
             ]
          },
          {
             "rrname": "usnews.com.",
             "type": 16,
-            "ttl": 457,
+            "ttl": 599,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1537,62 +1537,62 @@
          {
             "rrname": "usnews.com.",
             "type": 16,
-            "ttl": 457,
+            "ttl": 599,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
-               "facebook-domain-verification=4onziq2r3y9y8wx1tf5ympb4sz11x8"
+               "ZOOM_verify_X6FjtCkvSl6J_A5UT_QfLw"
             ]
          },
          {
             "rrname": "usnews.com.",
             "type": 16,
-            "ttl": 457,
+            "ttl": 599,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
-               "v=spf1 include:spf.usnews.com -all"
+               "facebook-domain-verification=4onziq2r3y9y8wx1tf5ympb4sz11x8"
             ]
          }
       ]
    },
    "foxnews.com": {
-      "A": [
+      "1": [
          {
             "rrname": "foxnews.com.",
             "type": 1,
-            "ttl": 17,
+            "ttl": 6,
             "rclass": 1,
             "rdlen": null,
             "rdata": "104.78.177.82"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "genius.com": {
-      "A": [
+      "1": [
          {
             "rrname": "genius.com.",
             "type": 1,
-            "ttl": 243,
+            "ttl": 79,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "104.18.18.96"
+            "rdata": "104.18.19.96"
          },
          {
             "rrname": "genius.com.",
             "type": 1,
-            "ttl": 243,
+            "ttl": 79,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "104.18.19.96"
+            "rdata": "104.18.18.96"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "genius.com.",
             "type": 16,
-            "ttl": 156,
+            "ttl": 299,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1602,7 +1602,7 @@
          {
             "rrname": "genius.com.",
             "type": 16,
-            "ttl": 156,
+            "ttl": 299,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1612,7 +1612,7 @@
          {
             "rrname": "genius.com.",
             "type": 16,
-            "ttl": 156,
+            "ttl": 299,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1622,7 +1622,7 @@
          {
             "rrname": "genius.com.",
             "type": 16,
-            "ttl": 156,
+            "ttl": 299,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1632,7 +1632,7 @@
          {
             "rrname": "genius.com.",
             "type": 16,
-            "ttl": 156,
+            "ttl": 299,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1642,24 +1642,24 @@
       ]
    },
    "spotify.com": {
-      "A": [
+      "1": [
          {
             "rrname": "spotify.com.",
             "type": 1,
-            "ttl": 183,
+            "ttl": 211,
             "rclass": 1,
             "rdlen": null,
             "rdata": "35.186.224.25"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "forbes.com": {
-      "A": [
+      "1": [
          {
             "rrname": "forbes.com.",
             "type": 1,
-            "ttl": 215,
+            "ttl": 34,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.2.49"
@@ -1667,15 +1667,15 @@
          {
             "rrname": "forbes.com.",
             "type": 1,
-            "ttl": 215,
+            "ttl": 34,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "151.101.66.49"
+            "rdata": "151.101.194.49"
          },
          {
             "rrname": "forbes.com.",
             "type": 1,
-            "ttl": 215,
+            "ttl": 34,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.130.49"
@@ -1683,36 +1683,36 @@
          {
             "rrname": "forbes.com.",
             "type": 1,
-            "ttl": 215,
+            "ttl": 34,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "151.101.194.49"
+            "rdata": "151.101.66.49"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "cnet.com": {
-      "A": [
+      "1": [
          {
             "rrname": "cnet.com.",
             "type": 1,
-            "ttl": 21599,
+            "ttl": 21496,
             "rclass": 1,
             "rdlen": null,
             "rdata": "35.190.79.82"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "washingtonpost.com": {
-      "A": [
+      "1": [
          {
             "rrname": "washingtonpost.com.",
             "type": 1,
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "143.204.222.83"
+            "rdata": "99.86.91.99"
          },
          {
             "rrname": "washingtonpost.com.",
@@ -1720,7 +1720,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "143.204.222.92"
+            "rdata": "99.86.91.53"
          },
          {
             "rrname": "washingtonpost.com.",
@@ -1728,7 +1728,7 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "143.204.222.102"
+            "rdata": "99.86.91.63"
          },
          {
             "rrname": "washingtonpost.com.",
@@ -1736,104 +1736,74 @@
             "ttl": 59,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "143.204.222.108"
+            "rdata": "99.86.91.31"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "paypal.com": {
-      "A": [
+      "1": [
          {
             "rrname": "paypal.com.",
             "type": 1,
-            "ttl": 271,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "64.4.250.37"
-         },
-         {
-            "rrname": "paypal.com.",
-            "type": 1,
-            "ttl": 271,
+            "ttl": 238,
             "rclass": 1,
             "rdlen": null,
             "rdata": "64.4.250.36"
+         },
+         {
+            "rrname": "paypal.com.",
+            "type": 1,
+            "ttl": 238,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "64.4.250.37"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "foodnetwork.com": {
-      "A": [
+      "1": [
          {
             "rrname": "foodnetwork.com.",
             "type": 1,
-            "ttl": 4,
+            "ttl": 59,
             "rclass": 1,
             "rdlen": null,
             "rdata": "204.78.50.45"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "hulu.com": {
-      "A": [
+      "1": [
          {
             "rrname": "hulu.com.",
             "type": 1,
             "ttl": 19,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "23.38.28.250"
+            "rdata": "104.108.57.9"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "go.com": {
-      "A": [
+      "1": [
          {
             "rrname": "go.com.",
             "type": 1,
-            "ttl": 299,
+            "ttl": 289,
             "rclass": 1,
             "rdlen": null,
             "rdata": "23.236.60.174"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "go.com.",
             "type": 16,
-            "ttl": 299,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": [
-               "htr9iscf127tqthdpuapd75e0s"
-            ]
-         },
-         {
-            "rrname": "go.com.",
-            "type": 16,
-            "ttl": 299,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": [
-               "34qqnv54o1kpgkan1oefc4chaq"
-            ]
-         },
-         {
-            "rrname": "go.com.",
-            "type": 16,
-            "ttl": 299,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": [
-               "6obgql8sf1ebl1h54e4jvd2qqa"
-            ]
-         },
-         {
-            "rrname": "go.com.",
-            "type": 16,
-            "ttl": 299,
+            "ttl": 186,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1843,52 +1813,82 @@
          {
             "rrname": "go.com.",
             "type": 16,
-            "ttl": 299,
+            "ttl": 186,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "htr9iscf127tqthdpuapd75e0s"
+            ]
+         },
+         {
+            "rrname": "go.com.",
+            "type": 16,
+            "ttl": 186,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "34qqnv54o1kpgkan1oefc4chaq"
+            ]
+         },
+         {
+            "rrname": "go.com.",
+            "type": 16,
+            "ttl": 186,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
                "zf4583k7l87r1mb4bn98zl974g3ddrby"
             ]
+         },
+         {
+            "rrname": "go.com.",
+            "type": 16,
+            "ttl": 186,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": [
+               "6obgql8sf1ebl1h54e4jvd2qqa"
+            ]
          }
       ]
    },
    "wowhead.com": {
-      "A": [
+      "1": [
          {
             "rrname": "wowhead.com.",
             "type": 1,
-            "ttl": 288,
+            "ttl": 2,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "104.18.30.49"
+            "rdata": "104.18.31.49"
          },
          {
             "rrname": "wowhead.com.",
             "type": 1,
-            "ttl": 288,
+            "ttl": 2,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "104.18.31.49"
+            "rdata": "104.18.30.49"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "ign.com": {
-      "A": [
+      "1": [
          {
             "rrname": "ign.com.",
             "type": 1,
-            "ttl": 44,
+            "ttl": 57,
             "rclass": 1,
             "rdlen": null,
             "rdata": "3.225.128.25"
          }
       ],
-      "TXT": [
+      "16": [
          {
             "rrname": "ign.com.",
             "type": 16,
-            "ttl": 299,
+            "ttl": 185,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1898,7 +1898,7 @@
          {
             "rrname": "ign.com.",
             "type": 16,
-            "ttl": 299,
+            "ttl": 185,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1908,7 +1908,7 @@
          {
             "rrname": "ign.com.",
             "type": 16,
-            "ttl": 299,
+            "ttl": 185,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1918,7 +1918,7 @@
          {
             "rrname": "ign.com.",
             "type": 16,
-            "ttl": 299,
+            "ttl": 185,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1928,7 +1928,7 @@
          {
             "rrname": "ign.com.",
             "type": 16,
-            "ttl": 299,
+            "ttl": 185,
             "rclass": 1,
             "rdlen": null,
             "rdata": [
@@ -1938,11 +1938,11 @@
       ]
    },
    "wikihow.com": {
-      "A": [
+      "1": [
          {
             "rrname": "wikihow.com.",
             "type": 1,
-            "ttl": 21456,
+            "ttl": 21317,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.194.110"
@@ -1950,7 +1950,15 @@
          {
             "rrname": "wikihow.com.",
             "type": 1,
-            "ttl": 21456,
+            "ttl": 21317,
+            "rclass": 1,
+            "rdlen": null,
+            "rdata": "151.101.2.110"
+         },
+         {
+            "rrname": "wikihow.com.",
+            "type": 1,
+            "ttl": 21317,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.66.110"
@@ -1958,28 +1966,20 @@
          {
             "rrname": "wikihow.com.",
             "type": 1,
-            "ttl": 21456,
+            "ttl": 21317,
             "rclass": 1,
             "rdlen": null,
             "rdata": "151.101.130.110"
-         },
-         {
-            "rrname": "wikihow.com.",
-            "type": 1,
-            "ttl": 21456,
-            "rclass": 1,
-            "rdlen": null,
-            "rdata": "151.101.2.110"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "expedia.com": {
-      "A": [
+      "1": [
          {
             "rrname": "expedia.com.",
             "type": 1,
-            "ttl": 24,
+            "ttl": 41,
             "rclass": 1,
             "rdlen": null,
             "rdata": "52.40.56.178"
@@ -1987,16 +1987,16 @@
          {
             "rrname": "expedia.com.",
             "type": 1,
-            "ttl": 24,
+            "ttl": 41,
             "rclass": 1,
             "rdlen": null,
             "rdata": "52.26.234.148"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "bbb.org": {
-      "A": [
+      "1": [
          {
             "rrname": "bbb.org.",
             "type": 1,
@@ -2006,23 +2006,23 @@
             "rdata": "216.52.119.101"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "books.google.com": {
-      "A": [
+      "1": [
          {
             "rrname": "books.google.com.",
             "type": 1,
             "ttl": 299,
             "rclass": 1,
             "rdlen": null,
-            "rdata": "172.217.21.14"
+            "rdata": "216.58.212.110"
          }
       ],
-      "TXT": []
+      "16": []
    },
    "huffpost.comimdb.compinterest.com": {
-      "A": [
+      "1": [
          {
             "rrname": "huffpost.comimdb.compinterest.com.",
             "type": 1,
@@ -2032,6 +2032,6 @@
             "rdata": "103.224.182.241"
          }
       ],
-      "TXT": []
+      "16": []
    }
 }

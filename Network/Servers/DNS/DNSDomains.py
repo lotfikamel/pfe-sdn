@@ -1,3 +1,5 @@
+supported_query_types = ['A', 'TXT']
+
 supported_domain_names = [
 	
 	"google.com",

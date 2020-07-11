@@ -2,6 +2,8 @@ from scapy.all import *
 
 import socket
 
+import json
+
 class DNSServer :
 
 	"""
@@ -16,6 +18,102 @@ class DNSServer :
 		self.DNS_SERVER_PORT = 53
 
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+		self.data = self.load_data()
+
+	"""
+		load dns json data
+		@return {Dict}
+	"""
+	def load_data (self) :
+
+		file = open('./dns_records.json', 'r')
+
+		return json.load(file)
+
+	"""
+		parse qname (domain name)
+		@param {Packet} packet
+		@return {String}
+	"""
+	def parse_qname (self, packet) :
+
+		qname = packet[DNSQR].qname.decode('utf-8').split('.')[:-1]
+
+		#remove www from the begining
+		qname = [chunk for chunk in qname if chunk != 'www']
+
+		qname = str.join('.', qname)
+
+		return qname
+
+	"""
+		parse query type field
+		@param {Packet} packet
+		@return {String}
+	"""
+	def parse_qtype (self, packet) :
+
+		return str(packet[DNSQR].qtype)
+
+	"""
+		check if the record asked exists
+		@param {String} qname
+		@param {String} qtype
+		@return {Boolean}
+	"""
+	def is_records_exists (self, qname, qtype) :
+
+		return qname in self.data and qtype in self.data[qname]
+
+	"""
+		build dns response packet
+		@param {Packet} packet
+		@param {String} qname
+		@param {String} qtype
+		@return {Packet}
+	"""
+	def build_record_response (self, packet, qname, qtype) :
+
+		ip = IP(dst=packet[IP].src, src=self.DNS_SERVER_IP)
+
+		udp =  UDP(dport=packet[UDP].sport, sport=self.DNS_SERVER_PORT)
+
+		qd = DNSQR(qname=packet[DNSQR].qname)
+
+		ancount = len(self.data[qname][qtype])
+
+		an = None
+
+		if ancount > 0 :
+
+			an = DNSRR(
+
+				rrname=packet[DNSQR].qname,
+				type=packet[DNSQR].qtype,
+				ttl=self.data[qname][qtype][0]['ttl'],
+				rclass=self.data[qname][qtype][0]['rclass'],
+				rdlen=self.data[qname][qtype][0]['rdlen'],
+				rdata=self.data[qname][qtype][0]['rdata']
+			)
+
+			if ancount > 1 :
+
+				for i in range(1, ancount) :
+
+					an = an / DNSRR(
+
+						rrname=packet[DNSQR].qname,
+						type=packet[DNSQR].qtype,
+						ttl=self.data[qname][qtype][i]['ttl'],
+						rclass=self.data[qname][qtype][i]['rclass'],
+						rdlen=self.data[qname][qtype][i]['rdlen'],
+						rdata=self.data[qname][qtype][i]['rdata']
+					)
+
+		dns = DNS(id=packet[DNS].id,ancount=ancount,an=an, qd=qd, qr=1, rd=1, ra=1)
+
+		return ip / udp / dns
 
 	"""
 		start the server
@@ -36,25 +134,18 @@ class DNSServer :
 
 			if packet.haslayer(DNSQR) :
 
-				print(packet[UDP].len)
+				qname = self.parse_qname(packet)
 
-				google = IP(dst='8.8.8.8') / UDP(sport=packet[UDP].sport) / DNS(rd=1, id=packet[DNS].id, qd=DNSQR(qname=packet[DNSQR].qname, qtype=packet[DNSQR].qtype))
+				qtype = self.parse_qtype(packet)
 
-				response = sr1(google, verbose=False)
+				if self.is_records_exists(qname, qtype) :
 
-				response.show()
+					response = self.build_record_response(packet, qname, qtype)
 
-				print(response[UDP].len / packet[UDP].len)
-				
-				ip = IP(dst='127.0.0.1', src='127.0.0.1')
+					response.show()
 
-				udp =  UDP(dport=packet[UDP].sport, sport=53)
-
-				dns = DNS(id=packet[DNS].id,ancount=1,an=DNSRR(rrname=packet[DNSQR].qname, type=packet[DNSQR].qtype, rdata='12.12.12.12'), qd=DNSQR(qname=packet[DNSQR].qname))
-
-				spf_resp = ip / udp / dns
-
-				self.sock.sendto(raw(spf_resp), address)
+					self.sock.sendto(raw(response), address)
+			
 
 dnsServer = DNSServer('127.0.0.1')
 
