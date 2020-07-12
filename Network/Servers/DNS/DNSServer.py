@@ -123,7 +123,7 @@ class DNSServer :
 	"""
 	def start (self) :
 
-		print(f'DNS Server start and waiting for queries on {self.DNS_SERVER_IP}:{self.DNS_SERVER_PORT}...')
+		print(f'DNS Server started and waiting for queries on {self.DNS_SERVER_IP}:{self.DNS_SERVER_PORT}...')
 
 		#bind the socket
 		self.sock.bind((self.DNS_SERVER_IP, self.DNS_SERVER_PORT))
@@ -150,7 +150,7 @@ class DNSServer :
 
 					print(address)
 
-					self.sock.sendto(raw(response), address)
+					self.sock.sendto(raw(response), (packet[IP].src, address[1]))
 			
 
 server_ip = sys.argv[1]

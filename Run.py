@@ -1,9 +1,19 @@
-import sys
+import threading
 
-import importlib
+class ThreadOne (threading.Thread) :
 
-sys.path.append('/home/lotfi/pfe/PFE')
+	def __init__ (self) :
 
-module = __import__('MachineLearning.Classifiers.DrDoSDNSClassifier', 'DrDoSDNSClassifier.py')
+		threading.Thread.__init__(self)
 
-print(module.load())
+	def run (self) :
+
+		print('1')
+
+t1 = ThreadOne()
+
+t2 = ThreadOne()
+
+t1.start()
+
+t2.start()

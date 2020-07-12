@@ -1,5 +1,6 @@
 """
-	class for calculating each flow attr
+	class for calculating each flow attributes
+	run as Thread
 """
 
 import sys
@@ -16,14 +17,18 @@ from pprint import pprint
 
 import threading, time
 
+import pickle
+
 from MachineLearning.Classifiers.DrDoSDNSClassifier import DrDoSDNSClassifier
 
-class TraficCalculator () :
+class TraficCalculator (threading.Thread) :
 
 	"""
 		init the trafic calculator
 	"""
 	def __init__ (self) :
+
+		threading.Thread.__init__(self)
 
 		"""
 			flow infos
@@ -55,6 +60,22 @@ class TraficCalculator () :
 		self.classify()
 
 	"""
+		run the thread and begin sniff
+		@return {Void}
+	"""
+	def run (self) :
+
+		self.init_sniff()
+
+	"""
+		get all flows
+		@return {Dict}
+	"""
+	def get_flows_as_binary (self) :
+
+		return pickle.dumps(self.flow_infos)
+
+	"""
 		begin sniffing
 		@return {Void}
 	"""
@@ -68,8 +89,6 @@ class TraficCalculator () :
 		@retrun {Boolean}
 	"""
 	def filter_packet (self, packet) :
-
-		print(packet[IP].src == '10.0.0.2')
 
 		return (IP in packet) and (DNS in packet and UDP in packet) # ( (TCP in packet) or (UDP in packet) )
 
@@ -548,6 +567,17 @@ class TraficCalculator () :
 
 		return flows
 
+	"""
+		start the flow sender thread
+		@return {Void}
+	"""
+	def start_flow_sender_thread (self) :
+
+		self.flowSender.start()
+
+	"""
+		classify all calculated flows
+	"""
 	def classify (self) :
 
 		threading.Timer(5, self.classify).start()
@@ -559,7 +589,3 @@ class TraficCalculator () :
 			pprint(self.flow_infos)
 
 			DrDoSDNSClassifier.predict_flows(flows)
-
-traficCalculator = TraficCalculator()
-
-traficCalculator.init_sniff()
