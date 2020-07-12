@@ -19,8 +19,6 @@ import threading, time
 
 import pickle
 
-from MachineLearning.Classifiers.DrDoSDNSClassifier import DrDoSDNSClassifier
-
 class TraficCalculator (threading.Thread) :
 
 	"""
@@ -57,8 +55,6 @@ class TraficCalculator (threading.Thread) :
 			'TCP' : 20
 		}
 
-		self.classify()
-
 	"""
 		run the thread and begin sniff
 		@return {Void}
@@ -73,7 +69,7 @@ class TraficCalculator (threading.Thread) :
 	"""
 	def get_flows_as_binary (self) :
 
-		return pickle.dumps(self.flow_infos)
+		return pickle.dumps(self.build_flows())
 
 	"""
 		begin sniffing
@@ -566,26 +562,3 @@ class TraficCalculator (threading.Thread) :
 			])
 
 		return flows
-
-	"""
-		start the flow sender thread
-		@return {Void}
-	"""
-	def start_flow_sender_thread (self) :
-
-		self.flowSender.start()
-
-	"""
-		classify all calculated flows
-	"""
-	def classify (self) :
-
-		threading.Timer(5, self.classify).start()
-
-		flows = self.build_flows()
-
-		if len(flows) > 0 :
-
-			pprint(self.flow_infos)
-
-			DrDoSDNSClassifier.predict_flows(flows)

@@ -12,7 +12,12 @@ from ryu.lib.packet import ethernet, tcp, udp, icmp, ipv4, arp, openflow, ipv6, 
 from ryu.lib.packet import ether_types
 from ryu.lib import hub
 
+import socket
+
+import pickle
+
 from Helpers import json_printer
+from MachineLearning.Classifiers.DrDoSDNSClassifier import DrDoSDNSClassifier
 
 class SwitchMacToPort(app_manager.RyuApp):
 
@@ -25,6 +30,44 @@ class SwitchMacToPort(app_manager.RyuApp):
         # mac to port table
         # format : { datapath_swicth_id : {mac : port} }
         self.mac_to_port = {}
+
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+        #flow collector threaed
+        self.flow_collector_thread = hub.spawn(self._collect_flows)
+
+        #flow collection interval
+        self.flow_collection_interval = 5
+
+    """
+        collect flow from the flow collector device
+    """
+    def _collect_flows (self) :
+
+        while True :
+
+            print('flow collection strated')
+
+            self.sock.sendto(pickle.dumps('lotfi'), ('127.0.0.1', 6000))
+
+            data, address = self.sock.recvfrom(65000)
+
+            flows = pickle.loads(data)
+            
+            if len(flows) > 0 :
+
+                print(flows)
+
+                predictions = DrDoSDNSClassifier.predict_flows(flows)
+
+                print('predictions', predictions)
+
+            else :
+
+                print('no flow to classify')
+
+            hub.sleep(self.flow_collection_interval)
+
 
     def __str__ (self) :
 

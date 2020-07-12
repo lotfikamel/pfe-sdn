@@ -148,14 +148,12 @@ class Classifier () :
 
 		# plt.show()
 
-		print(flows)
-
 		predictions = self.classifier.predict(flows)
 
 		labels = list(map(int, predictions))
 
 		labels = self.labelEncoder.inverse_transform(labels)
 
-		print('prediction', labels)
+		return labels
 
 
