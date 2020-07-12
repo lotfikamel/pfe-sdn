@@ -77,7 +77,7 @@ class TraficCalculator (threading.Thread) :
 	"""
 	def init_sniff (self) :
 
-		sniff(lfilter=self.filter_packet, prn=self.on_packet)
+		sniff(lfilter=self.filter_packet, prn=self.on_packet, iface=['s1-eth3'])
 
 	"""
 		filter packet to sniff
@@ -85,6 +85,10 @@ class TraficCalculator (threading.Thread) :
 		@retrun {Boolean}
 	"""
 	def filter_packet (self, packet) :
+
+		if ICMP in packet :
+
+			print('ICMP')
 
 		return (IP in packet) and (DNS in packet and UDP in packet) # ( (TCP in packet) or (UDP in packet) )
 

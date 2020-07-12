@@ -33,6 +33,8 @@ class SwitchMacToPort(app_manager.RyuApp):
 
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
+        self.sock.settimeout(1)
+
         #flow collector threaed
         self.flow_collector_thread = hub.spawn(self._collect_flows)
 
@@ -48,23 +50,28 @@ class SwitchMacToPort(app_manager.RyuApp):
 
             print('flow collection strated')
 
-            self.sock.sendto(pickle.dumps('lotfi'), ('127.0.0.1', 6000))
+            self.sock.sendto(b'GET_FLOWS', ('127.0.0.1', 6000))
 
-            data, address = self.sock.recvfrom(65000)
+            try :
 
-            flows = pickle.loads(data)
+                data, address = self.sock.recvfrom(65000)
+
+                flows = pickle.loads(data)
             
-            if len(flows) > 0 :
+                if len(flows) > 0 :
 
-                print(flows)
+                    print(flows)
 
-                predictions = DrDoSDNSClassifier.predict_flows(flows)
+                    predictions = DrDoSDNSClassifier.predict_flows(flows)
 
-                print('predictions', predictions)
+                    print('predictions', predictions)
 
-            else :
+                else :
 
-                print('no flow to classify')
+                    print('no flow to classify')
+            except Exception as e:
+
+                print('FlowCollector Server is off try next time')
 
             hub.sleep(self.flow_collection_interval)
 
@@ -118,7 +125,7 @@ class SwitchMacToPort(app_manager.RyuApp):
         @param {List<Object>}
         @return {Dictionery}
     """
-    def build_flow_match (self, packet, in_port):
+    def build_flow_match (self, packet, in_port) :
 
         flow_match = {
 
