@@ -270,9 +270,3 @@ class SwitchMacToPort(app_manager.RyuApp):
             out = parser.OFPPacketOut(datapath=datapath, buffer_id=msg.buffer_id, in_port=in_port, actions=actions, data=data)
 
         datapath.send_msg(out)
-
-    @set_ev_cls(ofp_event.EventOFPPacketIn, CONFIG_DISPATCHER)
-    def packet_in_config (self, ev) :
-
-        self.logger.info("from packet out")
-

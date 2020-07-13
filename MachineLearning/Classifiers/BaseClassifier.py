@@ -38,6 +38,12 @@ class Classifier () :
 
 		self.use_scaler = params['use_scaler']
 
+		self.balancerClass = params['balancer_class']
+
+		self.balancer = None
+
+		self.balancerArgs = params['balancer_args']
+
 		self.labelEncoder = LabelEncoder()
 
 		self.X = None
@@ -99,6 +105,16 @@ class Classifier () :
 			self.scaler = self.scalerClass()
 
 			self.X = self.scaler.fit_transform(self.X)
+
+		if self.balancerClass :
+
+			print(self.X.shape)
+
+			self.balancer = self.balancerClass(**self.balancerArgs)
+
+			self.X, self.y = self.balancer.fit_sample(self.X, self.y)
+
+			print(self.X.shape)
 
 		if self.is_exists() :
 
