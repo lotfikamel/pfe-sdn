@@ -77,7 +77,7 @@ class TraficCalculator (threading.Thread) :
 	"""
 	def init_sniff (self) :
 
-		sniff(lfilter=self.filter_packet, prn=self.on_packet, iface=['s1-eth3'])
+		sniff(lfilter=self.filter_packet, prn=self.on_packet)
 
 	"""
 		filter packet to sniff
@@ -533,36 +533,31 @@ class TraficCalculator (threading.Thread) :
 	"""
 	def build_flows (self) :
 
-		flows = []
+		flows_dict = {}
 
 		for flow_id in self.flow_infos :
 
-			flows.append([
+			flow = {
 
-				self.flow_infos[flow_id]['protocol'],
-				self.flow_infos[flow_id]['duration'],
+				'protocol' : self.flow_infos[flow_id]['protocol'],
+				'flow_duration' : self.flow_infos[flow_id]['duration'],
+				'total_forward_packets' : self.flow_infos[flow_id]['forward']['total'],
+				'total_backward_packets' : self.flow_infos[flow_id]['backward']['total'],
+				'total_forward_packets_length' : self.flow_infos[flow_id]['forward']['total_length'],
+				'total_backward_packets_length' : self.flow_infos[flow_id]['backward']['total_length'],
+				'forward_packet_length_mean' : self.flow_infos[flow_id]['forward']['length_mean'],
+				'backward_packet_length_mean' : self.flow_infos[flow_id]['backward']['length_mean'],
+				'forward_packets_per_second' : self.flow_infos[flow_id]['forward']['packet_per_second'],
+				'backward_packets_per_second' : self.flow_infos[flow_id]['backward']['packet_per_second'],
+				'forward_iat_mean' : self.flow_infos[flow_id]['forward']['mean_iat'],
+				'backward_iat_mean' : self.flow_infos[flow_id]['backward']['mean_iat'],
+				'flow_iat_mean' : self.flow_infos[flow_id]['mean_iat'],
+				'flow_packets_per_seconds' : self.flow_infos[flow_id]['packet_per_second'],
+				'flow_bytes_per_seconds' : self.flow_infos[flow_id]['bytes_per_second'],
+			}
 
-				self.flow_infos[flow_id]['forward']['total'],
-				self.flow_infos[flow_id]['backward']['total'],
+			pprint(flow)
 
-				self.flow_infos[flow_id]['forward']['total_length'],
-				self.flow_infos[flow_id]['backward']['total_length'],
+			flows_dict[flow_id] = list(flow.values())
 
-				self.flow_infos[flow_id]['forward']['length_mean'],
-				self.flow_infos[flow_id]['backward']['length_mean'],
-
-				# self.flow_infos[flow_id]['forward']['total_header_length'],
-				# self.flow_infos[flow_id]['backward']['total_header_length'],
-
-				self.flow_infos[flow_id]['forward']['packet_per_second'],
-				self.flow_infos[flow_id]['backward']['packet_per_second'],
-
-				self.flow_infos[flow_id]['forward']['mean_iat'],
-				self.flow_infos[flow_id]['backward']['mean_iat'],
-
-				self.flow_infos[flow_id]['mean_iat'],
-				self.flow_infos[flow_id]['packet_per_second'],
-				self.flow_infos[flow_id]['bytes_per_second'],
-			])
-
-		return flows
+		return flows_dict

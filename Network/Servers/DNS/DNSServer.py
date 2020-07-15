@@ -23,6 +23,8 @@ class DNSServer :
 
 		self.data = self.load_data()
 
+		self.query_received = 0
+
 	"""
 		load dns json data
 		@return {Dict}
@@ -130,9 +132,13 @@ class DNSServer :
 
 		while True:
 
+			print('waiting for queries ...')
+
 			data, address = self.sock.recvfrom(1024)
 
-			data = raw(data)
+			self.query_received += 1
+
+			data = bytes(data)
 
 			packet = IP(_pkt=data) / UDP(_pkt=data) / DNS(_pkt=data)
 
@@ -146,11 +152,11 @@ class DNSServer :
 
 					response = self.build_record_response(packet, qname, qtype)
 
-					response.show()
+					print(len(response))
 
-					print(address)
+					self.sock.sendto(bytes(response), (packet[IP].src, address[1]))
 
-					self.sock.sendto(raw(response), (packet[IP].src, address[1]))
+			print('query_received', self.query_received)
 			
 
 server_ip = sys.argv[1]

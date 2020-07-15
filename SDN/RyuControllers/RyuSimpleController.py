@@ -35,11 +35,16 @@ class SwitchMacToPort(app_manager.RyuApp):
 
         self.sock.settimeout(1)
 
+        self.PREDICTION_MAX_COUNT = 3
+
         #flow collector threaed
         self.flow_collector_thread = hub.spawn(self._collect_flows)
 
         #flow collection interval
-        self.flow_collection_interval = 5
+        self.flow_collection_interval = 2
+
+        #flow prediction
+        self.flow_predictions = {}
 
     """
         collect flow from the flow collector device
@@ -47,8 +52,6 @@ class SwitchMacToPort(app_manager.RyuApp):
     def _collect_flows (self) :
 
         while True :
-
-            print('flow collection strated')
 
             self.sock.sendto(b'GET_FLOWS', ('127.0.0.1', 6000))
 
@@ -60,20 +63,64 @@ class SwitchMacToPort(app_manager.RyuApp):
             
                 if len(flows) > 0 :
 
-                    print(flows)
+                    flow_ids = list(flows.keys())
 
-                    predictions = DrDoSDNSClassifier.predict_flows(flows)
+                    flow_values = list(flows.values())
 
-                    print('predictions', predictions)
+                    predictions = DrDoSDNSClassifier.predict(flow_values)
+
+                    self.update_flow_predictions(flow_ids, flow_values, predictions)
 
                 else :
 
                     print('no flow to classify')
             except Exception as e:
 
-                print('FlowCollector Server is off try next time')
+                print('FlowCollector Server is off try next time', e)
 
             hub.sleep(self.flow_collection_interval)
+
+    """
+        update flows prediction status
+        @param {List<String>} flow_ids
+        @param {List<List>} flow_values
+        @param {List<String>} predictions
+        @return {Void}
+    """
+    def update_flow_predictions (self, flow_ids, flow_values, predictions) :
+
+        for i in range(len(predictions)) :
+
+            if flow_ids[i] not in self.flow_predictions :
+
+                self.flow_predictions.update({
+
+                    flow_ids[i] : {
+
+                        'predicted_as' : {
+
+                            'BENIGN' : 0,
+                            'DrDoS_DNS' : 0
+                        },
+
+                        'prediction_count' : 0
+                    }
+                })
+
+
+            if self.flow_predictions[flow_ids[i]]['prediction_count'] !=0 and self.flow_predictions[flow_ids[i]]['prediction_count']%self.PREDICTION_MAX_COUNT == 0:
+
+                as_benign = self.flow_predictions[flow_ids[i]]['predicted_as']['BENIGN']
+
+                as_ddos = self.flow_predictions[flow_ids[i]]['predicted_as']['DrDoS_DNS']
+
+                final_prediction = 'BENIGN' if as_benign > as_ddos else 'DrDoS_DNS'
+
+                print(f'flow {flow_ids[i]} predicted as {final_prediction}')
+
+            self.flow_predictions[flow_ids[i]]['predicted_as'][predictions[i]] += 1
+
+            self.flow_predictions[flow_ids[i]]['prediction_count'] += 1
 
 
     def __str__ (self) :

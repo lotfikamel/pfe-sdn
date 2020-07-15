@@ -50,6 +50,8 @@ data_frame = pd.read_csv(dataset_path)
 
 dns_benign = data_frame.loc[data_frame['label'] == 'BENIGN']
 
+print(dns_benign['flow_packets_per_seconds'].value_counts())
+
 unseen_dns_benign = dns_benign.iloc[1900:1966,:]
 
 dns_benign = dns_benign.iloc[:1900]

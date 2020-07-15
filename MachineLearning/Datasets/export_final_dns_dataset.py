@@ -30,7 +30,7 @@ dns_drdos_dataframe = dns_drdos_dataframe[attributes]
 
 dns_drdos_dataframe.rename(columns=attributes_rename_mapping, inplace=True)
 
-dns_drdos_dataframe = dns_drdos_dataframe.loc[(dns_drdos_dataframe['protocol'] == 17) | (dns_drdos_dataframe['protocol'] == 6)]
+dns_drdos_dataframe = dns_drdos_dataframe.loc[dns_drdos_dataframe['protocol'] == 17]
 
 dns_drdos_dataframe = dns_drdos_dataframe.loc[(dns_drdos_dataframe['label'] == 'DrDoS_DNS') | (dns_drdos_dataframe['label'] == 'BENIGN')]
 
@@ -40,13 +40,17 @@ dns_drdos_dataframe.drop_duplicates(inplace=True)
 
 dns_drdos_benign = dns_drdos_dataframe[dns_drdos_dataframe['label'] == 'BENIGN']
 
+dns_drdos_benign = dns_drdos_benign[dns_drdos_benign['flow_packets_per_seconds'] < 200]
+
 dns_drdos = dns_drdos_dataframe[dns_drdos_dataframe['label'] == 'DrDoS_DNS']
 
 duplicateRowsDF = dns_drdos_dataframe[dns_drdos_dataframe.duplicated()]
 
-print(dns_drdos_dataframe.shape)
-
 print(dns_drdos_dataframe['label'].value_counts())
+
+dns_drdos_dataframe = pd.concat(objs=[dns_drdos_benign, dns_drdos], join='inner')
+
+dns_drdos_dataframe = dns_drdos_dataframe.reindex(np.random.permutation(dns_drdos_dataframe.index))
 
 dns_drdos_dataframe.to_csv('/home/lotfi/pfe/DDOS_datasets/final_datasets/DrDoS_DNS.csv', index=False)
 

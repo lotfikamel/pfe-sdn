@@ -19,7 +19,7 @@ class DNSAttackTopology (Topo) :
 	def build (self) :
 
 		#define switch
-		switch = self.addSwitch('s1', cls=OVSKernelSwitch, protocols='OpenFlow13')
+		switch = self.addSwitch('s1', cls=OVSKernelSwitch)
 
 		#define DNS Servers
 		DNS1 = self.addHost('DNS1', mac='00:00:00:00:00:01', ip='10.0.0.1/8')
@@ -32,7 +32,7 @@ class DNSAttackTopology (Topo) :
 		self.addLink(DNS1, switch)
 		self.addLink(DNS2, switch)
 
-		self.addLink(victime, switch, bw=2)
+		self.addLink(victime, switch)
 		self.addLink(attacker, switch)
 
 def start_network () :

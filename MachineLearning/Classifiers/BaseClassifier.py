@@ -38,6 +38,8 @@ class Classifier () :
 
 		self.use_scaler = params['use_scaler']
 
+		self.use_balancer = params['use_balancer']
+
 		self.balancerClass = params['balancer_class']
 
 		self.balancer = None
@@ -106,7 +108,7 @@ class Classifier () :
 
 			self.X = self.scaler.fit_transform(self.X)
 
-		if self.balancerClass :
+		if self.use_balancer == True :
 
 			print(self.X.shape)
 
@@ -154,17 +156,17 @@ class Classifier () :
 
 			self.persiste_scaler()
 
-	def predict_flows (self, flows) :
+	def predict (self, data) :
 
 		feat_importances = pd.Series(self.classifier.feature_importances_, index=self.X.columns).sort_values(ascending=False)
 
-		print(feat_importances)
+		#print(feat_importances)
 
 		# feat_importances.plot(kind="barh")
 
 		# plt.show()
 
-		predictions = self.classifier.predict(flows)
+		predictions = self.classifier.predict(data)
 
 		labels = list(map(int, predictions))
 

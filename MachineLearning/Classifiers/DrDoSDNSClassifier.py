@@ -19,6 +19,7 @@ DrDoSDNSClassifier = Classifier({
 	},
 	'scaler_class' : MinMaxScaler,
 	'use_scaler' : False,
+	'use_balancer' : False,
 	'balancer_class' : SMOTE,
 	'balancer_args' : {
 
