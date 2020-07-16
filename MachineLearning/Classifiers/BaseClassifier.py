@@ -160,7 +160,7 @@ class Classifier () :
 
 		feat_importances = pd.Series(self.classifier.feature_importances_, index=self.X.columns).sort_values(ascending=False)
 
-		#print(feat_importances)
+		print(feat_importances)
 
 		# feat_importances.plot(kind="barh")
 

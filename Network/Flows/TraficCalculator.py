@@ -55,6 +55,12 @@ class TraficCalculator (threading.Thread) :
 			'TCP' : 20
 		}
 
+		"""
+			duplaces packet ids to prevent sniffing same packet mutiple times
+			@var {List<Number>}
+		"""
+		self.duplicate_packet_ids = []
+
 	"""
 		run the thread and begin sniff
 		@return {Void}
@@ -77,7 +83,16 @@ class TraficCalculator (threading.Thread) :
 	"""
 	def init_sniff (self) :
 
-		sniff(lfilter=self.filter_packet, prn=self.on_packet)
+		sniff(lfilter=self.filter_packet, prn=self.on_packet, iface=['s1-eth1', 's1-eth2', 's1-eth3', 's1-eth4'])
+
+	"""
+		check if the packet is valide DNS packet
+		@param {Packet} packet
+		@return {Void}
+	"""
+	def is_dns_packet (self, packet) :
+
+		return (IP in packet) and (UDP in packet and DNS in packet)
 
 	"""
 		filter packet to sniff
@@ -86,11 +101,23 @@ class TraficCalculator (threading.Thread) :
 	"""
 	def filter_packet (self, packet) :
 
-		if ICMP in packet :
+		if self.is_dns_packet(packet) :
 
-			print('ICMP')
+			if packet[IP].id in self.duplicate_packet_ids :
 
-		return (IP in packet) and (DNS in packet and UDP in packet) # ( (TCP in packet) or (UDP in packet) )
+				print('duplicate packet !!!')
+
+				return False
+
+			else :
+
+				print('new packet', packet[IP].src, packet[IP].dst)
+
+				self.duplicate_packet_ids.append(packet[IP].id)
+
+				return True
+
+		return False
 
 	"""
 		on packet sniffed

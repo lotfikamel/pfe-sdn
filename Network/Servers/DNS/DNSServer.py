@@ -152,7 +152,7 @@ class DNSServer :
 
 					response = self.build_record_response(packet, qname, qtype)
 
-					print(len(response))
+					print(packet[IP].src)
 
 					self.sock.sendto(bytes(response), (packet[IP].src, address[1]))
 
