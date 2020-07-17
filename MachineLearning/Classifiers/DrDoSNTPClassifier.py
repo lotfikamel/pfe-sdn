@@ -10,7 +10,7 @@ from imblearn.over_sampling import SMOTE
 
 from .BaseClassifier import Classifier
 
-DrDoSDNSClassifier = Classifier({
+DrDoSNTPClassifier = Classifier({
 
 	'model_class' : RandomForestClassifier,
 	'model_args' : {
@@ -25,7 +25,7 @@ DrDoSDNSClassifier = Classifier({
 
 		'random_state' : 10
 	},
-	'dataset_path' : '/home/lotfi/pfe/DDOS_datasets/final_datasets/DrDoS_DNS.csv'
+	'dataset_path' : '/home/lotfi/pfe/DDOS_datasets/final_datasets/DrDoS_NTP.csv'
 })
 
-DrDoSDNSClassifier.load()
+DrDoSNTPClassifier.load()

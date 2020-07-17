@@ -8,10 +8,11 @@ import time
 
 import threading
 
-class AttackFlow (threading.Thread):
+class AttackFlow (threading.Thread) :
 
 	"""
 		default packet per second
+		@var {Integer}
 	"""
 	DEFAULT_PACKET_PER_SECOND = 100
 
@@ -63,7 +64,7 @@ class AttackFlow (threading.Thread):
 
 		while True :
 
-			self.sock.sendto(bytes(packet), (self.server_ip, 53))
+			self.sock.sendto(raw(packet), (self.server_ip, 53))
 
 			time.sleep(self.attack_rate)
 

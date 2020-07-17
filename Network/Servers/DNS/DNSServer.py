@@ -134,11 +134,11 @@ class DNSServer :
 
 			print('waiting for queries ...')
 
-			data, address = self.sock.recvfrom(1024)
+			data, address = self.sock.recvfrom(65000)
 
 			self.query_received += 1
 
-			data = bytes(data)
+			data = raw(data)
 
 			packet = IP(_pkt=data) / UDP(_pkt=data) / DNS(_pkt=data)
 
@@ -154,7 +154,7 @@ class DNSServer :
 
 					print(packet[IP].src)
 
-					self.sock.sendto(bytes(response), (packet[IP].src, address[1]))
+					self.sock.sendto(raw(response), (packet[IP].src, address[1]))
 
 			print('query_received', self.query_received)
 			
