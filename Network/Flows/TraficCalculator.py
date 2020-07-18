@@ -95,23 +95,32 @@ class TraficCalculator (threading.Thread) :
 		return (IP in packet) and (UDP in packet and DNS in packet)
 
 	"""
+		check if the packet is valide NTP packet
+		@param {Packet} packet
+		@return {Void}
+	"""
+	def is_ntp_packet (self, packet) :
+
+		return (IP in packet) and (UDP in packet and NTPHeader in packet)
+
+	"""
 		filter packet to sniff
 		@param {Packet} packet
 		@retrun {Boolean}
 	"""
 	def filter_packet (self, packet) :
 
-		if self.is_dns_packet(packet) :
+		if len(self.duplicate_packet_ids) > 50 :
+
+			self.duplicate_packet_ids = []
+
+		if self.is_dns_packet(packet) or self.is_ntp_packet(packet):
 
 			if packet[IP].id in self.duplicate_packet_ids :
-
-				print('duplicate packet !!!')
 
 				return False
 
 			else :
-
-				print('new packet', packet[IP].src, packet[IP].dst)
 
 				self.duplicate_packet_ids.append(packet[IP].id)
 

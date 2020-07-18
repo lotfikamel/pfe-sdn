@@ -1,0 +1,31 @@
+1 - Flow Display
+2 - DDOS Alert
+3 - Performances
+4 - Link (iperf)
+5 - Topology (host infos, ip, mac, interface)
+
+1 - Flow Display :
+
+	FlowCollector host
+	WebApp Controller => FlowCollector => each 2s
+
+	server => Flow
+	Flow => server
+	server => client
+
+2 - DDOS Alert
+
+	Web => Controller
+	Controller => web each 2s
+
+3 - Performances
+
+	CPU, RAM, DISK Usage (Controller, Switch)
+
+4 - Link (iperf)
+
+	After
+
+5 - Topology
+
+	Ask switch for connections like ARP Table

