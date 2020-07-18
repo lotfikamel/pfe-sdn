@@ -20,7 +20,9 @@ from os import path
 
 class Classifier () :
 
-	def __init__ (self, params) :
+	def __init__ (self, name, params) :
+
+		self.name = name
 
 		self.modelClass = params['model_class']
 
@@ -59,7 +61,7 @@ class Classifier () :
 	####
 	def is_exists (self) : 
 
-		return path.exists(f'{self.modelClass.__name__}.joblib')
+		return path.exists(f'{self.name}{self.modelClass.__name__}.joblib')
 
 	"""
 		clean the dataset from nan and inf
@@ -74,7 +76,7 @@ class Classifier () :
 	###
 	def persiste_classifier (self) :
 
-		joblib.dump(self.classifier, f'./{self.classifier.__class__.__name__}.joblib')
+		joblib.dump(self.classifier, f'./{self.name}{self.classifier.__class__.__name__}.joblib')
 
 	####
 	## Persiste the given scaler
@@ -84,7 +86,7 @@ class Classifier () :
 
 		if self.use_scaler == True :
 
-			joblib.dump(self.scaler, f'./{self.scaler.__class__.__name__}.joblib')
+			joblib.dump(self.scaler, f'./{self.name}{self.scaler.__class__.__name__}.joblib')
 
 	####
 	# load classifier if persisted else build new one
@@ -120,17 +122,17 @@ class Classifier () :
 
 		if self.is_exists() :
 
-			print('classifier exists', self.classifier)
+			print(f'classifier {self.name}', self.classifier)
 
-			self.classifier = joblib.load(f'./{self.modelClass.__name__}.joblib')
+			self.classifier = joblib.load(f'./{self.name}{self.modelClass.__name__}.joblib')
 
 			if self.use_scaler == True :
 
-				self.scaler = joblib.load(f'./{self.scalerClass.__name__}.joblib')
+				self.scaler = joblib.load(f'./{self.name}{self.scalerClass.__name__}.joblib')
 
 		else :
 
-			print('classifier not exists')
+			print(f'classifier {self.name} not exists')
 
 			self.build()
 
@@ -160,7 +162,7 @@ class Classifier () :
 
 		feat_importances = pd.Series(self.classifier.feature_importances_, index=self.X.columns).sort_values(ascending=False)
 
-		#print(feat_importances)
+		print(feat_importances)
 
 		# feat_importances.plot(kind="barh")
 

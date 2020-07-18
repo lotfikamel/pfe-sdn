@@ -200,8 +200,6 @@ class SwitchMacToPort(app_manager.RyuApp):
 
                 icmp_packet = packet.get_protocol(icmp.icmp)
 
-                # print(payload)
-
                 flow_match['ip_proto'] = protocol
                 flow_match['icmpv4_code'] = icmp_packet.code
                 flow_match['icmpv4_type'] = icmp_packet.type
@@ -291,7 +289,6 @@ class SwitchMacToPort(app_manager.RyuApp):
 
         actions = [parser.OFPActionOutput(out_port)]
 
-        #install flow entry if the port is not FLOODING port to avoid packet_in next time
         if out_port != ofproto.OFPP_FLOOD:
 
             match = parser.OFPMatch(**flow_match)
@@ -304,10 +301,7 @@ class SwitchMacToPort(app_manager.RyuApp):
             else:
 
                 self.add_flow_entry(datapath, 1, match, actions)
-
-        else : 
-
-            print('the out port is FLOODING port no flow installation will be done')
+                
         data = None
 
         if msg.buffer_id == ofproto.OFP_NO_BUFFER :

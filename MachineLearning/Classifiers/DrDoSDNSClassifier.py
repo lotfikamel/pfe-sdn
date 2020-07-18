@@ -10,7 +10,7 @@ from imblearn.over_sampling import SMOTE
 
 from .BaseClassifier import Classifier
 
-DrDoSDNSClassifier = Classifier({
+DrDoSDNSClassifier = Classifier('DNS', {
 
 	'model_class' : RandomForestClassifier,
 	'model_args' : {
