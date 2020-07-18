@@ -61,6 +61,8 @@ class TraficCalculator (threading.Thread) :
 		"""
 		self.duplicate_packet_ids = []
 
+		self.interfaces = ['s1-eth1', 's1-eth2', 's1-eth3', 's1-eth4']
+
 	"""
 		run the thread and begin sniff
 		@return {Void}
@@ -71,11 +73,13 @@ class TraficCalculator (threading.Thread) :
 
 	"""
 		get all flows
-		@return {Dict}
+		@return {Tuple}
 	"""
 	def get_flows_as_binary (self) :
 
-		return pickle.dumps(self.build_flows())
+		flows = self.build_flows()
+
+		return pickle.dumps(flows), flows
 
 	"""
 		begin sniffing
@@ -83,7 +87,7 @@ class TraficCalculator (threading.Thread) :
 	"""
 	def init_sniff (self) :
 
-		sniff(lfilter=self.filter_packet, prn=self.on_packet, iface=['s1-eth1', 's1-eth2', 's1-eth3', 's1-eth4'])
+		sniff(lfilter=self.filter_packet, prn=self.on_packet)
 
 	"""
 		check if the packet is valide DNS packet

@@ -6,6 +6,8 @@ import sys
 
 import pickle
 
+import json
+
 """
 	send all calculated flows via udp socket
 """
@@ -39,9 +41,15 @@ class FlowCollector :
 
 			if event == 'GET_FLOWS' :
 
-				binary_flows = self.traficCalculator.get_flows_as_binary()
+				binary_flows, flows = self.traficCalculator.get_flows_as_binary()
 
 				self.sock.sendto(binary_flows, address)
+
+			if event == 'GET_FLOWS_NODE' :
+
+				binary_flows, flows = self.traficCalculator.get_flows_as_binary()
+
+				self.sock.sendto(bytes(json.dumps(flows), 'utf-8'), address)		
 
 flowCollector = FlowCollector(sys.argv[1], 6000)
 
