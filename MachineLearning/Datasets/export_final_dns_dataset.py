@@ -66,6 +66,8 @@ dns_drdos_dataframe = dns_drdos_dataframe.reindex(np.random.permutation(dns_drdo
 
 print(dns_drdos_dataframe.shape)
 
+dns_drdos_dataframe.loc[dns_drdos_dataframe['label'] == 'DrDoS_DNS', 'label'] = 'DrDos'
+
 dns_drdos_dataframe.to_csv('/home/lotfi/pfe/DDOS_datasets/final_datasets/DrDoS_DNS.csv', index=False)
 
 dns_drdos_benign.to_csv('/home/lotfi/pfe/DDOS_datasets/final_datasets/DrDoS_DNS_BENIGN.csv', index=False)

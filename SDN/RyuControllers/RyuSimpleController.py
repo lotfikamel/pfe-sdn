@@ -100,7 +100,7 @@ class SwitchMacToPort(app_manager.RyuApp):
                         'predicted_as' : {
 
                             'BENIGN' : 0,
-                            'DrDoS_DNS' : 0
+                            'DrDoS' : 0
                         },
 
                         'prediction_count' : 0
@@ -112,9 +112,9 @@ class SwitchMacToPort(app_manager.RyuApp):
 
                 as_benign = self.flow_predictions[flow_ids[i]]['predicted_as']['BENIGN']
 
-                as_ddos = self.flow_predictions[flow_ids[i]]['predicted_as']['DrDoS_DNS']
+                as_ddos = self.flow_predictions[flow_ids[i]]['predicted_as']['DrDoS']
 
-                final_prediction = 'BENIGN' if as_benign > as_ddos else 'DrDoS_DNS'
+                final_prediction = 'BENIGN' if as_benign > as_ddos else 'DrDoS'
 
                 print('\033[1;33m' + '\033[1;31m'+ f'flow {flow_ids[i]} predicted as {final_prediction}' + '\033[0m')
 
