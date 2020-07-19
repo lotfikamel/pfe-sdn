@@ -1,6 +1,10 @@
 const express = require('express');
 
-const cors = require('cors');
+//load socket.io
+const Server = require('socket.io');
+
+//load http module
+const http = require('http');
 
 const UDPServer = require('./UDPServer')
 
@@ -8,21 +12,26 @@ const FlowController = require('./Controllers/FlowController')
 
 const App = express()
 
-App.use(cors({
+//create http server
+const httpServer = http.createServer(App);
 
-	origin : true,
-	credentials: true,
-}));
+//create new io instance
+const io = new Server(httpServer, {
 
-App.get('/', (req, res, next) => {
-
-	return res.json({
-
-		hichem : 'brahim'
-	});
+	serveClient : false,
+	upgradeTimeout : 20000,
+	cookie : false
 });
 
-App.listen(4000, () => {
+io.on('connection', (socket) => {
 
-	console.log('sdn monitor server is running on port 4000...')
+	console.log('client connected')
+
+	socket.on('GET_FLOWS', FlowController.getFlows(socket))
 })
+
+//listen for requests
+httpServer.listen(4000, () => {
+
+	console.log(`monitor server listening on port 4000...`);
+});

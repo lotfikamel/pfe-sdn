@@ -9,12 +9,19 @@
 
 import FlowTable from './FlowTable'
 
+import socket from '@/System/Socket'
+
 export default {
 
 	name : 'FlowPage',
 	components : {
 
 		FlowTable
+	},
+
+	created () {
+
+		socket.emit('GET_FLOWS')
 	}
 }	
 

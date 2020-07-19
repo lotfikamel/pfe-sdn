@@ -19,6 +19,8 @@ import threading, time
 
 import pickle
 
+import json
+
 class TraficCalculator (threading.Thread) :
 
 	"""
@@ -73,13 +75,13 @@ class TraficCalculator (threading.Thread) :
 
 	"""
 		get all flows
-		@return {Tuple}
+		@return {Dict}
 	"""
 	def get_flows_as_binary (self) :
 
-		flows = self.build_flows()
+		flows, flow_monitor = self.build_flows()
 
-		return pickle.dumps(flows), flows
+		return pickle.dumps(flows), flow_monitor
 
 	"""
 		begin sniffing
@@ -211,7 +213,13 @@ class TraficCalculator (threading.Thread) :
 
 			'protocol' : packet[IP].proto,
 
-			'ip_forwarded' : packet[IP].src,
+			'ip_src' : packet[IP].src,
+
+			'port_src' : packet[UDP].sport,
+
+			'ip_dst' : packet[IP].dst,
+
+			'port_dst' : packet[UDP].dport,
 
 			'first_packet_time' : datetime.now(),
 
@@ -256,7 +264,7 @@ class TraficCalculator (threading.Thread) :
 	"""
 	def is_forward  (self, flow_id, packet) :
 
-		return packet[IP].src == self.flow_infos[flow_id]['ip_forwarded']
+		return packet[IP].src == self.flow_infos[flow_id]['ip_src']
 
 	"""
 		get protocol constant length
@@ -575,10 +583,17 @@ class TraficCalculator (threading.Thread) :
 
 		flows_dict = {}
 
+		flow_monitor = []
+
 		for flow_id in self.flow_infos :
 
 			flow = {
 
+				'flow_id' : flow_id,
+				'ipv4_src' : self.flow_infos[flow_id]['ip_src'],
+				'port_src' : self.flow_infos[flow_id]['port_src'],
+				'ipv4_dst' : self.flow_infos[flow_id]['ip_dst'],
+				'port_dst' : self.flow_infos[flow_id]['port_dst'],
 				'protocol' : self.flow_infos[flow_id]['protocol'],
 				'flow_duration' : self.flow_infos[flow_id]['duration'],
 				'total_forward_packets' : self.flow_infos[flow_id]['forward']['total'],
@@ -596,8 +611,22 @@ class TraficCalculator (threading.Thread) :
 				'flow_bytes_per_seconds' : self.flow_infos[flow_id]['bytes_per_second'],
 			}
 
+			flow_monitor.append(flow)
+
+			flow = self.clean_flow(flow, ['flow_id', 'ipv4_src', 'ipv4_dst', 'port_src', 'port_dst'])
+
 			pprint(flow)
 
 			flows_dict[flow_id] = list(flow.values())
 
-		return flows_dict
+		return flows_dict, flow_monitor
+
+	def clean_flow (self, flow, keys) :
+
+		flow_copy = dict(flow)
+
+		for key in keys :
+
+			del flow_copy[key]
+
+		return flow_copy

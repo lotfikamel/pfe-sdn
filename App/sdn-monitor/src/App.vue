@@ -1,7 +1,7 @@
 <template lang="html">
 	<div id="app">
 		<Navbar/>
-		<div class="uk-container">
+		<div class="uk-container uk-container-xlarge">
 			<router-view></router-view>
 		</div>
 	</div>
@@ -11,7 +11,7 @@
 
 import Navbar from '@/Components/Navbar'
 
-import http from '@/Config/Http'
+import socket from '@/System/Socket'
 
 export default {
 
@@ -24,10 +24,7 @@ export default {
 
 	created () {
 
-		http.get('/').then(res => {
-
-			console.log(res.data)
-		})
+		socket.open()
 	}
 }	
 

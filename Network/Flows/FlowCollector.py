@@ -2,8 +2,6 @@ import socket
 
 from TraficCalculator import TraficCalculator
 
-import sys
-
 import pickle
 
 import json
@@ -41,16 +39,22 @@ class FlowCollector :
 
 			if event == 'GET_FLOWS' :
 
-				binary_flows, flows = self.traficCalculator.get_flows_as_binary()
+				binary_flows, json_flow = self.traficCalculator.get_flows_as_binary()
 
 				self.sock.sendto(binary_flows, address)
 
-			if event == 'GET_FLOWS_NODE' :
+			if event == 'GET_FLOWS_MONITOR' :
 
-				binary_flows, flows = self.traficCalculator.get_flows_as_binary()
+				binary_flows, flow_monitor = self.traficCalculator.get_flows_as_binary()
 
-				self.sock.sendto(bytes(json.dumps(flows), 'utf-8'), address)		
+				monitor = {}
 
-flowCollector = FlowCollector(sys.argv[1], 6000)
+				monitor['event'] = event
+
+				monitor['data'] = flow_monitor
+
+				self.sock.sendto(bytes(json.dumps(monitor), 'utf-8'), address)		
+
+flowCollector = FlowCollector('127.0.0.1', 6000)
 
 flowCollector.start()

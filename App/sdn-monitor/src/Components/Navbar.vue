@@ -1,6 +1,6 @@
 <template lang="html">
 	<div id="navbar" class="uk-background-default">
-		<div class="uk-container"> 
+		<div class="uk-container uk-container-xlarge"> 
 			<nav uk-navbar>
 				<a href="#" class="uk-navbar-item uk-logo uk-text-primary">SDN-Monitor</a>
 			    <div class="uk-navbar-right">
