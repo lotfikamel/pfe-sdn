@@ -116,6 +116,8 @@ class TraficCalculator (threading.Thread) :
 	"""
 	def filter_packet (self, packet) :
 
+		print('packet')
+
 		if len(self.duplicate_packet_ids) > 50 :
 
 			self.duplicate_packet_ids = []

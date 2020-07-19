@@ -45,6 +45,8 @@ def start_network () :
 
 	net.start()
 
+	net.pingAll()
+
 	net.startTerms()
 
 	CLI(net)

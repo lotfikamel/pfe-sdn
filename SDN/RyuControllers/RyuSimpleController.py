@@ -12,9 +12,13 @@ from ryu.lib.packet import ethernet, tcp, udp, icmp, ipv4, arp, openflow, ipv6, 
 from ryu.lib.packet import ether_types
 from ryu.lib import hub
 
+from ryu.topology.api import *
+
 import socket
 
 import pickle
+
+import copy
 
 from Helpers import json_printer
 from MachineLearning.Classifiers.DrDoSDNSClassifier import DrDoSDNSClassifier
@@ -52,6 +56,14 @@ class SwitchMacToPort(app_manager.RyuApp):
     def _collect_flows (self) :
 
         while True :
+
+            hosts = copy.copy(get_all_host(self))
+
+            switches = copy.copy(get_all_switch(self))
+
+            print('hosts', [host.mac for host in hosts])
+
+            print('switches', switches)
 
             self.sock.sendto(b'GET_FLOWS', ('127.0.0.1', 6000))
 
