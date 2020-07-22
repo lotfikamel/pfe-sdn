@@ -80,7 +80,7 @@ def start_attack () :
 
 	packet_per_second = int(sys.argv[2]) if len(sys.argv) >= 3 else DNSAttackFlow.DEFAULT_PACKET_PER_SECOND
 
-	servers = ['10.0.0.1']
+	servers = ['10.0.0.1', '10.0.0.2']
 
 	threads = []
 

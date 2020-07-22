@@ -10,6 +10,8 @@ const UDPServer = require('./UDPServer')
 
 const FlowController = require('./Controllers/FlowController')
 
+const Event = require('./System/Event')
+
 const App = express()
 
 //create http server
@@ -28,7 +30,15 @@ io.on('connection', (socket) => {
 	console.log('client connected')
 
 	socket.on('GET_FLOWS', FlowController.getFlows(socket))
-})
+});
+
+Event.on('GET_FLOWS_MONITOR', FlowController.sendFlows(io))
+
+Event.on('GET_FINAL_PREDICTION', FlowController.sendPredictions(io))
+
+FlowController.startFlowScheduler()
+
+FlowController.startFlowPredictionsScheduler()
 
 //listen for requests
 httpServer.listen(4000, () => {

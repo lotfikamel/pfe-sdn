@@ -4,7 +4,7 @@ import socket
 
 import sys
 
-server_ip = '10.0.0.1'
+server_ip = '10.0.0.3'
 
 ip = sys.argv[1]
 

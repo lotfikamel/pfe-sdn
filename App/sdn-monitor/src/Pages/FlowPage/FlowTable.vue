@@ -7,7 +7,7 @@
 		        </tr>
 		    </thead>
 		    <tbody>
-		        <tr v-for="(flow, index) in values">
+		        <tr v-for="(flow, index) in values" v-bind:class="{'ddos' : isDDOS(flow)}">
 		            <td v-for="(v, index) in flow" style="font-size: 0.85rem">{{ v }}</td>
 		        </tr>
 		    </tbody>
@@ -31,13 +31,31 @@ export default {
 		values () {
 
 			return this.$store.state.data.flows.values
+		},
+
+		predictions () {
+
+			return this.$store.state.data.flows.predictions
+		}
+	},
+
+	methods : {
+
+		isDDOS (flow) {
+
+			return flow[0] in this.predictions && this.predictions[flow[0]].prediction == 'DrDoS'
 		}
 	}
 }	
 
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 	
+.ddos {
+
+	background: #e8441c !important;
+	color: #fff
+}
 
 </style>

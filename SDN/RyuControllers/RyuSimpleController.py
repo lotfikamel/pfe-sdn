@@ -1,5 +1,7 @@
 import sys
 
+import subprocess
+
 sys.path.append('/home/lotfi/pfe/PFE')
 
 from ryu.base import app_manager
@@ -18,9 +20,12 @@ import socket
 
 import pickle
 
+import json
+
 import copy
 
 from Helpers import json_printer
+from Helpers.CmdAsync import CmdAsync
 from MachineLearning.Classifiers.DrDoSDNSClassifier import DrDoSDNSClassifier
 
 class SwitchMacToPort(app_manager.RyuApp):
@@ -30,6 +35,11 @@ class SwitchMacToPort(app_manager.RyuApp):
     def __init__(self, *args, **kwargs):
 
         super(SwitchMacToPort, self).__init__(*args, **kwargs)
+
+        self.nodejs_server = CmdAsync(['node', '/home/lotfi/pfe/PFE/App/sdn-monitor-server/Server.js'])
+
+        # run monitor server as thread
+        self.nodejs_server.start()
 
         # mac to port table
         # format : { datapath_swicth_id : {mac : port} }
@@ -50,6 +60,8 @@ class SwitchMacToPort(app_manager.RyuApp):
         #flow prediction
         self.flow_predictions = {}
 
+        self.topology = {}
+
     """
         collect flow from the flow collector device
     """
@@ -57,15 +69,11 @@ class SwitchMacToPort(app_manager.RyuApp):
 
         while True :
 
-            hosts = copy.copy(get_all_host(self))
+            data = bytes(json.dumps({ 'event' : 'GET_FLOWS', 'data' : [] }), 'utf-8')
 
-            switches = copy.copy(get_all_switch(self))
+            self.sock.sendto(data, ('127.0.0.1', 6000))
 
-            print('hosts', [host.mac for host in hosts])
-
-            print('switches', switches)
-
-            self.sock.sendto(b'GET_FLOWS', ('127.0.0.1', 6000))
+            self.update_topology()
 
             try :
 
@@ -128,11 +136,33 @@ class SwitchMacToPort(app_manager.RyuApp):
 
                 final_prediction = 'BENIGN' if as_benign > as_ddos else 'DrDoS'
 
+                data = bytes(json.dumps({ 'event' : 'FINAL_PREDICTION', 'data' : { flow_ids[i] : final_prediction } }), 'utf-8')
+
+                self.sock.sendto(data, ('127.0.0.1', 6000))
+
                 print('\033[1;33m' + '\033[1;31m'+ f'flow {flow_ids[i]} predicted as {final_prediction}' + '\033[0m')
 
             self.flow_predictions[flow_ids[i]]['predicted_as'][predictions[i]] += 1
 
             self.flow_predictions[flow_ids[i]]['prediction_count'] += 1
+
+    """
+    
+        update topology infos
+    """
+    def update_topology (self) :
+
+        hosts = copy.copy(get_all_host(self))
+
+        switches = copy.copy(get_all_switch(self))
+
+        self.topology['hosts'] = [ host.to_dict() for host in hosts]
+
+        self.topology['switches'] = [ switch.to_dict() for switch in switches]
+
+        data = bytes(json.dumps({ 'event' : 'UPDATE_TOPOLOGY', 'data' : self.topology }), 'utf-8')
+
+        self.sock.sendto(data, ('127.0.0.1', 6000))
 
 
     def __str__ (self) :

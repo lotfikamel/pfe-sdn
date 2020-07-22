@@ -1,12 +1,14 @@
 const dgram = require('dgram')
 
-const server = dgram.createSocket('udp4')
+const server = dgram.createSocket('udp4');
 
-server.on('listening', () => {
+const Event = require('./System/Event')
 
-	console.log('udp server started on port 4001')
+server.on('message', (msg, info) => {
+
+	let response = JSON.parse(msg.toString())
+
+	Event.emit(response.event, response.data)
 })
-
-server.bind(4001)
 
 module.exports = server;

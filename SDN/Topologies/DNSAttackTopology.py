@@ -25,12 +25,18 @@ class DNSAttackTopology (Topo) :
 		DNS1 = self.addHost('DNS1', mac='00:00:00:00:00:01', ip='10.0.0.1/8')
 		DNS2 = self.addHost('DNS2', mac='00:00:00:00:00:02', ip='10.0.0.2/8')
 
+		NTP1 = self.addHost('NTP1', mac='00:00:00:00:00:03', ip='10.0.0.3/8')
+		NTP2 = self.addHost('NTP2', mac='00:00:00:00:00:04', ip='10.0.0.4/8')
+
 		#define victime and attacker hosts
-		victime = self.addHost('victime', mac='00:00:00:00:00:03', ip='10.0.0.3')
-		attacker = self.addHost('attacker', mac='00:00:00:00:00:04', ip='10.0.0.4')
+		victime = self.addHost('victime', mac='00:00:00:00:00:05', ip='10.0.0.5')
+		attacker = self.addHost('attacker', mac='00:00:00:00:00:06', ip='10.0.0.6')
 
 		self.addLink(DNS1, switch)
 		self.addLink(DNS2, switch)
+
+		self.addLink(NTP1, switch)
+		self.addLink(NTP2, switch)
 
 		self.addLink(victime, switch)
 		self.addLink(attacker, switch)
@@ -46,8 +52,6 @@ def start_network () :
 	net.start()
 
 	net.pingAll()
-
-	net.startTerms()
 
 	CLI(net)
 

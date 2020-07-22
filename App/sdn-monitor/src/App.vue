@@ -2,6 +2,7 @@
 	<div id="app">
 		<Navbar/>
 		<div class="uk-container uk-container-xlarge">
+			<Alert/>
 			<router-view></router-view>
 		</div>
 	</div>
@@ -11,6 +12,8 @@
 
 import Navbar from '@/Components/Navbar'
 
+import Alert from '@/Components/Alert'
+
 import socket from '@/System/Socket'
 
 export default {
@@ -19,7 +22,8 @@ export default {
 
 	components : {
 
-		Navbar
+		Navbar,
+		Alert
 	},
 
 	created () {
@@ -33,12 +37,6 @@ export default {
 
 <style lang="css">
 	
-html, body {
-
-	height: 100%
-}
-
-
 body {
 
 	padding-top: 100px;

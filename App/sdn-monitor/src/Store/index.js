@@ -15,8 +15,28 @@ export default new Vuex.Store({
 
 				header : [],
 
-				values : []
+				values : [],
+
+				predictions : {}
 			}
+		}
+	},
+
+	getters : {
+
+		getDDOS (state) {
+
+			let data = [];
+
+			for (let i in state.data.flows.predictions) {
+
+				if (state.data.flows.predictions[i].prediction == 'DrDoS') {
+
+					data.push(state.data.flows.predictions[i].ips)
+				}
+			}
+
+			return data;
 		}
 	},
 
@@ -30,6 +50,11 @@ export default new Vuex.Store({
 		SET_FLOW_VALUES (state, values) {
 
 			state.data.flows.values = values
+		},
+
+		SET_PREDICTIONS (state, predictions) {
+
+			state.data.flows.predictions = predictions
 		}
 	},
 
@@ -40,6 +65,11 @@ export default new Vuex.Store({
 			commit('SET_FLOW_HEADER', data.flowsHeader);
 
 			commit('SET_FLOW_VALUES', data.flowsValues);
+		},
+
+		finalPredictions ({ commit }, data) {
+
+			commit('SET_PREDICTIONS', data)
 		}
 	}
 })

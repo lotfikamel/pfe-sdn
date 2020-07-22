@@ -1,6 +1,6 @@
 <template lang="html">
 	<div id="flow-page">
-		<h2>Flux</h2>
+		<h2>Flux en temps réel</h2>
 		<FlowTable/>
 	</div>
 </template>

@@ -15,6 +15,11 @@ socket.on('connect', () => {
 socket.on('GET_FLOWS', (data) => {
 
 	Store.dispatch('getFlows', data)
+});
+
+socket.on('GET_FINAL_PREDICTION', (data) => {
+
+	Store.dispatch('finalPredictions', data)
 })
 
 export default socket
