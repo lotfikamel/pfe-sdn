@@ -22,4 +22,9 @@ socket.on('GET_FINAL_PREDICTION', (data) => {
 	Store.dispatch('finalPredictions', data)
 })
 
+socket.on('GET_TOPOLOGY', (data) => {
+
+	Store.dispatch('getTopology', data)
+})
+
 export default socket

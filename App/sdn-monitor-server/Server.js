@@ -36,9 +36,13 @@ Event.on('GET_FLOWS_MONITOR', FlowController.sendFlows(io))
 
 Event.on('GET_FINAL_PREDICTION', FlowController.sendPredictions(io))
 
+Event.on('GET_TOPOLOGY', FlowController.sendTopology(io))
+
 FlowController.startFlowScheduler()
 
 FlowController.startFlowPredictionsScheduler()
+
+FlowController.startTopologyScheduler()
 
 //listen for requests
 httpServer.listen(4000, () => {

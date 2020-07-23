@@ -18,6 +18,14 @@ function startFlowPredictionsScheduler () {
 	}, 1000)
 }
 
+function startTopologyScheduler () {
+
+	setInterval(() => {
+
+		UDPServer.send(JSON.stringify({ event : 'GET_TOPOLOGY', data : [] }), 6000, '127.0.0.1')
+	}, 1000)
+}
+
 /**
 * Get flow From flowCollector Server
 * 
@@ -51,6 +59,14 @@ function sendFlows (io) {
 	}
 }
 
+function sendTopology (io) {
+
+	return (data) => {
+
+		io.emit('GET_TOPOLOGY', data)
+	}
+}
+
 function sendPredictions (io) {
 
 	return (data) => {
@@ -65,5 +81,7 @@ module.exports = {
 	sendFlows,
 	sendPredictions,
 	startFlowScheduler,
-	startFlowPredictionsScheduler
+	startFlowPredictionsScheduler,
+	startTopologyScheduler,
+	sendTopology
 }

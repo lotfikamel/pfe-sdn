@@ -18,7 +18,9 @@ export default new Vuex.Store({
 				values : [],
 
 				predictions : {}
-			}
+			},
+
+			topology : {}
 		}
 	},
 
@@ -55,6 +57,11 @@ export default new Vuex.Store({
 		SET_PREDICTIONS (state, predictions) {
 
 			state.data.flows.predictions = predictions
+		},
+
+		SET_TOPOLOGY (state, data) {
+
+			state.data.topology = data
 		}
 	},
 
@@ -65,6 +72,11 @@ export default new Vuex.Store({
 			commit('SET_FLOW_HEADER', data.flowsHeader);
 
 			commit('SET_FLOW_VALUES', data.flowsValues);
+		},
+
+		getTopology ({ commit }, data) {
+
+			commit('SET_TOPOLOGY', data);
 		},
 
 		finalPredictions ({ commit }, data) {

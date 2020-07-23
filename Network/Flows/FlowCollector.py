@@ -93,6 +93,12 @@ class FlowCollector :
 
 				self.topology = data['data']
 
+			if data['event'] == 'GET_TOPOLOGY' :
+
+				data = { 'event' : 'GET_TOPOLOGY', 'data' : self.topology }
+
+				self.sock.sendto(bytes(json.dumps(data), 'utf-8'), address)
+
 flowCollector = FlowCollector('127.0.0.1', 6000)
 
 flowCollector.start()

@@ -2,12 +2,11 @@
 	<div id="navbar" class="uk-background-default">
 		<div class="uk-container uk-container-xlarge"> 
 			<nav uk-navbar>
-				<a href="#" class="uk-navbar-item uk-logo uk-text-primary">SDN-Monitor</a>
+				<a href="#" class="uk-navbar-item uk-logo">SDN-Monitor</a>
 			    <div class="uk-navbar-right">
 			        <ul class="uk-navbar-nav">
-			        		<li class="uk-active"><a href="#">Flux</a></li>
-			        		<li><a href="#">Performances</a></li>
-			        		<li><a href="#">Topologie</a></li>
+			        		<li class="uk-active"><router-link to='/'>Flux</router-link></li>
+			        		<li class="uk-active"><router-link to='/topology'>topologie</router-link></li>
 			        </ul>
 			    </div>
 			</nav>

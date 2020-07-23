@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import FlowPage from '@/Pages/FlowPage/FlowPage.vue'
+import TopologyPage from '@/Pages/TopologyPage/TopologyPage.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,11 @@ const routes = [
       path: '/',
       name: 'FlowPage',
       component: FlowPage
+   },
+   {
+      path: '/topology',
+      name: 'TopologyPage',
+      component: TopologyPage
    }
 ]
 

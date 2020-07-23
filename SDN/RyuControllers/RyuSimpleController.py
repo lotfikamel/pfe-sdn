@@ -62,6 +62,16 @@ class SwitchMacToPort(app_manager.RyuApp):
 
         self.topology = {}
 
+        self.host_names = {
+
+            '10.0.0.1' : 'Serveur DNS 1',
+            '10.0.0.2' : 'Serveur DNS 2',
+            '10.0.0.3' : 'Serveur NTP 1',
+            '10.0.0.4' : 'Serveur NTP 2',
+            '10.0.0.5' : 'Victime',
+            '10.0.0.6' : 'Attacker',
+        }
+
     """
         collect flow from the flow collector device
     """
@@ -157,6 +167,10 @@ class SwitchMacToPort(app_manager.RyuApp):
         switches = copy.copy(get_all_switch(self))
 
         self.topology['hosts'] = [ host.to_dict() for host in hosts]
+
+        for host in self.topology['hosts'] :
+
+            host['name'] = self.host_names[host['ipv4'][0]]
 
         self.topology['switches'] = [ switch.to_dict() for switch in switches]
 
