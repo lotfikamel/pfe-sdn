@@ -27,4 +27,9 @@ socket.on('GET_TOPOLOGY', (data) => {
 	Store.dispatch('getTopology', data)
 })
 
+socket.on('TEST_BANDWIDTH', (data) => {
+
+	Store.dispatch('bwResult', data)
+})
+
 export default socket

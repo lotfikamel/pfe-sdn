@@ -43,8 +43,6 @@ class FlowCollector :
 
 			data = json.loads(data)
 
-			print(data['event'])
-
 			if data['event'] == 'GET_FLOWS' :
 
 				binary_flows, json_flow = self.traficCalculator.get_flows_as_binary()
@@ -88,8 +86,6 @@ class FlowCollector :
 				self.sock.sendto(bytes(json.dumps(final), 'utf-8'), address)
 
 			if data['event'] == 'UPDATE_TOPOLOGY' :
-
-				print('topology', data['data'])
 
 				self.topology = data['data']
 

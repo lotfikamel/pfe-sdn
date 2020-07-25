@@ -10,6 +10,75 @@ from mininet.cli import CLI
 
 from mininet.node import OVSKernelSwitch, RemoteController
 
+from threading import Thread
+
+import socket
+
+import json
+
+class BandwidthTester (Thread) :
+
+	"""
+		Init bw tester
+		@param {Mininet} net
+	"""
+	def __init__ (self, net) :
+
+		Thread.__init__(self)
+
+		self.net = net
+
+		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+		self.sock.settimeout(5)
+
+		self.kill = False
+
+	def kill_server (self) :
+
+		self.kill = True
+
+		self.sock.close()
+
+	"""
+		run the thread
+	"""
+	def run (self) :
+
+		print('bandwidth tester started and waiting for requests on port 1000 ...')
+
+		self.sock.bind(('127.0.0.1', 1000))
+
+		global RUN_SERVER
+
+		while True and self.kill == False:
+
+			try :
+
+				data, address = self.sock.recvfrom(65000)
+
+				data = data.decode('utf-8')
+
+				data = json.loads(data)
+
+				event = data['event']
+
+				if event == 'TEST_BANDWIDTH' :
+
+					bw = self.net.iperf(hosts=[self.net.get(data['data'][0]), self.net.get(data['data'][1])])
+
+					response = {}
+
+					response['event'] = event
+
+					response['data'] = bw
+
+					self.sock.sendto(bytes(json.dumps(response)), address)
+
+			except Exception as e:
+
+				pass
+
 class DNSAttackTopology (Topo) :
 
 	"""
@@ -49,6 +118,10 @@ def start_network () :
 
 	net = Mininet(topo=topo, link=TCLink, controller=controller)
 
+	bandwidthTester = BandwidthTester(net)
+
+	bandwidthTester.start()
+
 	net.start()
 
 	net.pingAll()
@@ -56,6 +129,8 @@ def start_network () :
 	CLI(net)
 
 	net.stop()
+
+	bandwidthTester.kill_server()
 
 if __name__ == '__main__' :
 

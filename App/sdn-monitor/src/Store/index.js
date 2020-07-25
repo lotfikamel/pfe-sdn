@@ -20,7 +20,9 @@ export default new Vuex.Store({
 				predictions : {}
 			},
 
-			topology : {}
+			topology : {},
+
+			bw : []
 		}
 	},
 
@@ -62,6 +64,16 @@ export default new Vuex.Store({
 		SET_TOPOLOGY (state, data) {
 
 			state.data.topology = data
+		},
+
+		BW_RESULT (state, data) {
+
+			state.data.bw = data
+		},
+
+		CLEAR_BW (state, data) {
+
+			state.data.bw = []
 		}
 	},
 
@@ -82,6 +94,11 @@ export default new Vuex.Store({
 		finalPredictions ({ commit }, data) {
 
 			commit('SET_PREDICTIONS', data)
+		},
+
+		bwResult ({ commit }, data) {
+
+			commit('BW_RESULT', data)
 		}
 	}
 })

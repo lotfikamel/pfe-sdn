@@ -3,7 +3,7 @@ const UDPServer = require('../UDPServer')
 const Event = require('../System/Event')
 
 function startFlowScheduler () {
-
+	
 	setInterval(() => {
 
 		UDPServer.send(JSON.stringify({ event : 'GET_FLOWS_MONITOR', data : [] }), 6000, '127.0.0.1')

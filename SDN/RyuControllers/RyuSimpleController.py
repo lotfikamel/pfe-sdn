@@ -170,7 +170,9 @@ class SwitchMacToPort(app_manager.RyuApp):
 
         for host in self.topology['hosts'] :
 
-            host['name'] = self.host_names[host['ipv4'][0]]
+            if len(host['ipv4']) > 0:
+
+                host['name'] = self.host_names[host['ipv4'][0]]
 
         self.topology['switches'] = [ switch.to_dict() for switch in switches]
 

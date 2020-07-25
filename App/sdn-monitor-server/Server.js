@@ -10,6 +10,8 @@ const UDPServer = require('./UDPServer')
 
 const FlowController = require('./Controllers/FlowController')
 
+const PerformanceController = require('./Controllers/PerformanceController')
+
 const Event = require('./System/Event')
 
 const App = express()
@@ -30,6 +32,8 @@ io.on('connection', (socket) => {
 	console.log('client connected')
 
 	socket.on('GET_FLOWS', FlowController.getFlows(socket))
+
+	socket.on('TEST_BANDWIDTH', PerformanceController.runTest(socket))
 });
 
 Event.on('GET_FLOWS_MONITOR', FlowController.sendFlows(io))
@@ -37,6 +41,8 @@ Event.on('GET_FLOWS_MONITOR', FlowController.sendFlows(io))
 Event.on('GET_FINAL_PREDICTION', FlowController.sendPredictions(io))
 
 Event.on('GET_TOPOLOGY', FlowController.sendTopology(io))
+
+Event.on('TEST_BANDWIDTH', PerformanceController.sendBwResult(io))
 
 FlowController.startFlowScheduler()
 

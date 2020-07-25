@@ -7,6 +7,7 @@
 			        <ul class="uk-navbar-nav">
 			        		<li class="uk-active"><router-link to='/'>Flux</router-link></li>
 			        		<li class="uk-active"><router-link to='/topology'>topologie</router-link></li>
+			        		<li class="uk-active"><router-link to='/bw'>bande passante</router-link></li>
 			        </ul>
 			    </div>
 			</nav>
