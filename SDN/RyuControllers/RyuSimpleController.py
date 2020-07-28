@@ -60,7 +60,7 @@ class SwitchMacToPort(app_manager.RyuApp):
         #flow prediction
         self.flow_predictions = {}
 
-        self.topology = {}
+        self.topology = { 'hosts' : [] }
 
         self.host_names = {
 
@@ -162,23 +162,30 @@ class SwitchMacToPort(app_manager.RyuApp):
     """
     def update_topology (self) :
 
-        hosts = copy.copy(get_all_host(self))
-
-        switches = copy.copy(get_all_switch(self))
-
-        self.topology['hosts'] = [ host.to_dict() for host in hosts]
-
-        for host in self.topology['hosts'] :
-
-            if len(host['ipv4']) > 0:
-
-                host['name'] = self.host_names[host['ipv4'][0]]
+        switches = copy.copy(get_switch(self))
 
         self.topology['switches'] = [ switch.to_dict() for switch in switches]
 
         data = bytes(json.dumps({ 'event' : 'UPDATE_TOPOLOGY', 'data' : self.topology }), 'utf-8')
 
         self.sock.sendto(data, ('127.0.0.1', 6000))
+
+    """
+        add new disconvered host
+        @param {Dict} flow_match
+        @return {Void}
+    """
+    def add_host (self, flow_match) :
+
+        if flow_match['ipv4_src'] not in [ host['ipv4'] for host in self.topology['hosts']] :
+
+            self.topology['hosts'].append({
+
+                'name' : self.host_names[flow_match['ipv4_src']],
+                'mac' : flow_match['eth_src'],
+                'ipv4' : flow_match['ipv4_src'],
+                'port_no' : flow_match['in_port'], 
+            })
 
 
     def __str__ (self) :
@@ -251,6 +258,8 @@ class SwitchMacToPort(app_manager.RyuApp):
 
             flow_match['ipv4_src'] = ipv4_layer.src
             flow_match['ipv4_dst'] = ipv4_layer.dst
+
+            self.add_host(flow_match)
 
             protocol = ipv4_layer.proto
 

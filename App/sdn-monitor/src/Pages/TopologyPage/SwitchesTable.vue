@@ -1,7 +1,7 @@
 <template>
 	<div v-if="switches.length > 0" class="uk-overflow-auto">
 		<div v-for="sw in switches">
-			<h3> switche {{ sw.dpid }}</h3>
+			<h3>Interfaces du switche {{ sw.dpid }}</h3>
 			<table class="uk-table uk-table-striped uk-table-small">
 			    <thead>
 			        <tr>

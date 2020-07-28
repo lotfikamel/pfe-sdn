@@ -16,6 +16,8 @@ import socket
 
 import json
 
+import os
+
 class BandwidthTester (Thread) :
 
 	"""
@@ -30,7 +32,7 @@ class BandwidthTester (Thread) :
 
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-		self.sock.settimeout(5)
+		self.sock.settimeout(2)
 
 		self.kill = False
 
@@ -89,6 +91,9 @@ class DNSAttackTopology (Topo) :
 
 		#define switch
 		switch = self.addSwitch('s1', cls=OVSKernelSwitch)
+		switch2 = self.addSwitch('s2', cls=OVSKernelSwitch)
+
+		self.addLink(switch, switch2)
 
 		#define DNS Servers
 		DNS1 = self.addHost('DNS1', mac='00:00:00:00:00:01', ip='10.0.0.1/8')
@@ -98,8 +103,8 @@ class DNSAttackTopology (Topo) :
 		NTP2 = self.addHost('NTP2', mac='00:00:00:00:00:04', ip='10.0.0.4/8')
 
 		#define victime and attacker hosts
-		victime = self.addHost('victime', mac='00:00:00:00:00:05', ip='10.0.0.5')
-		attacker = self.addHost('attacker', mac='00:00:00:00:00:06', ip='10.0.0.6')
+		victime = self.addHost('victime', mac='00:00:00:00:00:05', ip='10.0.0.5/8')
+		attacker = self.addHost('attacker', mac='00:00:00:00:00:06', ip='10.0.0.6/8')
 
 		self.addLink(DNS1, switch)
 		self.addLink(DNS2, switch)
@@ -107,8 +112,8 @@ class DNSAttackTopology (Topo) :
 		self.addLink(NTP1, switch)
 		self.addLink(NTP2, switch)
 
-		self.addLink(victime, switch)
-		self.addLink(attacker, switch)
+		self.addLink(victime, switch2)
+		self.addLink(attacker, switch2)
 
 def start_network () :
 

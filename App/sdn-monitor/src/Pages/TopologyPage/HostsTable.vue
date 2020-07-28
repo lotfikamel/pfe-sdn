@@ -9,13 +9,7 @@
 		    <tbody>
 		        <tr v-for="(host, index) in hosts">
 		            <td v-for="(h, key) in host" style="font-size: 0.85rem">
-		            	<span v-if="key == 'name'">{{ h }}</span>
-		            	<span v-if="key == 'mac'">{{ h }}</span>
-		            	<span v-if="key == 'ipv4'">{{ h[0] }}</span>
-		            	<span v-if="key == 'ipv6'">{{ h[1] }}</span>
-		            	<div v-if="key == 'port'">
-		            		<div v-for="(port, k) in h">{{ k }} : {{ port }}</div>
-		            	</div>
+		            	{{ h }}
 		            </td>
 		        </tr>
 		    </tbody>

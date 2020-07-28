@@ -63,7 +63,7 @@ class TraficCalculator (threading.Thread) :
 		"""
 		self.duplicate_packet_ids = []
 
-		self.interfaces = ['s1-eth1', 's1-eth2', 's1-eth3', 's1-eth4', 's1-eth5', 's1-eth6']
+		self.interfaces = ['s1-eth1', 's1-eth2', 's1-eth3', 's1-eth4', 's2-eth1', 's2-eth2']
 
 	"""
 		run the thread and begin sniff
