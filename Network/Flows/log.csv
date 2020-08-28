@@ -1,0 +1,2 @@
+flow_id,ipv4_src,port_src,ipv4_dst,port_dst,protocol,flow_duration,total_forward_packets,total_backward_packets,total_forward_packets_length,total_backward_packets_length,forward_packet_length_mean,backward_packet_length_mean,forward_packets_per_second,backward_packets_per_second,forward_iat_mean,backward_iat_mean,flow_iat_mean,flow_packets_per_seconds,flow_bytes_per_seconds,label
+10.0.0.1-10.0.0.6-53-59652-17,10.0.0.6,59652,10.0.0.1,53,17,0,1,0,60,0,60,0,1,0,0,0,0,1,60,DrDoS

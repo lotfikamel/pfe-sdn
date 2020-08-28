@@ -67,7 +67,29 @@ class FlowCollector :
 
 					self.final_predictions[i] = data['data'][i]
 
-				print(self.final_predictions)
+				binary_flows, flow_monitor = self.traficCalculator.get_flows_as_binary()
+
+				head = list(flow_monitor[0].keys())
+
+				head.append('label')
+
+				head = ','.join(head)
+
+				log_file = open('log.csv', 'w')
+
+				log_file.write(f'{head}\n')
+
+				for flow in flow_monitor :
+
+					flow_list = list(flow.values())
+
+					flow_list.append(self.final_predictions[flow['flow_id']])
+
+					flow_csv = ','.join(str(int) for int in flow_list)
+
+					log_file.write(f'{flow_csv}\n')
+
+				log_file.close()
 
 			if data['event'] == 'GET_FINAL_PREDICTION' :
 

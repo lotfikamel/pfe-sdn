@@ -48,6 +48,8 @@ print(ntp_drdos_dataframe.shape)
 
 print(ntp_drdos_dataframe['label'].value_counts())
 
+ntp_drdos_dataframe.loc[ntp_drdos_dataframe['label'] == 'DrDoS_NTP', 'label'] = 'DrDoS'
+
 ntp_drdos_dataframe.to_csv('/home/lotfi/pfe/DDOS_datasets/final_datasets/DrDoS_NTP.csv', index=False)
 
 ntp_drdos_benign.to_csv('/home/lotfi/pfe/DDOS_datasets/final_datasets/DrDoS_NTP_BENIGN.csv', index=False)

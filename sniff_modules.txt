@@ -1,0 +1,45 @@
+modules de renifleur de trafic:
+
+comme le contrôleur SDN, le module sniffer est un script python qui démarre les trois modules: "module sniff", "calculateur de flux" et "expéditeur de flux" en tant que threads python et le sniffer et ses trois modules forment un projet python. ce sniffer doit être exécuté par un serveur qui est un hôte de notre réseau sdn.
+
+1 - module sniff: un script python écrit en utilisant la bibliothèque scapy, au début ce module commence à écouter toutes les interfaces de commutation et peut capturer tous les paquets qui entrent ou sortent de ces interfaces.
+ce module a été programmé pour capturer uniquement les paquets DNS et NTP, mais il peut être facilement programmé pour capturer n'importe quel paquet, il est également programmé pour détecter les paquets duplicat et capturer uniquement la première occurrence de chacun. à la fin, il passe le paquet capturé au «module de calcul de flux» via des variables locales partagées entre les threads et continue à écouter.
+
+2 - calculateur de flux: une classe python qui est chargée d'identifier chaque flux par un identifiant de flux unique et de calculer pour chaque flux tous les attributs à l'aide des paquets provenant du module sniffer.
+
+la première tâche importante pour ce module est d'identifier chaque communication entre 2 hôtes de manière unique afin que tous les paquets transmis de la source à la destination ou de la destination à la source doivent être vus comme étant le même flux, pour faire ce module utilise cette formule:
+
+flow_id = Min(ip_src, ip_dst)-Max(ip_src, ip_dst)-Min(port_src, port_dst)-Max(port_src, port_dst)-ip_protocol
+
+pour expliquer l'utilisation de cette formule, nous prenons un exemple de communication TCP entre une source A et une destination B.La source A envoie un paquet et B répond avec un paquet:
+
+source A (ip_src = 10.0.0.1, port_src = 10)
+destination B (ip_src = 10.0.0.2, port_src = 2)
+Le code de protocole TCP est 6
+
+pour le paquet que A envoie à B pour la formule donne:
+flow_id = 10.0.0.1-10.0.0.2-2-10-6
+
+pour le paquet que B repond à A la formule donne le même résultat:
+flow_id = 10.0.0.1-10.0.0.2-2-10-6
+
+de cette manière, ce module identifie chaque communication de manière unique.
+
+pour la partie calcul des attributs, cette classe fournit des méthodes pour calculer chaque attribut. chaque méthode prend le paquet comme paramètre et calcule l'attribut dont elle est responsable
+
+nous prenons un exemple comment ce module calcule l'attribut de durée de flux:
+
+la formule de la durée du flux est:
+flow_duration = le temps d'arrivée du dernier paquet - le temps d'arrivée du premier paquet
+
+-ce module reçoit le paquet et génère le flow_id
+-vérifier s'il a déjà inséré un flux avec cet identifiant dans sa structure de données.
+-si non, il installe un nouveau flux et mis l'attribut flow_duration à 0 (car c'est le premier paquet de ce flux) et stocke également le temps d'arrivée de ce paquet pour une utilisation ultérieure.
+- si oui signifie que ce paquet est le deuxième ou le troisième ... donc il appelle la méthode flow_duration(packet) et passe le paquet comme paramètre, puis cette méthode applique simplement la formule flow_duration vue ci-dessus
+-puis pour chaque paquet de ce flux, l'attribut flow_duration est mis à jour
+
+ce mécanisme dans cet exemple est applicable à tous les autres attributs en utilisant la formule appropriée de chaque attribut et des changements simples
+
+et comme ça ce module calcule tous les attributs de flux et les prépare dans une liste pour le prochain module "flow sender"
+
+3 - Flow sender: est un serveur UDP fonctionnant sur le port 6000 et attend les requêtes. une fois une requete arrivée, il collecte tous les flux calculés à partir du "calculateur de flux" et les renvoie à l'entité qu'il a contactée

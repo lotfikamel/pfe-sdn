@@ -7,13 +7,14 @@ import numpy as np
 #import matplotlib
 import matplotlib.pyplot as plt
 
-from sklearn.linear_model import LogisticRegression
+#import Decision Tree Algorithms
+from sklearn.tree import DecisionTreeClassifier
 
-from sklearn.naive_bayes import GaussianNB as KNN
+#import K Neirest Neighbors Classifier
+from sklearn.neighbors import KNeighborsClassifier
 
-from sklearn.naive_bayes import GaussianNB as RandomForest
-
-from sklearn.svm import SVC
+#import Random Forest Classifier
+from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 
 #import split test size
 from sklearn.model_selection import train_test_split
@@ -28,28 +29,11 @@ from imblearn.over_sampling import SMOTE
 #import time to mesure training time
 from time import time
 
-#import joblib to persiste and load a classifier
-from joblib import dump, load
-
-#import os
-from os import path
-
-from dataset_attributes import attributes_rename_mapping
-
-attributes = attributes_rename_mapping.keys()
 
 dataset_path = '/home/lotfi/pfe/DDOS_datasets/final_datasets/DrDoS_DNS.csv'
 
 #create dataframe
 data_frame = pd.read_csv(dataset_path)
-
-# data_frame = data_frame[attributes]
-
-# data_frame.rename(columns=attributes_rename_mapping, inplace=True)
-
-# data_frame = data_frame.replace([np.inf, -np.inf, np.nan], np.nan).dropna()
-
-# data_frame.drop_duplicates(inplace=True)
 
 encoder = LabelEncoder()
 
@@ -65,20 +49,26 @@ smote = SMOTE()
 X_smote, y_smote = smote.fit_sample(X, y)
 
 #split dataset into train and test
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(X_smote, y_smote, test_size=0.2)
 
 #create classifier or model
 
-# classifier = KNeighborsClassifier()
+# classifier = DecisionTreeClassifier(criterion="entropy")
 
-# classifier = RandomForestClassifier(criterion="entropy")
+classifier = KNeighborsClassifier()
 
-classifier = RandomForest()
+#classifier = RandomForestClassifier()
 
 #mesure the trauning time
 start = time()
 
 classifier.fit(X_train, y_train)
+
+#feat_importances = pd.Series(classifier.feature_importances_, index=X.columns).sort_values(ascending=False)
+
+#feat_importances.plot(kind="barh")
+
+#plt.show()
 
 end = time() - start
 
@@ -86,9 +76,11 @@ print(f'training time is : {end}')
 
 predictions = classifier.predict(X_test)
 
-confusion_matrix = metrics.confusion_matrix(y_test, predictions)
+labels = list(map(int, predictions))
 
-classification_report = metrics.classification_report(y_test, predictions, labels=np.unique(y), target_names=encoder.inverse_transform(np.unique(y)))
+confusion_matrix = metrics.confusion_matrix(y_test, predictions, labels=np.unique(y))
+
+classification_report = metrics.classification_report(y_test, predictions, labels=np.unique(y), target_names=encoder.inverse_transform(np.unique(y)), digits=6)
 
 print('confusion matrix :')
 
@@ -97,3 +89,5 @@ print(confusion_matrix)
 print('classification report :')
 
 print(classification_report)
+
+print('accuracy', metrics.accuracy_score(y_test, predictions))
